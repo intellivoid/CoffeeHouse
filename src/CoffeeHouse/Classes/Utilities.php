@@ -130,6 +130,6 @@
         public static function icognocheckCode(string $vars): string
         {
             $data = substr($vars . '&icognocheck=', 7, 26);
-            return(hash('md5', $data . 'd'));
+            return(hash('md5', $data));
         }
     }
