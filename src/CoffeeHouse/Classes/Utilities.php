@@ -121,15 +121,5 @@
             return '';
         }
 
-        /**
-         * Creates icognocheck Code
-         *
-         * @param string $vars
-         * @return string
-         */
-        public static function icognocheckCode(string $vars): string
-        {
-            $data = substr($vars . '&icognocheck=', 7, 26);
-            return(hash('md5', $data));
-        }
+
     }

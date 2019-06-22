@@ -10,4 +10,7 @@
     abstract class ExceptionCodes
     {
         const BotSessionException = 100;
+        const DatabaseException = 101;
+        const InvalidSearchMethodException = 102;
+        const ForeignSessionNotFoundException = 103;
     }

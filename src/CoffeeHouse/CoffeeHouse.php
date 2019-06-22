@@ -4,19 +4,28 @@
     namespace CoffeeHouse;
 
     use acm\acm;
+    use CoffeeHouse\Managers\ForeignSessionsManager;
     use Exception;
     use mysqli;
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Abstracts' . DIRECTORY_SEPARATOR . 'ExceptionCodes.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Abstracts' . DIRECTORY_SEPARATOR . 'ForeignSessionSearchMethod.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Bots' . DIRECTORY_SEPARATOR . 'Cleverbot.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Bots' . DIRECTORY_SEPARATOR . 'CleverbotSession.php');
 
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'Hashing.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'Utilities.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'BotSessionException.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'DatabaseException.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'ForeignSessionNotFoundException.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidSearchMethodException.php');
+
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ForeignSessionsManager.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'BotThought.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'ForeignSession.php');
 
     if(class_exists('ZiProto\ZiProto') == false)
     {
@@ -53,6 +62,11 @@
         private $acm;
 
         /**
+         * @var ForeignSessionsManager
+         */
+        private $ForeignSessionsManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -61,6 +75,8 @@
             $this->acm = new acm(__DIR__, 'CoffeeHouse');
             $this->DatabaseConfiguration = $this->acm->getConfiguration('Database');
             $this->database = null;
+
+            $this->ForeignSessionsManager = new ForeignSessionsManager($this);
         }
 
         /**
@@ -80,5 +96,13 @@
             }
 
             return $this->database;
+        }
+
+        /**
+         * @return ForeignSessionsManager
+         */
+        public function getForeignSessionsManager(): ForeignSessionsManager
+        {
+            return $this->ForeignSessionsManager;
         }
     }

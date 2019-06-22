@@ -3,10 +3,16 @@
 
     namespace CoffeeHouse\Bots;
 
+    use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\Classes\Utilities;
     use CoffeeHouse\Exceptions\BotSessionException;
     use CoffeeHouse\Objects\BotThought;
 
+
+    /**
+     * Class CleverbotSession
+     * @package CoffeeHouse\Bots
+     */
     class CleverbotSession
     {
 
@@ -118,7 +124,7 @@
 
             // Debug this (Creates icognoid value)
             $data = http_build_query($this->vars);
-            $this->vars['icognocheck'] = Utilities::icognocheckCode($data);
+            $this->vars['icognocheck'] = Hashing::icognocheckCode($data);
 
             $Response = Utilities::request(
                 $this->bot->getServiceUrl(),
