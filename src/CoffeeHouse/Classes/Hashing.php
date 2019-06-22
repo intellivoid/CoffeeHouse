@@ -52,9 +52,9 @@
          * @param int $time
          * @return string
          */
-        public static function foreignSessionId(string $vars, string $language, int $time)
+        public static function foreignSessionId(string $language, int $time)
         {
-            $vars_c = hash('sha256', self::pepper($vars) . $language);
+            $vars_c = hash('sha256', self::pepper($time) . $language);
             return hash('sha256', $vars_c . $time);
         }
     }

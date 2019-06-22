@@ -5,6 +5,8 @@
 
 
     use CoffeeHouse\Exceptions\BotSessionException;
+    use CoffeeHouse\Objects\HttpResponse;
+    use http\Client\Response;
 
     /**
      * Class Utilities
@@ -20,10 +22,10 @@
          * @param $cookies
          * @param $parameters
          * @param null $headers
-         * @return bool|string
+         * @return HttpResponse
          * @throws BotSessionException
          */
-        public static function request(string $url, &$cookies, $parameters, $headers = null)
+        public static function request(string $url, &$cookies, $parameters, $headers = null): HttpResponse
         {
             $ContextParameters  = array();
             $ContextParameters['http'] = array();
@@ -103,7 +105,7 @@
 
             // Close the stream
             fclose($BufferStream);
-            return $Response;
+            return new HttpResponse($cookies, $Response);
         }
 
         /**

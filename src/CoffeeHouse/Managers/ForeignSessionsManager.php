@@ -39,24 +39,21 @@
         /**
          * Creates a new foreign session
          *
-         * @param $headers
-         * @param $cookies
-         * @param $variables
          * @param string $language
          * @return ForeignSession
          * @throws DatabaseException
          * @throws ForeignSessionNotFoundException
          * @throws InvalidSearchMethodException
          */
-        public function createSession($headers, $cookies, $variables, string $language): ForeignSession
+        public function createSession(string $language): ForeignSession
         {
             $created = (int)time();
             $last_updated = $created;
-            $session_id = Hashing::foreignSessionId(json_encode($variables), $language, $created);
+            $session_id = Hashing::foreignSessionId($language, $created);
             $session_id = $this->coffeeHouse->getDatabase()->real_escape_string($session_id);
-            $headers = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode($headers));
-            $cookies = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode($cookies));
-            $variables = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode($variables));
+            $headers = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode(array()));
+            $cookies = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode(array()));
+            $variables = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode(array()));
             $language = $this->coffeeHouse->getDatabase()->real_escape_string($language);
             $available = (int)true;
             $messages = 0;
