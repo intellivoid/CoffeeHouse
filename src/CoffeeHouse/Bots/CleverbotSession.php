@@ -4,6 +4,7 @@
     namespace CoffeeHouse\Bots;
 
     use CoffeeHouse\Classes\Utilities;
+    use CoffeeHouse\Exceptions\BotSessionException;
     use CoffeeHouse\Objects\BotThought;
 
     class CleverbotSession
@@ -39,6 +40,7 @@
          * @param Cleverbot $bot
          * @param string $language
          * @param array|null $session
+         * @throws BotSessionException
          */
         public function __construct(Cleverbot $bot, string $language, $session = null)
         {
@@ -90,6 +92,7 @@
 
         /**
          * Sets the cookies variables
+         * @throws BotSessionException
          */
         private function setCookies()
         {
@@ -102,6 +105,13 @@
             );
         }
 
+        /**
+         * Processes a thought and returns the results
+         *
+         * @param string $thought
+         * @return BotThought
+         * @throws BotSessionException
+         */
         public function thinkThought(string $thought): BotThought
         {
             $this->vars['stimulus'] = $thought;

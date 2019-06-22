@@ -1,6 +1,7 @@
 <?php
 
     use CoffeeHouse\Bots\Cleverbot;
+    use CoffeeHouse\Exceptions\BotSessionException;
 
     $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
     include_once($SourceDirectory . 'CoffeeHouse' . DIRECTORY_SEPARATOR . 'CoffeeHouse.php');
@@ -19,8 +20,17 @@
     $Session = null;
     while(true)
     {
-        $Bot->createSession('en', $Session);
-        $Response = $Bot->think(getInput());
-        $Session = $Response->getSession();
-        print("Bot: " . $Response->getOutput() . "\n");
+        try
+        {
+            $Bot->createSession('en', $Session);
+            $Response = $Bot->think(getInput());
+            $Session = $Response->getSession();
+            print("Bot: " . $Response->getOutput() . "\n");
+        }
+        catch(BotSessionException $botSessionException)
+        {
+            print("Error!\n");
+            var_dump($botSessionException->getErrorDetails());
+            exit(255);
+        }
     }

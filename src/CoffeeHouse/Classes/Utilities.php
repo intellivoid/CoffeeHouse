@@ -4,6 +4,8 @@
     namespace CoffeeHouse\Classes;
 
 
+    use CoffeeHouse\Exceptions\BotSessionException;
+
     /**
      * Class Utilities
      * @package CoffeeHouse\Classes
@@ -19,6 +21,7 @@
          * @param $parameters
          * @param null $headers
          * @return bool|string
+         * @throws BotSessionException
          */
         public static function request(string $url, &$cookies, $parameters, $headers = null)
         {
@@ -79,7 +82,12 @@
             // Establish the request stream
             $Context = stream_context_create($ContextParameters);
             $BufferStream = fopen($url, 'rb', false, $Context);
+            if(!$BufferStream)
+            {
+                throw new BotSessionException(error_get_last());
+            }
             $Response = stream_get_contents($BufferStream);
+
 
             // Accept new cookies
             if(!is_null($cookies))
@@ -122,6 +130,6 @@
         public static function icognocheckCode(string $vars): string
         {
             $data = substr($vars . '&icognocheck=', 7, 26);
-            return(hash('md5', $data));
+            return(hash('md5', $data . 'd'));
         }
     }

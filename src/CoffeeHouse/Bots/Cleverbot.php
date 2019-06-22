@@ -3,6 +3,7 @@
 
     namespace CoffeeHouse\Bots;
 
+    use CoffeeHouse\Exceptions\BotSessionException;
     use CoffeeHouse\Objects\BotThought;
 
     /**
@@ -80,6 +81,7 @@
         /**
          * @param string $text
          * @return BotThought
+         * @throws BotSessionException
          */
         public function think(string $text): BotThought
         {
