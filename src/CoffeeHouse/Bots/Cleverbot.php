@@ -10,6 +10,7 @@
     use CoffeeHouse\Exceptions\BotSessionException;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\ForeignSessionNotFoundException;
+    use CoffeeHouse\Exceptions\InvalidMessageException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Objects\BotThought;
     use CoffeeHouse\Objects\ForeignSession;
@@ -107,14 +108,14 @@
         }
 
         /**
-         * @param string $text
+         * @param string $input
          * @return BotThought
          * @throws BotSessionException
          * @throws DatabaseException
          */
-        public function think(string $text): string
+        public function think(string $input): string
         {
-            $this->Session->Variables['stimulus'] = $text;
+            $this->Session->Variables['stimulus'] = $input;
 
             // Debug this (Creates icognoid value)
             $data = http_build_query($this->Session->Variables);
@@ -161,6 +162,18 @@
 
             $this->Session->Messages += 1;
             $this->coffeeHouse->getForeignSessionsManager()->updateSession($this->Session);
+
+            try
+            {
+                $this->coffeeHouse->getChatDialogsManager()->recordDialog(
+                    $this->Session->SessionID, $this->Session->Messages, $input, $Text
+                );
+            }
+            catch(InvalidMessageException $invalidMessageException)
+            {
+                // Ignore this exception
+            }
+
 
             return $Text;
         }

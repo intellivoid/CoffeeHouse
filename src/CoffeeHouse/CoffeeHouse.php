@@ -4,6 +4,7 @@
     namespace CoffeeHouse;
 
     use acm\acm;
+    use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use Exception;
     use mysqli;
@@ -15,12 +16,15 @@
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'Hashing.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'Utilities.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'Validation.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'BotSessionException.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'DatabaseException.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'ForeignSessionNotFoundException.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidMessageException.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidSearchMethodException.php');
 
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ChatDialogsManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ForeignSessionsManager.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'BotThought.php');
@@ -67,6 +71,11 @@
         private $ForeignSessionsManager;
 
         /**
+         * @var ChatDialogsManager
+         */
+        private $ChatDialogsManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -77,6 +86,7 @@
             $this->database = null;
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
+            $this->ChatDialogsManager = new ChatDialogsManager($this);
         }
 
         /**
@@ -104,6 +114,14 @@
         public function getForeignSessionsManager(): ForeignSessionsManager
         {
             return $this->ForeignSessionsManager;
+        }
+
+        /**
+         * @return ChatDialogsManager
+         */
+        public function getChatDialogsManager(): ChatDialogsManager
+        {
+            return $this->ChatDialogsManager;
         }
 
     }

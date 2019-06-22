@@ -12,11 +12,16 @@
         $handle = fopen ("php://stdin","r");
         $line = fgets($handle);
         fclose($handle);
+        print("\n");
         return $line;
     }
 
     $CoffeeHouse = new \CoffeeHouse\CoffeeHouse();
     $Bot = new Cleverbot($CoffeeHouse);
+    $Bot->newSession('en');
 
-    $Bot->loadSession('bb5cc4fd78e831f5112dcc8747a387615dc068d4967de943e81db3bcf231520e');
-    echo $Bot->think("Hello");
+    while(true)
+    {
+        $Output = $Bot->think(getInput());
+        print("Bot: $Output\n");
+    }

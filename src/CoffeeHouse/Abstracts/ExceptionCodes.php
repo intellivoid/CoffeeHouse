@@ -13,4 +13,5 @@
         const DatabaseException = 101;
         const InvalidSearchMethodException = 102;
         const ForeignSessionNotFoundException = 103;
+        const InvalidMessageException = 104;
     }
