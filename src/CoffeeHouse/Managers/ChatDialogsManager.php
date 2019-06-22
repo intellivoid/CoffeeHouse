@@ -54,8 +54,8 @@
 
             $session_id = $this->coffeeHouse->getDatabase()->real_escape_string($session_id);
             $step = (int)$step;
-            $input = $this->coffeeHouse->getDatabase()->real_escape_string($input);
-            $output = $this->coffeeHouse->getDatabase()->real_escape_string($output);
+            $input = $this->coffeeHouse->getDatabase()->real_escape_string(base64_encode($input));
+            $output = $this->coffeeHouse->getDatabase()->real_escape_string(base64_encode($output));
             $timestamp = (int)time();
 
             $Query = "INSERT INTO `chat_dialogs` (session_id, step, input, output, timestamp) VALUES ('$session_id', $step, '$input', '$output', $timestamp)";
