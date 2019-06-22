@@ -6,6 +6,7 @@
     use acm\acm;
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
+    use CoffeeHouse\Managers\TelegramClientManager;
     use Exception;
     use mysqli;
 
@@ -79,6 +80,11 @@
         private $ChatDialogsManager;
 
         /**
+         * @var TelegramClientManager
+         */
+        private $TelegramClientManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -90,6 +96,7 @@
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
+            $this->TelegramClientManager = new TelegramClientManager($this);
         }
 
         /**
@@ -125,6 +132,14 @@
         public function getChatDialogsManager(): ChatDialogsManager
         {
             return $this->ChatDialogsManager;
+        }
+
+        /**
+         * @return TelegramClientManager
+         */
+        public function getTelegramClientManager(): TelegramClientManager
+        {
+            return $this->TelegramClientManager;
         }
 
     }

@@ -113,4 +113,26 @@
                 throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
             }
         }
+
+        /**
+         * Creates the client if it doesn't exist
+         *
+         * @param string $chat_id
+         * @return bool
+         * @throws DatabaseException
+         * @throws TelegramClientNotFoundException
+         */
+        public function syncClient(string $chat_id): TelegramClient
+        {
+            try
+            {
+                $Client = $this->getClient($chat_id);
+            }
+            catch(TelegramClientNotFoundException $telegramClientNotFoundException)
+            {
+                $Client = $this->registerClient($chat_id);
+            }
+
+            return $Client;
+        }
     }
