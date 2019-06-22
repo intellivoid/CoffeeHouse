@@ -85,6 +85,11 @@
         private $TelegramClientManager;
 
         /**
+         * @var mixed
+         */
+        private $TelegramConfiguration;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -92,6 +97,7 @@
         {
             $this->acm = new acm(__DIR__, 'CoffeeHouse');
             $this->DatabaseConfiguration = $this->acm->getConfiguration('Database');
+            $this->TelegramConfiguration = $this->acm->getConfiguration('Telegram');
             $this->database = null;
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
@@ -140,6 +146,14 @@
         public function getTelegramClientManager(): TelegramClientManager
         {
             return $this->TelegramClientManager;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getTelegramConfiguration()
+        {
+            return $this->TelegramConfiguration;
         }
 
     }

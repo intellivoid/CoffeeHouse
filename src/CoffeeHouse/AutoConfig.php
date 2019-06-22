@@ -18,4 +18,9 @@
     $DatabaseSchema->setDefinition('Name', 'coffee_house');
     $acm->defineSchema('Database', $DatabaseSchema);
 
+    $TelegramSchema = new Schema();
+    $TelegramSchema->setDefinition('BotName', 'LydiaChatBot');
+    $TelegramSchema->setDefinition('ApiKey', '<API KEY>');
+    $acm->defineSchema('Telegram', $TelegramSchema);
+
     $acm->processCommandLine();
