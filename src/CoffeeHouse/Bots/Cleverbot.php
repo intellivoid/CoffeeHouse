@@ -164,4 +164,12 @@
 
             return $Text;
         }
+
+        /**
+         * @return ForeignSession
+         */
+        public function getSession(): ForeignSession
+        {
+            return $this->Session;
+        }
     }
