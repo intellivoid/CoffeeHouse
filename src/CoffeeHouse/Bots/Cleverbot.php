@@ -72,6 +72,7 @@
         /**
          * @param string $language
          * @param null $session
+         * @throws BotSessionException
          */
         public function createSession($language = 'en', $session = null)
         {
