@@ -23,26 +23,17 @@
         private $serviceUrl;
 
         /**
-         * @var mixed
-         */
-        private $endIndex;
-
-        /**
          * @var CleverbotSession
          */
         private $Session;
 
         /**
          * Cleverbot constructor.
-         * @param $baseUrl
-         * @param $serviceUrl
-         * @param $endIndex
          */
-        public function __construct($baseUrl, $serviceUrl, $endIndex)
+        public function __construct()
         {
-            $this->baseUrl = $baseUrl;
-            $this->serviceUrl = $serviceUrl;
-            $this->endIndex = $endIndex;
+            $this->baseUrl = 'http://cleverbot.com';
+            $this->serviceUrl = 'https://www.cleverbot.com/webservicemin?uc=UseOfficialCleverbotAPI';
         }
 
         /**
@@ -75,22 +66,6 @@
         public function setServiceUrl($serviceUrl): void
         {
             $this->serviceUrl = $serviceUrl;
-        }
-
-        /**
-         * @return mixed
-         */
-        public function getEndIndex()
-        {
-            return $this->endIndex;
-        }
-
-        /**
-         * @param mixed $endIndex
-         */
-        public function setEndIndex($endIndex): void
-        {
-            $this->endIndex = $endIndex;
         }
 
         /**

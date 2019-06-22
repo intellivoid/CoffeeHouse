@@ -1,7 +1,6 @@
 <?php
 
-    use CoffeeHouse\Abstracts\BotType;
-    use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Bots\Cleverbot;
 
     $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
     include_once($SourceDirectory . 'CoffeeHouse' . DIRECTORY_SEPARATOR . 'CoffeeHouse.php');
@@ -15,8 +14,7 @@
         return $line;
     }
 
-    $CoffeeHouse = new CoffeeHouse();
-    $Bot = $CoffeeHouse->create(BotType::Cleverbot);
+    $Bot = new Cleverbot();
 
     $Session = null;
     while(true)
