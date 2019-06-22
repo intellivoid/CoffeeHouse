@@ -21,6 +21,7 @@
     $TelegramSchema = new Schema();
     $TelegramSchema->setDefinition('BotName', 'LydiaChatBot');
     $TelegramSchema->setDefinition('ApiKey', '<API KEY>');
+    $TelegramSchema->setDefinition('WebHook', 'https://localhost/');
     $acm->defineSchema('Telegram', $TelegramSchema);
 
     $acm->processCommandLine();
