@@ -6,8 +6,7 @@
 
     use CoffeeHouse\Exceptions\BotSessionException;
     use CoffeeHouse\Objects\HttpResponse;
-    use http\Client\Response;
-
+    
     /**
      * Class Utilities
      * @package CoffeeHouse\Classes
@@ -123,5 +122,16 @@
             return '';
         }
 
-
+        /**
+         * Replaces third party input
+         *
+         * @param string $input
+         * @return string
+         */
+        public static function replaceThirdPartyMessages(string $input): string
+        {
+            $input = str_ireplace('cleverbot', 'Lydia', $input);
+            $input = str_ireplace('clever bot', 'Lydia', $input);
+            return $input;
+        }
     }

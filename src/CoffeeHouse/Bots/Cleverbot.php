@@ -175,7 +175,7 @@
             }
 
 
-            return $Text;
+            return Utilities::replaceThirdPartyMessages($Text);
         }
 
         /**
