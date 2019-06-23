@@ -24,4 +24,8 @@
     $TelegramSchema->setDefinition('WebHook', 'https://localhost/');
     $acm->defineSchema('Telegram', $TelegramSchema);
 
+    $ModularApiSchema = new Schema();
+    $ModularApiSchema->setDefinition('IssuerName', 'Intellivoid');
+    $acm->defineSchema('ModularAPI', $ModularApiSchema);
+
     $acm->processCommandLine();
