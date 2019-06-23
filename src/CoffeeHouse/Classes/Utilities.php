@@ -132,6 +132,8 @@
         {
             $input = str_ireplace('cleverbot', 'Lydia', $input);
             $input = str_ireplace('clever bot', 'Lydia', $input);
+            $input = str_ireplace('rollo carpenter', 'Zi Xing', $input);
+            $input = str_ireplace('jabberwacky', 'Lorde', $input);
             return $input;
         }
     }
