@@ -15,4 +15,6 @@
         const ForeignSessionNotFoundException = 103;
         const InvalidMessageException = 104;
         const TelegramClientNotFoundException = 105;
+        const ApiPlanNotFoundException = 106;
+        const InvalidApiPlanTypeException = 107;
     }
