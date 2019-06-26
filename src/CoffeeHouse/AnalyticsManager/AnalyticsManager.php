@@ -37,8 +37,6 @@
         include_once(__DIR__ . DIRECTORY_SEPARATOR . 'acm' . DIRECTORY_SEPARATOR . 'acm.php');
     }
 
-    include(__DIR__ . DIRECTORY_SEPARATOR . 'AutoConfig.php');
-
     /**
      * Class AnalyticsManager
      * @package AnalyticsManager

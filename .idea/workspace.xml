@@ -2,54 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf24a7e6-5d8a-463f-84a8-235ed02969f3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Abstracts/ExceptionCodes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Abstracts/RecordSearchMethod.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AutoConfig.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Exceptions/DatabaseException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Exceptions/InvalidDayException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Exceptions/InvalidHourException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Exceptions/InvalidRecordSearchMethodException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Exceptions/ObjectNotAvailableException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Exceptions/RecordAlreadyExistsException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Exceptions/RecordNotFoundException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Managers/Manager.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Objects/DayData.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Objects/MonthData.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Objects/Record.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Utilities/Builder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Utilities/Hashing.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Abstracts/Options.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Abstracts/Regex.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/BufferStream.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/DecodingOptions.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/EncodingOptions.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Exception/DecodingFailedException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Exception/EncodingFailedException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Exception/InsufficientDataException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Exception/IntegerOverflowException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Exception/InvalidOptionException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Ext.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Packet.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Type/Binary.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/Type/Map.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/TypeTransformer/BinaryTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/TypeTransformer/Extension.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/TypeTransformer/MapTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/TypeTransformer/Validator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/ZiProto.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/ZiProto/ziproto.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/acm/Abstracts/ExceptionCodes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/acm/CommandLine.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/acm/Exceptions/LocalConfigurationException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/acm/Exceptions/NoConfigurationFoundException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/acm/Objects/Schema.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/acm/acm.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/acm/acm.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/analytics_manager.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/configuration.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AutoConfig.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,16 +48,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1026">
-              <caret line="74" column="54" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
+            <state relative-caret-position="274">
+              <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="394">
@@ -135,8 +89,8 @@
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/ExceptionCodes.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/InvalidApiPlanTypeException.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php" />
-        <option value="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php" />
       </list>
     </option>
   </component>
@@ -228,12 +182,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1561578527406</updated>
-      <workItem from="1561578528869" duration="2757000" />
+      <workItem from="1561578528869" duration="2793000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2757000" />
+    <option name="totallyTimeSpent" value="2793000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -376,13 +330,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="74" column="54" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/Managers/Manager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -390,10 +337,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AutoConfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-72" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="61" column="120" selection-start-line="61" selection-start-column="120" selection-end-line="61" selection-end-column="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
         </state>
       </provider>
     </entry>
