@@ -57,6 +57,11 @@
         include_once(__DIR__ . DIRECTORY_SEPARATOR . 'ModularAPI' . DIRECTORY_SEPARATOR . 'ModularAPI.php');
     }
 
+    if(class_exists('AnalyticsManager\AnalyticsManager') == false)
+    {
+        include_once(__DIR__ . DIRECTORY_SEPARATOR . 'AnalyticsManager' . DIRECTORY_SEPARATOR . 'AnalyticsManager.php');
+    }
+
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'AutoConfig.php');
 
     /**
