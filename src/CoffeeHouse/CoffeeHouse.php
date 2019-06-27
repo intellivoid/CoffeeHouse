@@ -4,6 +4,7 @@
     namespace CoffeeHouse;
 
     use acm\acm;
+    use CoffeeHouse\Managers\ApiPlanManager;
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use CoffeeHouse\Managers\TelegramClientManager;
@@ -106,6 +107,11 @@
         private $TelegramConfiguration;
 
         /**
+         * @var ApiPlanManager
+         */
+        private $ApiPlanManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -119,6 +125,7 @@
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
             $this->TelegramClientManager = new TelegramClientManager($this);
+            $this->ApiPlanManager = new ApiPlanManager($this);
         }
 
         /**
@@ -178,6 +185,14 @@
         public function getDatabaseConfiguration()
         {
             return $this->DatabaseConfiguration;
+        }
+
+        /**
+         * @return ApiPlanManager
+         */
+        public function getApiPlanManager(): ApiPlanManager
+        {
+            return $this->ApiPlanManager;
         }
 
     }

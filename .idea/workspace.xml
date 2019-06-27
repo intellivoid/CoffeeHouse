@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf24a7e6-5d8a-463f-84a8-235ed02969f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Bots/Cleverbot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Bots/Cleverbot.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,15 +26,24 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="354">
-              <caret line="325" column="46" selection-start-line="325" selection-start-column="46" selection-end-line="325" selection-end-column="46" />
+              <caret line="325" column="23" selection-start-line="325" selection-start-column="23" selection-end-line="325" selection-end-column="23" />
               <folding>
                 <element signature="e#50#93#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="192" column="24" selection-start-line="192" selection-start-column="24" selection-end-line="192" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -67,9 +73,9 @@
         <option value="$PROJECT_DIR$/src/CoffeeHouse/AnalyticsManager/AnalyticsManager.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Managers/ChatDialogsManager.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Managers/TelegramClientManager.php" />
-        <option value="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Bots/Cleverbot.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" />
       </list>
     </option>
   </component>
@@ -119,6 +125,14 @@
             <path>
               <item name="CoffeeHouse" type="b2602c69:ProjectViewProjectNode" />
               <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
+              <item name="ModularAPI" type="462c0819:PsiDirectoryNode" />
+              <item name="Managers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CoffeeHouse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
               <item name="tables" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -161,18 +175,19 @@
       <option name="presentableId" value="Default" />
       <updated>1561578527406</updated>
       <workItem from="1561578528869" duration="3727000" />
-      <workItem from="1561672234706" duration="49000" />
+      <workItem from="1561672234706" duration="113000" />
+      <workItem from="1561674850995" duration="57000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3776000" />
+    <option name="totallyTimeSpent" value="3897000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19288956" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19591528" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -326,13 +341,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="127" column="9" lean-forward="true" selection-start-line="127" selection-start-column="9" selection-end-line="127" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Bots/Cleverbot.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -346,10 +354,17 @@
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="354">
-          <caret line="325" column="46" selection-start-line="325" selection-start-column="46" selection-end-line="325" selection-end-column="46" />
+          <caret line="325" column="23" selection-start-line="325" selection-start-column="23" selection-end-line="325" selection-end-column="23" />
           <folding>
             <element signature="e#50#93#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="192" column="24" selection-start-line="192" selection-start-column="24" selection-end-line="192" selection-end-column="24" />
         </state>
       </provider>
     </entry>
