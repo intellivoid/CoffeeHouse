@@ -172,4 +172,12 @@
             return $this->TelegramConfiguration;
         }
 
+        /**
+         * @return mixed
+         */
+        public function getDatabaseConfiguration()
+        {
+            return $this->DatabaseConfiguration;
+        }
+
     }

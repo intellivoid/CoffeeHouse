@@ -321,6 +321,10 @@
                 $Plan = $this->getPlan(PlanSearchMethod::byAccountId, $accountId);
                 $PlanExists = true;
             }
+            else
+            {
+                $Plan->AccountId = $accountId;
+            }
 
             $current_time = time();
 

@@ -14,6 +14,7 @@
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Objects\BotThought;
     use CoffeeHouse\Objects\ForeignSession;
+    use Exception;
 
     /**
      * Class _Cleverbot
@@ -45,6 +46,7 @@
         /**
          * Cleverbot constructor.
          * @param CoffeeHouse $coffeeHouse
+         * @throws Exception
          */
         public function __construct(CoffeeHouse $coffeeHouse)
         {
