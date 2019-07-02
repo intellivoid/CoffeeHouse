@@ -156,6 +156,8 @@
                             pack('V', hexdec($matches[0]))
                         );
                     }, $Text);
+
+                $Text = Utilities::replaceThirdPartyMessages($Text);
             }
             else
             {
@@ -176,8 +178,7 @@
                 // Ignore this exception
             }
 
-
-            return Utilities::replaceThirdPartyMessages($Text);
+            return $Text;
         }
 
         /**
