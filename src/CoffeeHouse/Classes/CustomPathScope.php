@@ -5,6 +5,7 @@
 
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\PathScopeOutputNotFound;
+    use Exception;
 
     /**
      * Class CustomPathScope
@@ -18,6 +19,7 @@
          * @param string $input
          * @return string|null
          * @throws PathScopeOutputNotFound
+         * @throws Exception
          */
         public static function processTriggers(string $input)
         {
@@ -28,7 +30,14 @@
                 $Calculation = levenshtein($input, $Trigger);
                 if($Calculation < $Properties['max_points'])
                 {
-                    return self::getOutput($Properties['output']);
+                    if($Properties['random_factor'] == true)
+                    {
+                        $RandomFactor = (bool)random_int(0, 1);
+                        if($RandomFactor == true)
+                        {
+                            return self::getOutput($Properties['output']);
+                        }
+                    }
                 }
             }
 

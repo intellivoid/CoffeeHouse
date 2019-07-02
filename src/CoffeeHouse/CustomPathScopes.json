@@ -2,20 +2,30 @@
     "triggers": {
         "Who is your creator?": {
           "max_points": 3,
+          "random_factor": true,
           "output": "creator"
         },
-      "Who created you?": {
-          "max_points": 3,
-          "output": "creator"
-      }
+        "Who created you?": {
+            "max_points": 3,
+            "random_factor": true,
+            "output": "creator"
+        },
+        "Who's the best weeb in the world?": {
+            "max_points": 4,
+            "random_factor": true,
+            "output": "best_weeb"
+        }
     },
     "outputs": {
         "creator": [
-          "Zi Xing is my creator.",
-          "Zi Xing created me.",
-          "I think Zi Xing is my creator.",
-          "Do you know who Zi Xing is?",
-          "A software engineer that goes by the name of Zi Xing."
+            "Zi Xing is my creator.",
+            "Zi Xing created me.",
+            "I think Zi Xing is my creator.",
+            "Do you know who Zi Xing is?",
+            "A software engineer that goes by the name of Zi Xing."
+        ],
+        "best_weeb": [
+            "Rem is the best girl"
         ]
     }
 }
