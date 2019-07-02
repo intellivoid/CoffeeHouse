@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf24a7e6-5d8a-463f-84a8-235ed02969f3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/CustomPathScopes.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Responses/main_pointer.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,37 +31,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/StringDistance.php">
+        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/linear_usage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="19" column="64" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="9" column="5" selection-start-line="3" selection-start-column="4" selection-end-line="9" selection-end-column="5" />
+            <state relative-caret-position="149">
+              <caret line="202" column="22" selection-start-line="202" selection-start-column="22" selection-end-line="202" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
+        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="20" column="106" selection-start-line="20" selection-start-column="106" selection-end-line="20" selection-end-column="106" />
+            <state relative-caret-position="144">
+              <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CustomPathScopes.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -94,8 +87,10 @@
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Responses/main_pointer.json" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Classes/StringDistance.php" />
         <option value="$PROJECT_DIR$/tests/linear_usage.php" />
-        <option value="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/CustomPathScopes/main_pointer.json" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/CustomPathScopes.json" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" />
       </list>
     </option>
   </component>
@@ -128,13 +123,6 @@
               <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CoffeeHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="Classes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -189,12 +177,12 @@
       <workItem from="1561578528869" duration="3727000" />
       <workItem from="1561672234706" duration="113000" />
       <workItem from="1561674850995" duration="740000" />
-      <workItem from="1562092230953" duration="1770000" />
+      <workItem from="1562092230953" duration="4433000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6350000" />
+    <option name="totallyTimeSpent" value="9013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -395,17 +383,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php">
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CustomPathScopes/main_pointer.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="5" selection-start-line="3" selection-start-column="4" selection-end-line="9" selection-end-column="5" />
+        <state relative-caret-position="120">
+          <caret line="5" column="31" lean-forward="true" selection-end-line="14" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="20" column="106" selection-start-line="20" selection-start-column="106" selection-end-line="20" selection-end-column="106" />
+        <state relative-caret-position="149">
+          <caret line="202" column="22" selection-start-line="202" selection-start-column="22" selection-end-line="202" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CustomPathScopes.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
         </state>
       </provider>
     </entry>

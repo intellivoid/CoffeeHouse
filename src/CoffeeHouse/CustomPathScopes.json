@@ -1,0 +1,14 @@
+{
+    "triggers": {
+        "Who is your creator?": {
+          "max_points": 2,
+          "output": "creator"
+        }
+    },
+    "outputs": {
+        "creator": [
+          "Zi Xing is my creator",
+          "Zi Xing created me"
+        ]
+    }
+}
