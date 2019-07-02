@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf24a7e6-5d8a-463f-84a8-235ed02969f3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/StringDistance.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Responses/main_pointer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CoffeeHouse.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CoffeeHouse.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Bots/Cleverbot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Bots/Cleverbot.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,43 +31,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php">
+        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/StringDistance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-              <folding>
-                <element signature="e#50#93#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Managers/ChatDialogsManager.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="72" column="5" lean-forward="true" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+            <state relative-caret-position="24">
+              <caret line="3" column="9" lean-forward="true" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Bots/Cleverbot.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="147" column="30" selection-start-line="147" selection-start-column="30" selection-end-line="147" selection-end-column="30" />
-              <folding>
-                <element signature="e#45#98#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="192" column="44" selection-start-line="192" selection-start-column="44" selection-end-line="192" selection-end-column="44" />
+            <state relative-caret-position="144">
+              <caret line="21" column="105" selection-start-line="21" selection-start-column="105" selection-end-line="21" selection-end-column="105" />
             </state>
           </provider>
         </entry>
@@ -95,8 +74,10 @@
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Managers/ChatDialogsManager.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Managers/TelegramClientManager.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php" />
-        <option value="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Bots/Cleverbot.php" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/Responses/main_pointer.json" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/Classes/StringDistance.php" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" />
       </list>
     </option>
   </component>
@@ -134,14 +115,7 @@
               <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="Bots" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CoffeeHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="CoffeeHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="Managers" type="462c0819:PsiDirectoryNode" />
+              <item name="Classes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CoffeeHouse" type="b2602c69:ProjectViewProjectNode" />
@@ -190,12 +164,12 @@
       <workItem from="1561578528869" duration="3727000" />
       <workItem from="1561672234706" duration="113000" />
       <workItem from="1561674850995" duration="740000" />
-      <workItem from="1562092230953" duration="65000" />
+      <workItem from="1562092230953" duration="854000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4645000" />
+    <option name="totallyTimeSpent" value="5434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -214,7 +188,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32993197" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -348,13 +322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="192" column="44" selection-start-line="192" selection-start-column="44" selection-end-line="192" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Managers/ApiPlanManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="354">
@@ -368,7 +335,7 @@
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Managers/ChatDialogsManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="487">
-          <caret line="72" column="5" lean-forward="true" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -379,6 +346,27 @@
           <folding>
             <element signature="e#45#98#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Responses/main_pointer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/StringDistance.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="3" column="9" lean-forward="true" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="21" column="105" selection-start-line="21" selection-start-column="105" selection-end-line="21" selection-end-column="105" />
         </state>
       </provider>
     </entry>
