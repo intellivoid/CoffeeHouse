@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf24a7e6-5d8a-463f-84a8-235ed02969f3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/PathScopeOutputNotFound.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/ExceptionCodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/ExceptionCodes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,20 +26,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="20" column="106" lean-forward="true" selection-start-line="20" selection-start-column="106" selection-end-line="20" selection-end-column="106" />
+            <state relative-caret-position="312">
+              <caret line="32" column="67" lean-forward="true" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="293">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
+              <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+              <folding>
+                <element signature="e#48#76#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Exceptions/PathScopeOutputNotFound.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="197">
+              <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
               <folding>
                 <element signature="e#52#93#0#PHP" expanded="true" />
               </folding>
@@ -108,10 +108,10 @@
         <option value="$PROJECT_DIR$/tests/linear_usage.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/CustomPathScopes/main_pointer.json" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/CustomPathScopes.json" />
-        <option value="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/ExceptionCodes.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/PathScopeOutputNotFound.php" />
         <option value="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" />
+        <option value="$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php" />
       </list>
     </option>
   </component>
@@ -205,12 +205,12 @@
       <workItem from="1561578528869" duration="3727000" />
       <workItem from="1561672234706" duration="113000" />
       <workItem from="1561674850995" duration="740000" />
-      <workItem from="1562092230953" duration="4674000" />
+      <workItem from="1562092230953" duration="5049000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9254000" />
+    <option name="totallyTimeSpent" value="9629000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -418,13 +418,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Abstracts/ExceptionCodes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
@@ -432,20 +425,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="32" column="67" lean-forward="true" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Exceptions/PathScopeOutputNotFound.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="197">
+          <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
           <folding>
             <element signature="e#52#93#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php">
+    <entry file="file://$PROJECT_DIR$/src/CoffeeHouse/Classes/CustomPathScope.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="20" column="106" lean-forward="true" selection-start-line="20" selection-start-column="106" selection-end-line="20" selection-end-column="106" />
+        <state relative-caret-position="293">
+          <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+          <folding>
+            <element signature="e#48#76#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

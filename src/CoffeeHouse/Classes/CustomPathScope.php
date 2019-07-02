@@ -4,6 +4,7 @@
     namespace CoffeeHouse\Classes;
 
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Exceptions\PathScopeOutputNotFound;
 
     /**
      * Class CustomPathScope
@@ -16,6 +17,7 @@
          *
          * @param string $input
          * @return string|null
+         * @throws PathScopeOutputNotFound
          */
         public static function processTriggers(string $input)
         {
@@ -33,12 +35,23 @@
             return null;
         }
 
+        /**
+         * Gets a random output
+         *
+         * @param string $output
+         * @return string
+         * @throws PathScopeOutputNotFound
+         */
         public static function getOutput(string $output): string
         {
             $CPS = CoffeeHouse::getCustomPathScopes();
+
             if(isset($CPS['outputs'][$output]) == false)
             {
-
+                throw new PathScopeOutputNotFound();
             }
+
+            $SelectedOutput = array_rand($CPS['outputs'][$output]);
+            return $CPS['outputs'][$output][$SelectedOutput];
         }
     }
