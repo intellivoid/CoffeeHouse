@@ -1,14 +1,17 @@
 {
     "triggers": {
         "Who is your creator?": {
-          "max_points": 2,
+          "max_points": 3,
           "output": "creator"
         }
     },
     "outputs": {
         "creator": [
-          "Zi Xing is my creator",
-          "Zi Xing created me"
+          "Zi Xing is my creator.",
+          "Zi Xing created me.",
+          "I think Zi Xing is my creator.",
+          "Do you know who Zi Xing is?",
+          "A software engineer that goes by the name of Zi Xing."
         ]
     }
 }
