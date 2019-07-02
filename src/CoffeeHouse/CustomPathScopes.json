@@ -12,7 +12,7 @@
         },
         "Who's the best weeb in the world?": {
             "max_points": 4,
-            "random_factor": true,
+            "random_factor": false,
             "output": "best_weeb"
         }
     },
