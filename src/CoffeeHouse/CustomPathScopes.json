@@ -3,7 +3,11 @@
         "Who is your creator?": {
           "max_points": 3,
           "output": "creator"
-        }
+        },
+      "Who created you?": {
+          "max_points": 3,
+          "output": "creator"
+      }
     },
     "outputs": {
         "creator": [
