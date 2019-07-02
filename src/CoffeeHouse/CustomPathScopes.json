@@ -12,8 +12,13 @@
         },
         "Who's the best weeb in the world?": {
             "max_points": 4,
-            "random_factor": false,
+            "random_factor": true,
             "output": "best_weeb"
+        },
+        "Do you want some Pizza?": {
+            "max_points": "4",
+            "random_factor": true,
+            "output": "link(s)_pizza"
         }
     },
     "outputs": {
@@ -25,7 +30,13 @@
             "A software engineer that goes by the name of Zi Xing."
         ],
         "best_weeb": [
-            "Rem is the best girl"
+            "Rem is the best girl.",
+            "Node is a big boy.",
+            "Node is a qt boy."
+        ],
+        "link(s)_pizza": [
+            "One moment, i'm going to ask Link",
+            "ByteChain cannot offer support for Pizza."
         ]
     }
 }
