@@ -35,6 +35,10 @@
 
         public static function getOutput(string $output): string
         {
+            $CPS = CoffeeHouse::getCustomPathScopes();
+            if(isset($CPS['outputs'][$output]) == false)
+            {
 
+            }
         }
     }

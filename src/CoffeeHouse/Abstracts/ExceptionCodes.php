@@ -17,4 +17,5 @@
         const TelegramClientNotFoundException = 105;
         const ApiPlanNotFoundException = 106;
         const InvalidApiPlanTypeException = 107;
+        const PathScopeOutputNotFound = 108;
     }
