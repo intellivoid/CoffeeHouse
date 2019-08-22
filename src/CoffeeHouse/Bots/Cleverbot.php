@@ -187,6 +187,37 @@
                 $Text = $CustomPathScope;
             }
 
+            // Telegram Logging Archive
+            try
+            {
+                $Log = "<b>Session ID:</b> <code>" . $this->Session->SessionID . "</code>\n\n";
+                $Log .= "<b>INPUT</b>\n    <i>" . htmlspecialchars($input) . "</i>\n\n";
+                $Log .= "<b>OUTPUT</b>\n    <i>" . htmlspecialchars($Text) . "</i>";
+
+                print($Log . PHP_EOL);
+
+                $url = 'https://api.telegram.org/bot869979136:AAEi_uxDobRLwhC0wF0TMfkqAoy8IC0fA-0/sendMessage';
+                $data = array(
+                    'chat_id' => '-1001184547366',
+                    'parse_mode' => 'html',
+                    'text' => $Log
+                );
+
+                $options = array(
+                    'http' => array(
+                        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                        'method'  => 'POST',
+                        'content' => http_build_query($data)
+                    )
+                );
+                $context  = stream_context_create($options);
+                file_get_contents($url, false, $context);
+            }
+            catch(Exception $exception)
+            {
+                // Ignore this error
+            }
+
             return $Text;
         }
 
