@@ -194,8 +194,6 @@
                 $Log .= "<b>INPUT</b>\n    <i>" . htmlspecialchars($input) . "</i>\n\n";
                 $Log .= "<b>OUTPUT</b>\n    <i>" . htmlspecialchars($Text) . "</i>";
 
-                print($Log . PHP_EOL);
-
                 $url = 'https://api.telegram.org/bot869979136:AAEi_uxDobRLwhC0wF0TMfkqAoy8IC0fA-0/sendMessage';
                 $data = array(
                     'chat_id' => '-1001184547366',
