@@ -145,15 +145,6 @@
         }
 
         /**
-         * @return array
-         */
-        public static function getCustomPathScopes(): array
-        {
-            $CPS = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'CustomPathScopes.json');
-            return json_decode($CPS, true);
-        }
-
-        /**
          * @return UserSubscriptionManager
          */
         public function getUserSubscriptionManager(): UserSubscriptionManager
