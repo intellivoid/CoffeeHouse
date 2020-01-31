@@ -6,6 +6,7 @@
     use acm\acm;
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
+    use CoffeeHouse\Managers\UserSubscriptionManager;
     use Exception;
     use mysqli;
 
@@ -29,6 +30,7 @@
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ChatDialogsManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ForeignSessionsManager.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'UserSubscriptionManager.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'BotThought.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'ForeignSession.php');
@@ -79,6 +81,11 @@
         private $ChatDialogsManager;
 
         /**
+         * @var UserSubscriptionManager
+         */
+        private $UserSubscriptionManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -90,6 +97,7 @@
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
+            $this->UserSubscriptionManager = new UserSubscriptionManager($this);
         }
 
         /**
@@ -143,6 +151,14 @@
         {
             $CPS = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'CustomPathScopes.json');
             return json_decode($CPS, true);
+        }
+
+        /**
+         * @return UserSubscriptionManager
+         */
+        public function getUserSubscriptionManager(): UserSubscriptionManager
+        {
+            return $this->UserSubscriptionManager;
         }
 
     }
