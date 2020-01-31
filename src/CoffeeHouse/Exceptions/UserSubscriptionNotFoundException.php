@@ -20,4 +20,6 @@
         {
             parent::__construct("The user subscription was not found in the database", ExceptionCodes::UserSubscriptionNotFoundException, null);
         }
+
+
     }
