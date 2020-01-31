@@ -112,6 +112,14 @@
          */
         public function updateMasterConfiguration(): bool
         {
+            if(file_exists($this->MasterConfigurationLocation))
+            {
+                if(is_writeable($this->MasterConfigurationLocation) == false)
+                {
+                    return false;
+                }
+            }
+
             if($this->MasterConfigurationLoaded == false)
             {
                 if($this->reloadMasterConfiguration() == false)

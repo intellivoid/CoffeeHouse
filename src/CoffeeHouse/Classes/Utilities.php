@@ -133,7 +133,10 @@
             $input = str_ireplace('cleverbot', 'Lydia', $input);
             $input = str_ireplace('clever bot', 'Lydia', $input);
             $input = str_ireplace('rollo carpenter', 'Zi Xing', $input);
-            $input = str_ireplace('jabberwacky', 'Lorde', $input);
+            $input = str_ireplace('jabberwacky', 'Lydia', $input);
+            $input = str_ireplace('clever', 'smart', $input);
+            $input = str_ireplace('existor', 'Intellivoid', $input);
+
             return $input;
         }
     }
