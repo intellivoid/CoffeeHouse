@@ -28,5 +28,8 @@
         /** @deprecated  */
         const InvalidApiPlanTypeException = 107;
 
+        /** @deprecated  */
         const PathScopeOutputNotFound = 108;
+
+        const UserSubscriptionNotFoundException = 109;
     }
