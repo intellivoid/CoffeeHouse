@@ -19,10 +19,13 @@
 
         const InvalidMessageException = 104;
 
+        /** @deprecated  */
         const TelegramClientNotFoundException = 105;
 
+        /** @deprecated  */
         const ApiPlanNotFoundException = 106;
 
+        /** @deprecated  */
         const InvalidApiPlanTypeException = 107;
 
         const PathScopeOutputNotFound = 108;
