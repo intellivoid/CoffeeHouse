@@ -8,6 +8,8 @@
     use CoffeeHouse\Abstracts\UserSubscriptionStatus;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\InvalidSearchMethodException;
+    use CoffeeHouse\Exceptions\UserSubscriptionNotFoundException;
     use CoffeeHouse\Objects\UserSubscription;
     use msqg\QueryBuilder;
 
@@ -39,6 +41,8 @@
          * @param int $access_record_id
          * @return UserSubscription
          * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws UserSubscriptionNotFoundException
          */
         public function registerUserSubscription(int $account_id, int $subscription_id, int $access_record_id): UserSubscription
         {
@@ -63,7 +67,55 @@
             }
             else
             {
-                throw new DatabaseException($this->coffeeHouse->getDatabase()->error, $Query);
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
+        }
+
+        /**
+         * Gets an existing user subscription record from the database
+         *
+         * @param string $search_method
+         * @param int $value
+         * @return UserSubscription
+         * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws UserSubscriptionNotFoundException
+         */
+        public function getUserSubscription(string $search_method, int $value): UserSubscription
+        {
+            switch($search_method)
+            {
+                case UserSubscriptionSearchMethod::byId:
+                case UserSubscriptionSearchMethod::bySubscriptionID:
+                case UserSubscriptionSearchMethod::byAccessRecordID:
+                case UserSubscriptionSearchMethod::byAccountID:
+                    $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
+                    $value = (int)$value;
+                    break;
+
+                default:
+                    throw new InvalidSearchMethodException();
+            }
+
+            $Query = QueryBuilder::select('user_subscriptions', [
+                'id', 'account_id', 'subscription_id', 'access_record_id', 'status', 'created_timestamp'
+            ], $search_method, $value);
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults == false)
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
+            else
+            {
+                if($QueryResults->num_rows !== 1)
+                {
+                    throw new UserSubscriptionNotFoundException();
+                }
+
+                $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
+
+                return UserSubscription::fromArray($Row);
             }
         }
     }
