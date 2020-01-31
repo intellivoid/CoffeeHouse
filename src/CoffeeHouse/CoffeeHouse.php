@@ -7,7 +7,6 @@
     use CoffeeHouse\Managers\ApiPlanManager;
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
-    use CoffeeHouse\Managers\TelegramClientManager;
     use Exception;
     use mysqli;
 
@@ -32,18 +31,15 @@
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidMessageException.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidSearchMethodException.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'PathScopeOutputNotFound.php');
-    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Exceptions' . DIRECTORY_SEPARATOR . 'TelegramClientNotFoundException.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ApiPlanManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ChatDialogsManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ForeignSessionsManager.php');
-    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'TelegramClientManager.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'ApiPlan.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'BotThought.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'ForeignSession.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'HttpResponse.php');
-    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'TelegramClient.php');
 
     if(class_exists('ZiProto\ZiProto') == false)
     {
@@ -100,16 +96,6 @@
         private $ChatDialogsManager;
 
         /**
-         * @var TelegramClientManager
-         */
-        private $TelegramClientManager;
-
-        /**
-         * @var mixed
-         */
-        private $TelegramConfiguration;
-
-        /**
          * @var ApiPlanManager
          */
         private $ApiPlanManager;
@@ -122,12 +108,10 @@
         {
             $this->acm = new acm(__DIR__, 'CoffeeHouse');
             $this->DatabaseConfiguration = $this->acm->getConfiguration('Database');
-            $this->TelegramConfiguration = $this->acm->getConfiguration('Telegram');
             $this->database = null;
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
-            $this->TelegramClientManager = new TelegramClientManager($this);
             $this->ApiPlanManager = new ApiPlanManager($this);
         }
 
@@ -166,21 +150,6 @@
             return $this->ChatDialogsManager;
         }
 
-        /**
-         * @return TelegramClientManager
-         */
-        public function getTelegramClientManager(): TelegramClientManager
-        {
-            return $this->TelegramClientManager;
-        }
-
-        /**
-         * @return mixed
-         */
-        public function getTelegramConfiguration()
-        {
-            return $this->TelegramConfiguration;
-        }
 
         /**
          * @return mixed
