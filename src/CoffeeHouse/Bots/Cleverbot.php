@@ -4,7 +4,6 @@
     namespace CoffeeHouse\Bots;
 
     use CoffeeHouse\Abstracts\ForeignSessionSearchMethod;
-    use CoffeeHouse\Classes\CustomPathScope;
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\Classes\Utilities;
     use CoffeeHouse\CoffeeHouse;
@@ -13,7 +12,6 @@
     use CoffeeHouse\Exceptions\ForeignSessionNotFoundException;
     use CoffeeHouse\Exceptions\InvalidMessageException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
-    use CoffeeHouse\Exceptions\PathScopeOutputNotFound;
     use CoffeeHouse\Objects\BotThought;
     use CoffeeHouse\Objects\ForeignSession;
     use Exception;
@@ -116,7 +114,6 @@
          * @return BotThought
          * @throws BotSessionException
          * @throws DatabaseException
-         * @throws PathScopeOutputNotFound
          */
         public function think(string $input): string
         {
@@ -181,11 +178,6 @@
                 // Ignore this exception
             }
 
-            $CustomPathScope = CustomPathScope::processTriggers($input);
-            if($CustomPathScope !== null)
-            {
-                $Text = $CustomPathScope;
-            }
 
             // Telegram Logging Archive
             try
