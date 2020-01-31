@@ -134,6 +134,7 @@
             $input = str_ireplace('clever bot', 'Lydia', $input);
             $input = str_ireplace('rollo carpenter', 'Zi Xing', $input);
             $input = str_ireplace('jabberwacky', 'Lydia', $input);
+            $input = str_ireplace('clever', 'Smart', $input);
             $input = str_ireplace('existor', 'Intellivoid', $input);
             return $input;
         }
