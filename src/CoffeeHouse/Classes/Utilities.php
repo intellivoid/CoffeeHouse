@@ -136,6 +136,7 @@
             $input = str_ireplace('jabberwacky', 'Lydia', $input);
             $input = str_ireplace('clever', 'smart', $input);
             $input = str_ireplace('existor', 'Intellivoid', $input);
+
             return $input;
         }
     }
