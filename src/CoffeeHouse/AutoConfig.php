@@ -15,17 +15,7 @@
     $DatabaseSchema->setDefinition('Port', '3306');
     $DatabaseSchema->setDefinition('Username', 'admin');
     $DatabaseSchema->setDefinition('Password', 'admin');
-    $DatabaseSchema->setDefinition('Name', 'coffee_house');
+    $DatabaseSchema->setDefinition('Name', 'coffeehouse');
     $acm->defineSchema('Database', $DatabaseSchema);
-
-    $TelegramSchema = new Schema();
-    $TelegramSchema->setDefinition('BotName', 'LydiaChatBot');
-    $TelegramSchema->setDefinition('ApiKey', '<API KEY>');
-    $TelegramSchema->setDefinition('WebHook', 'https://localhost/');
-    $acm->defineSchema('Telegram', $TelegramSchema);
-
-    $ModularApiSchema = new Schema();
-    $ModularApiSchema->setDefinition('IssuerName', 'Intellivoid');
-    $acm->defineSchema('ModularAPI', $ModularApiSchema);
 
     $acm->processCommandLine();
