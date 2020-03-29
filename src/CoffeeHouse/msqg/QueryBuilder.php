@@ -157,9 +157,10 @@
          * @param mysqli $mysqli
          * @param string $table
          * @param array $values
+         * @param bool $ignore
          * @return string
          */
-        public static function s_insert_into(mysqli $mysqli, string $table, array $values): string
+        public static function s_insert_into(mysqli $mysqli, string $table, array $values, bool $ignore=true): string
         {
             $table = $mysqli->real_escape_string($table);
             
@@ -177,7 +178,7 @@
                 }
             }
 
-            return self::insert_into($table, $x_values);
+            return self::insert_into($table, $x_values, $ignore);
         }
 
         /**
@@ -185,9 +186,10 @@
          *
          * @param string $table
          * @param array $values
+         * @param bool $ignore
          * @return string
          */
-        public static function insert_into(string $table, array $values): string
+        public static function insert_into(string $table, array $values, bool $ignore=true): string
         {
             $Keys = '';
             $Values = '';
@@ -225,8 +227,16 @@
                 }
             }
 
-            /** @noinspection SqlNoDataSourceInspection */
-            return "INSERT INTO `$table` ($Keys) VALUES ($Values);";
+            if($ignore)
+            {
+                /** @noinspection SqlNoDataSourceInspection */
+                return "INSERT IGNORE INTO `$table` ($Keys) VALUES ($Values);";
+            }
+            else
+            {
+                /** @noinspection SqlNoDataSourceInspection */
+                return "INSERT INTO `$table` ($Keys) VALUES ($Values);";
+            }
         }
 
         /**
