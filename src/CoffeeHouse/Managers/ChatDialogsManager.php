@@ -8,6 +8,7 @@
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\InvalidMessageException;
+    use msqg\QueryBuilder;
 
     /**
      * Class ChatDialogsManager
@@ -58,7 +59,13 @@
             $output = $this->coffeeHouse->getDatabase()->real_escape_string(base64_encode($output));
             $timestamp = (int)time();
 
-            $Query = "INSERT INTO `chat_dialogs` (session_id, step, input, output, timestamp) VALUES ('$session_id', $step, '$input', '$output', $timestamp)";
+            $Query = QueryBuilder::insert_into('chat_dialogs', array(
+                'session_id' => $session_id,
+                'step' => $step,
+                'input' => $input,
+                'output' => $output,
+                'timestamp' => $timestamp
+            ));
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
             if($QueryResults)
