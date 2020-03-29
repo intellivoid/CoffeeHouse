@@ -11,6 +11,7 @@
     use CoffeeHouse\Exceptions\ForeignSessionNotFoundException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Objects\ForeignSession;
+    use msqg\QueryBuilder;
     use ZiProto\ZiProto;
 
     /**
@@ -59,7 +60,18 @@
             $messages = 0;
             $expires = $created + 10800;
 
-            $Query = "INSERT INTO `foreign_sessions` (session_id, headers, cookies, variables, language, available, messages, expires, last_updated, created) VALUES ('$session_id', '$headers', '$cookies', '$variables', '$language', $available, $messages, $expires, $last_updated, $created)";
+           $Query = QueryBuilder::insert_into('foreign_sessions', array(
+                'session_id' => $session_id,
+                'headers' => $headers,
+                'cookies' => $cookies,
+                'variables' => $variables,
+                'language' => $language,
+                'available' => $available,
+                'messages' => $messages,
+                'expires' => $expires,
+                'last_updated' => $last_updated,
+                'created' => $created
+            ));
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
             if($QueryResults)
             {
@@ -92,14 +104,26 @@
 
                 case ForeignSessionSearchMethod::bySessionId:
                     $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
-                    $value =  "'" . $this->coffeeHouse->getDatabase()->real_escape_string($value) . "'";
+                    $value =  $this->coffeeHouse->getDatabase()->real_escape_string($value);
                     break;
 
                 default:
                     throw new InvalidSearchMethodException();
             }
 
-            $Query = "SELECT id, session_id, headers, cookies, variables, language, available, messages, expires, last_updated, created FROM `foreign_sessions` WHERE $search_method=$value";
+            $Query = QueryBuilder::select('foreign_sessions', [
+                'id',
+                'session_id',
+                'headers',
+                'cookies',
+                'variables',
+                'language',
+                'available',
+                'messages',
+                'expires',
+                'last_updated',
+                'created'
+            ], $search_method, $value);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
             if($QueryResults)
@@ -142,7 +166,15 @@
             $messages = (int)$foreignSession->Messages;
             $last_updated = (int)time();
 
-            $Query = "UPDATE `foreign_sessions` SET headers='$headers', cookies='$cookies', variables='$variables', language='$language', available=$available, messages=$messages, last_updated=$last_updated WHERE id=$id";
+            $Query = QueryBuilder::update('foreign_sessions', array(
+                'headers' => $headers,
+                'cookies' => $cookies,
+                'variables' => $variables,
+                'language' => $language,
+                'available' => $available,
+                'messages' => $messages,
+                'last_updated' => $last_updated
+            ), 'id', $id);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
             if($QueryResults)
