@@ -11,6 +11,7 @@
     use CoffeeHouse\Exceptions\ForeignSessionNotFoundException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Objects\ForeignSession;
+    use msqg\QueryBuilder;
     use ZiProto\ZiProto;
 
     /**
@@ -59,7 +60,18 @@
             $messages = 0;
             $expires = $created + 10800;
 
-            $Query = "INSERT INTO `foreign_sessions` (session_id, headers, cookies, variables, language, available, messages, expires, last_updated, created) VALUES ('$session_id', '$headers', '$cookies', '$variables', '$language', $available, $messages, $expires, $last_updated, $created)";
+           $Query = QueryBuilder::insert_into('foreign_sessions', array(
+                'session_id' => $session_id,
+                'headers' => $headers,
+                'cookies' => $cookies,
+                'variables' => $variables,
+                'language' => $language,
+                'available' => $available,
+                'messages' => $messages,
+                'expires' => $expires,
+                'last_updated' => $last_updated,
+                'created' => $created
+            ));
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
             if($QueryResults)
             {
