@@ -111,7 +111,6 @@
                     throw new InvalidSearchMethodException();
             }
 
-            $Query = "SELECT id, session_id, headers, cookies, variables, language, available, messages, expires, last_updated, created FROM `foreign_sessions` WHERE $search_method=$value";
             $Query = QueryBuilder::select('foreign_sessions', [
                 'id',
                 'session_id',
