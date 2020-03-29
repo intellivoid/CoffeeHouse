@@ -166,7 +166,15 @@
             $messages = (int)$foreignSession->Messages;
             $last_updated = (int)time();
 
-            $Query = "UPDATE `foreign_sessions` SET headers='$headers', cookies='$cookies', variables='$variables', language='$language', available=$available, messages=$messages, last_updated=$last_updated WHERE id=$id";
+            $Query = QueryBuilder::update('foreign_sessions', array(
+                'headers' => $headers,
+                'cookies' => $cookies,
+                'variables' => $variables,
+                'language' => $language,
+                'available' => $available,
+                'messages' => $messages,
+                'last_updated' => $last_updated
+            ), 'id', $id);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
             if($QueryResults)
