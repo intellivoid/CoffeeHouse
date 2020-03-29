@@ -104,7 +104,7 @@
 
                 case ForeignSessionSearchMethod::bySessionId:
                     $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
-                    $value =  "'" . $this->coffeeHouse->getDatabase()->real_escape_string($value) . "'";
+                    $value =  $this->coffeeHouse->getDatabase()->real_escape_string($value);
                     break;
 
                 default:
@@ -112,6 +112,19 @@
             }
 
             $Query = "SELECT id, session_id, headers, cookies, variables, language, available, messages, expires, last_updated, created FROM `foreign_sessions` WHERE $search_method=$value";
+            $Query = QueryBuilder::select('foreign_sessions', [
+                'id',
+                'session_id',
+                'headers',
+                'cookies',
+                'variables',
+                'language',
+                'available',
+                'messages',
+                'expires',
+                'last_updated',
+                'created'
+            ], $search_method, $value);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
             if($QueryResults)
