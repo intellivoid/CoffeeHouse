@@ -7,6 +7,7 @@
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
+    use DeepAnalytics\DeepAnalytics;
     use Exception;
     use mysqli;
 
@@ -41,6 +42,11 @@
     if(class_exists('ZiProto\ZiProto') == false)
     {
         include_once(__DIR__ . DIRECTORY_SEPARATOR . 'ZiProto' . DIRECTORY_SEPARATOR . 'ZiProto.php');
+    }
+
+    if(class_exists('DeepAnalytics\DeepAnalytics') == false)
+    {
+        include_once(__DIR__ . DIRECTORY_SEPARATOR . 'DeepAnalytics' . DIRECTORY_SEPARATOR . 'DeepAnalytics.php');
     }
 
     if(class_exists('msqg\msqg') == false)
@@ -92,6 +98,11 @@
         private $UserSubscriptionManager;
 
         /**
+         * @var DeepAnalytics
+         */
+        private $DeepAnalytics;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -104,6 +115,7 @@
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
             $this->UserSubscriptionManager = new UserSubscriptionManager($this);
+            $this->DeepAnalytics = new DeepAnalytics();
         }
 
         /**
@@ -156,6 +168,14 @@
         public function getUserSubscriptionManager(): UserSubscriptionManager
         {
             return $this->UserSubscriptionManager;
+        }
+
+        /**
+         * @return DeepAnalytics
+         */
+        public function getDeepAnalytics(): DeepAnalytics
+        {
+            return $this->DeepAnalytics;
         }
 
     }
