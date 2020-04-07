@@ -92,6 +92,7 @@
             $this->Session->Language = $language;
 
             $this->coffeeHouse->getForeignSessionsManager()->updateSession($this->Session);
+            $this->coffeeHouse->getDeepAnalytics()->tally('coffeehouse', 'lydia_sessions', 0);
         }
 
         /**
@@ -178,6 +179,8 @@
             {
                 // Ignore this exception
             }
+
+            $this->coffeeHouse->getDeepAnalytics()->tally('coffeehouse', 'lydia_messages', 0);
 
             return $Text;
         }
