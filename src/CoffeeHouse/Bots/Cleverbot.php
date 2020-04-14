@@ -92,6 +92,7 @@
             $this->Session->Language = $language;
 
             $this->coffeeHouse->getForeignSessionsManager()->updateSession($this->Session);
+            $this->coffeeHouse->getDeepAnalytics()->tally('coffeehouse', 'created_sessions');
         }
 
         /**
@@ -179,6 +180,7 @@
                 // Ignore this exception
             }
 
+            $this->coffeeHouse->getDeepAnalytics()->tally('coffeehouse', 'think_thought');
             return $Text;
         }
 
