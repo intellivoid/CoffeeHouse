@@ -141,7 +141,6 @@
             $Query = QueryBuilder::update('user_subscriptions', array(
                 'account_id' => $account_id,
                 'subscription_id' => $subscription_id,
-                'access_record_id' => $access_record_id,
                 'status' => $status
             ), 'id', $id);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
