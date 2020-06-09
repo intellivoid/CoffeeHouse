@@ -7,6 +7,7 @@
     use CoffeeHouse\Classes\ServerInterface;
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
+    use CoffeeHouse\Managers\GeneralizedClassificationManager;
     use CoffeeHouse\Managers\SpamPredictionCacheManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
     use CoffeeHouse\NaturalLanguageProcessing\SpamPrediction;
@@ -40,6 +41,7 @@
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ChatDialogsManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ForeignSessionsManager.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'GeneralizedClassificationManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'SpamPredictionCacheManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'UserSubscriptionManager.php');
 
@@ -138,6 +140,11 @@
         private $SpamPredictionCacheManager;
 
         /**
+         * @var GeneralizedClassificationManager
+         */
+        private $GeneralizedClassificationManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -152,6 +159,7 @@
             $this->ChatDialogsManager = new ChatDialogsManager($this);
             $this->UserSubscriptionManager = new UserSubscriptionManager($this);
             $this->SpamPredictionCacheManager = new SpamPredictionCacheManager($this);
+            $this->GeneralizedClassificationManager = new GeneralizedClassificationManager($this);
             $this->ServerInterface = new ServerInterface($this);
             $this->SpamPrediction = new SpamPrediction($this);
             $this->DeepAnalytics = new DeepAnalytics();
@@ -247,6 +255,14 @@
         public function getSpamPrediction(): SpamPrediction
         {
             return $this->SpamPrediction;
+        }
+
+        /**
+         * @return GeneralizedClassificationManager
+         */
+        public function getGeneralizedClassificationManager(): GeneralizedClassificationManager
+        {
+            return $this->GeneralizedClassificationManager;
         }
 
     }
