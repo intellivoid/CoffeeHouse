@@ -13,6 +13,7 @@
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Exceptions\SpamPredictionCacheNotFoundException;
+    use CoffeeHouse\Objects\GeneralizedClassification;
     use CoffeeHouse\Objects\Results\SpamPredictionResults;
 
     /**
@@ -44,12 +45,28 @@
          * @param bool $cache
          * @return SpamPredictionResults
          * @throws DatabaseException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidSearchMethodException
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
+         * @noinspection DuplicatedCode
          */
         public function predict(string $input, bool $generalize=false, string $generalized_id="None", bool $cache=true): SpamPredictionResults
         {
             $SpamPredictionCache = null;
+            $PredictionGeneralization = null;
+
+            if($generalize)
+            {
+                if($generalized_id == "None")
+                {
+                    $PredictionGeneralization = $this->createGeneralized();
+                }
+                else
+                {
+                    $PredictionGeneralization = $this->getGeneralized($generalized_id);
+                }
+            }
 
             if($cache)
             {
@@ -74,6 +91,20 @@
                         $PredictionResults = new SpamPredictionResults();
                         $PredictionResults->SpamPrediction = $SpamPredictionCache->SpamCalculation;
                         $PredictionResults->HamPrediction = $SpamPredictionCache->HamCalculation;
+
+                        if($generalize)
+                        {
+                            /** @var GeneralizedClassification $PredictionGeneralization */
+                            $PredictionGeneralization['spam_generalized']->addValue($PredictionResults->SpamPrediction);
+                            $PredictionGeneralization['ham_generalized']->addValue($PredictionResults->HamPrediction);
+
+                            $PredictionResults->GeneralizedSpam = $PredictionGeneralization['spam_generalized']->Results;
+                            $PredictionResults->GeneralizedHam = $PredictionGeneralization['ham_generalized']->Results;
+                            $PredictionResults->GeneralizedID = $PredictionGeneralization['generalized_id'];
+
+                            $this->updateGeneralized($PredictionGeneralization);
+                        }
+
                         return $PredictionResults;
                     }
                 }
@@ -98,6 +129,19 @@
                         $this->coffeeHouse->getSpamPredictionCacheManager()->updateCache($SpamPredictionCache, $PredictionResults);
                     }
                 }
+            }
+
+            if($generalize)
+            {
+                /** @var GeneralizedClassification $PredictionGeneralization */
+                $PredictionGeneralization['spam_generalized']->addValue($PredictionResults->SpamPrediction);
+                $PredictionGeneralization['ham_generalized']->addValue($PredictionResults->HamPrediction);
+
+                $PredictionResults->GeneralizedSpam = $PredictionGeneralization['spam_generalized']->Results;
+                $PredictionResults->GeneralizedHam = $PredictionGeneralization['ham_generalized']->Results;
+                $PredictionResults->GeneralizedID = $PredictionGeneralization['generalized_id'];
+
+                $this->updateGeneralized($PredictionGeneralization);
             }
 
             return $PredictionResults;
