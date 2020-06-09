@@ -108,7 +108,7 @@
             $this->Data[$this->CurrentPointer] = $value;
             $this->CurrentPointer += 1;
 
-            return $this->Results;
+            return $this->calculateResults();
         }
 
         /**
