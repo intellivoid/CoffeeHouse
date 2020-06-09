@@ -32,6 +32,24 @@
         public $Module;
 
         /**
+         * Generates a valid HTTP address for the server interface connection
+         *
+         * @param bool $ssl
+         * @return string
+         */
+        public function generateAddress(bool $ssl=false): string
+        {
+            $address = $this->Host . ":" . $this->Port;
+
+            if($ssl)
+            {
+                return "https://" . $address;
+            }
+
+            return "http://" . $address;
+        }
+
+        /**
          * @return array
          */
         public function toArray(): array
