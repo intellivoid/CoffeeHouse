@@ -108,4 +108,36 @@
                 throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
             }
         }
+
+        /**
+         * Updates an existing cache record in the database
+         *
+         * @param SpamPredictionCache $spamPredictionCache
+         * @param SpamPredictionResults $spamPredictionResults
+         * @return bool
+         * @throws DatabaseException
+         */
+        public function updateCache(SpamPredictionCache $spamPredictionCache, SpamPredictionResults $spamPredictionResults): bool
+        {
+            $id = (int)$spamPredictionCache->ID;
+            $ham = (float)$spamPredictionResults->HamPrediction;
+            $spam = (float)$spamPredictionResults->SpamPrediction;
+            $last_updated_timestamp = (int)time();
+
+            $Query = QueryBuilder::update('spam_prediction_cache', array(
+                'ham' => $ham,
+                'spam' => $spam,
+                'last_updated' => $last_updated_timestamp
+            ), 'id', $id);
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults)
+            {
+                return(True);
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
+        }
     }
