@@ -38,6 +38,11 @@
             print("This isn't spam" . PHP_EOL);
         }
 
+        if($Results->isGeneralizedSpam())
+        {
+            print("This is is generally spam!" . PHP_EOL);
+        }
+
         $GeneralizedID = $Results->GeneralizedID;
         print(PHP_EOL);
     }
