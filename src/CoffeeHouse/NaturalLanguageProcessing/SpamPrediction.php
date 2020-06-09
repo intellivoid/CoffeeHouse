@@ -4,9 +4,12 @@
     namespace CoffeeHouse\NaturalLanguageProcessing;
 
 
+    use CoffeeHouse\Abstracts\GeneralizedClassificationSearchMethod;
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\GeneralizedClassificationNotFoundException;
+    use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Exceptions\SpamPredictionCacheNotFoundException;
@@ -101,8 +104,31 @@
             return $PredictionResults;
         }
 
-        public function getGeneralized(string $generalized_id): Geerali
+        /**
+         * Returns the generalized results as an array
+         *
+         * @param string $generalized_id
+         * @return array
+         * @throws DatabaseException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidSearchMethodException
+         */
+        public function getGeneralized(string $generalized_id): array
         {
+            $generalized_ids = explode(':', $generalized_id);
 
+            if(count($generalized_ids) !== 2)
+            {
+                throw new GeneralizedClassificationNotFoundException();
+            }
+
+            return array(
+                'ham_generalized' => $this->coffeeHouse->getGeneralizedClassificationManager()->get(
+                    GeneralizedClassificationSearchMethod::byPublicID, $generalized_ids[0]
+                ),
+                'spam_generalized' => $this->coffeeHouse->getGeneralizedClassificationManager()->get(
+                    GeneralizedClassificationSearchMethod::byPublicID, $generalized_ids[1]
+                )
+            );
         }
     }
