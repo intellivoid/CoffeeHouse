@@ -3,6 +3,8 @@
 
     namespace CoffeeHouse\Objects;
 
+    use CoffeeHouse\Exceptions\GeneralizedClassificationLimitException;
+
     /**
      * Class GeneralizedClassification
      * @package CoffeeHouse\Objects
@@ -66,6 +68,50 @@
         public $Created;
 
         /**
+         * Calculates the final results
+         *
+         * @return float
+         */
+        public function calculateResults(): float
+        {
+            $Results = (float)0;
+
+            foreach($this->Data as $datum)
+            {
+                $Results += $datum;
+            }
+
+            $this->Results = ($Results / $this->Size);
+            return $this->Results;
+        }
+
+        /**
+         * Adds a new value to the generalized classifier
+         *
+         * @param float $value
+         * @param bool $overwrite
+         * @return float
+         * @throws GeneralizedClassificationLimitException
+         */
+        public function addValue(float $value, bool $overwrite=true): float
+        {
+            if($this->CurrentPointer == $this->Size)
+            {
+                if($overwrite == false)
+                {
+                    throw new GeneralizedClassificationLimitException();
+                }
+
+                $this->CurrentPointer = 0;
+            }
+
+            $this->Data[$this->CurrentPointer] = $value;
+            $this->CurrentPointer += 1;
+
+            return $this->Results;
+        }
+
+        /**
          * Returns an array for which represents this object
          *
          * @return array
@@ -84,15 +130,9 @@
             );
         }
 
-        public function addValue(float $value, bool $overwrite=true): float
-        {
-            if($this->CurrentPointer == $this->Size)
-            {
-                if($overwrite)
-            }
-        }
-
         /**
+         * Constructs object from array
+         *
          * @param array $data
          * @return GeneralizedClassification
          */
