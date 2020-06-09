@@ -19,5 +19,13 @@
     {
         $Results = $CoffeeHouse->getSpamPrediction()->predict(getInput());
         var_dump($Results);
+        if($Results->isSpam())
+        {
+            print("This is spam!" . PHP_EOL);
+        }
+        else
+        {
+            print("This isn't spam" . PHP_EOL);
+        }
         print(PHP_EOL);
     }
