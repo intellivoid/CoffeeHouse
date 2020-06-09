@@ -17,11 +17,7 @@
 
     while(true)
     {
-        $CoffeeHouse->Ana
-        var_dump($);
+        $Results = $CoffeeHouse->getSpamPrediction()->predict(getInput());
+        var_dump($Results);
+        print(PHP_EOL);
     }
-
-
-
-    print($Results . PHP_EOL);
-    exit(0);
