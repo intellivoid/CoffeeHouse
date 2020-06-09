@@ -7,6 +7,7 @@
     use CoffeeHouse\Classes\ServerInterface;
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
+    use CoffeeHouse\Managers\SpamPredictionCacheManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
     use CoffeeHouse\NaturalLanguageProcessing\SpamPrediction;
     use DeepAnalytics\DeepAnalytics;
@@ -131,6 +132,11 @@
         private $SpamPrediction;
 
         /**
+         * @var SpamPredictionCacheManager
+         */
+        private $SpamPredictionCacheManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -144,6 +150,7 @@
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
             $this->UserSubscriptionManager = new UserSubscriptionManager($this);
+            $this->SpamPredictionCacheManager = new SpamPredictionCacheManager($this);
             $this->ServerInterface = new ServerInterface($this);
             $this->SpamPrediction = new SpamPrediction($this);
             $this->DeepAnalytics = new DeepAnalytics();
@@ -223,6 +230,14 @@
         public function getServerInterface(): ServerInterface
         {
             return $this->ServerInterface;
+        }
+
+        /**
+         * @return SpamPredictionCacheManager
+         */
+        public function getSpamPredictionCacheManager(): SpamPredictionCacheManager
+        {
+            return $this->SpamPredictionCacheManager;
         }
 
     }

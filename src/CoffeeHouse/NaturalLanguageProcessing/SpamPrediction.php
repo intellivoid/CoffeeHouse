@@ -29,6 +29,11 @@
 
         public function predict(string $input, bool $cache=false): SpamPredictionResults
         {
+            $SpamPredictionCache = null;
 
+            if($cache)
+            {
+                $SpamPredictionCache = $this->coffeeHouse->
+            }
         }
     }
