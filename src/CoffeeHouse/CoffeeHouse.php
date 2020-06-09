@@ -4,6 +4,7 @@
     namespace CoffeeHouse;
 
     use acm\acm;
+    use CoffeeHouse\Classes\ServerInterface;
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
@@ -114,6 +115,11 @@
         private $ServerConfiguration;
 
         /**
+         * @var ServerInterface
+         */
+        private $ServerInterface;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -127,6 +133,7 @@
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
             $this->UserSubscriptionManager = new UserSubscriptionManager($this);
+            $this->ServerInterface = new ServerInterface($this);
             $this->DeepAnalytics = new DeepAnalytics();
         }
 
@@ -196,6 +203,14 @@
         public function getServerConfiguration()
         {
             return $this->ServerConfiguration;
+        }
+
+        /**
+         * @return ServerInterface
+         */
+        public function getServerInterface(): ServerInterface
+        {
+            return $this->ServerInterface;
         }
 
     }
