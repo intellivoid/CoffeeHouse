@@ -8,7 +8,7 @@
      * Class SpamDetectionCache
      * @package CoffeeHouse\Objects\Cache
      */
-    class SpamDetectionCache
+    class SpamPredictionCache
     {
         /**
          * Unique internal databsae ID for this cache record
@@ -73,11 +73,11 @@
          * Constructs object from array data
          *
          * @param array $data
-         * @return SpamDetectionCache
+         * @return SpamPredictionCache
          */
-        public static function fromArray(array $data): SpamDetectionCache
+        public static function fromArray(array $data): SpamPredictionCache
         {
-            $SpamDetectionCacheObject = new SpamDetectionCache();
+            $SpamDetectionCacheObject = new SpamPredictionCache();
 
             if(isset($data['id']))
             {

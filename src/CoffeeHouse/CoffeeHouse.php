@@ -8,6 +8,7 @@
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
+    use CoffeeHouse\NaturalLanguageProcessing\SpamPrediction;
     use DeepAnalytics\DeepAnalytics;
     use Exception;
     use mysqli;
@@ -39,7 +40,9 @@
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ForeignSessionsManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'UserSubscriptionManager.php');
 
-    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Cache' . DIRECTORY_SEPARATOR . 'SpamDetectionCache.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'NaturalLanguageProcessing' . DIRECTORY_SEPARATOR . 'SpamPrediction.php');
+
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Cache' . DIRECTORY_SEPARATOR . 'SpamPredictionCache.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'BotThought.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'ForeignSession.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'HttpResponse.php');
@@ -120,6 +123,11 @@
         private $ServerInterface;
 
         /**
+         * @var SpamPrediction
+         */
+        private $SpamPrediction;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -134,6 +142,7 @@
             $this->ChatDialogsManager = new ChatDialogsManager($this);
             $this->UserSubscriptionManager = new UserSubscriptionManager($this);
             $this->ServerInterface = new ServerInterface($this);
+            $this->SpamPrediction = new SpamPrediction($this);
             $this->DeepAnalytics = new DeepAnalytics();
         }
 

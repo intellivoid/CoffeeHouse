@@ -15,5 +15,5 @@
         /**
          * Spam Detection Module of CoffeeHouse-Server
          */
-        const SpamDetection = "SPAM_DETECTION";
+        const SpamPrediction = "SPAM_PREDICTION";
     }

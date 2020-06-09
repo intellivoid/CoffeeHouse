@@ -79,8 +79,8 @@
 
             switch($module)
             {
-                case ServerInterfaceModule::SpamDetection:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()['SpamDetectionPort'];
+                case ServerInterfaceModule::SpamPrediction:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()['SpamPredictionPort'];
                     break;
 
                 default:

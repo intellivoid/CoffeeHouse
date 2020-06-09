@@ -8,7 +8,7 @@
     try
     {
         $Results = $CoffeeHouse->getServerInterface()->sendRequest(
-            \CoffeeHouse\Abstracts\ServerInterfaceModule::SpamDetection, "/",
+            \CoffeeHouse\Abstracts\ServerInterfaceModule::SpamPrediction, "/",
             array(
                 "input" => "Hello There!"
             )
