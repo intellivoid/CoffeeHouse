@@ -18,4 +18,9 @@
     $DatabaseSchema->setDefinition('Name', 'coffeehouse');
     $acm->defineSchema('Database', $DatabaseSchema);
 
+    $ServerSchema = new Schema();
+    $ServerSchema->setDefinition('Host', '192.168.0.107');
+    $ServerSchema->setDefinition('SpamPredictionPort', '5601');
+    $acm->defineSchema('CoffeeHouseServer', $ServerSchema);
+
     $acm->processCommandLine();

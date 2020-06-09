@@ -47,14 +47,24 @@
         /**
          * Creates a foreign session id
          *
-         * @param string $vars
          * @param string $language
          * @param int $time
          * @return string
          */
-        public static function foreignSessionId(string $language, int $time)
+        public static function foreignSessionId(string $language, int $time): string
         {
             $vars_c = hash('sha256', self::pepper($time) . $language);
             return hash('sha256', $vars_c . $time);
+        }
+
+        /**
+         * Hashes a input using SHA256
+         *
+         * @param string $input
+         * @return string
+         */
+        public static function input(string $input): string
+        {
+            return hash('sha256', $input);
         }
     }
