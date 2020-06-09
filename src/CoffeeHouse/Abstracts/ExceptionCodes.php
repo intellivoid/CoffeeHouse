@@ -38,4 +38,6 @@
         const ServerInterfaceException = 111;
 
         const SpamPredictionCacheNotFoundException = 112;
+
+        const GeneralizedClassificationNotFoundException = 113;
     }
