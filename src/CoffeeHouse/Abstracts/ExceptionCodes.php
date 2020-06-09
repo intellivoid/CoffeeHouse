@@ -40,4 +40,6 @@
         const SpamPredictionCacheNotFoundException = 112;
 
         const GeneralizedClassificationNotFoundException = 113;
+
+        const GeneralizedClassificationLimitException = 114;
     }

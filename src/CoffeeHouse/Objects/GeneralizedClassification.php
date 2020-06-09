@@ -84,6 +84,14 @@
             );
         }
 
+        public function addValue(float $value, bool $overwrite=true): float
+        {
+            if($this->CurrentPointer == $this->Size)
+            {
+                if($overwrite)
+            }
+        }
+
         /**
          * @param array $data
          * @return GeneralizedClassification
