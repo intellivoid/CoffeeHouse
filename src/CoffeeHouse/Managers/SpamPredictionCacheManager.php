@@ -7,6 +7,9 @@
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\SpamPredictionCacheNotFoundException;
+    use CoffeeHouse\NaturalLanguageProcessing\SpamPrediction;
+    use CoffeeHouse\Objects\Cache\SpamPredictionCache;
     use CoffeeHouse\Objects\Results\SpamPredictionResults;
     use msqg\QueryBuilder;
 
@@ -65,7 +68,15 @@
             }
         }
 
-        public function getCache(string $input): bool
+        /**
+         * Returns an existing cache record from the database
+         *
+         * @param string $input
+         * @return SpamPredictionCache
+         * @throws DatabaseException
+         * @throws SpamPredictionCacheNotFoundException
+         */
+        public function getCache(string $input): SpamPredictionCache
         {
             $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input($input));
 
@@ -85,14 +96,11 @@
 
                 if ($Row == False)
                 {
-                    throw new ForeignSessionNotFoundException();
+                    throw new SpamPredictionCacheNotFoundException();
                 }
                 else
                 {
-                    $Row['headers'] = ZiProto::decode($Row['headers']);
-                    $Row['cookies'] = ZiProto::decode($Row['cookies']);
-                    $Row['variables'] = ZiProto::decode($Row['variables']);
-                    return(ForeignSession::fromArray($Row));
+                    return(SpamPredictionCache::fromArray($Row));
                 }
             }
             else
