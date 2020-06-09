@@ -36,4 +36,6 @@
         const InvalidServerInterfaceModuleException = 110;
 
         const ServerInterfaceException = 111;
+
+        const SpamPredictionCacheNotFoundException = 112;
     }

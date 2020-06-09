@@ -64,4 +64,40 @@
                 throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
             }
         }
+
+        public function getCache(string $input): bool
+        {
+            $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input($input));
+
+            $Query = QueryBuilder::select('spam_prediction_cache', [
+                'id',
+                'hash',
+                'ham_calculation',
+                'spam_calculation',
+                'last_updated',
+                'created'
+            ], 'hash', $hash);
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults)
+            {
+                $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
+
+                if ($Row == False)
+                {
+                    throw new ForeignSessionNotFoundException();
+                }
+                else
+                {
+                    $Row['headers'] = ZiProto::decode($Row['headers']);
+                    $Row['cookies'] = ZiProto::decode($Row['cookies']);
+                    $Row['variables'] = ZiProto::decode($Row['variables']);
+                    return(ForeignSession::fromArray($Row));
+                }
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
+        }
     }
