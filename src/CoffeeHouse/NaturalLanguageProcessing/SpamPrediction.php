@@ -13,7 +13,6 @@
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Exceptions\SpamPredictionCacheNotFoundException;
-    use CoffeeHouse\Objects\Cache\SpamPredictionCache;
     use CoffeeHouse\Objects\Results\SpamPredictionResults;
 
     /**
