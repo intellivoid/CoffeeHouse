@@ -134,6 +134,41 @@
             {
                 throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
             }
+        }
 
+        /**
+         * Updates an existing generalized classification record in the database
+         *
+         * @param GeneralizedClassification $generalizedClassification
+         * @return bool
+         * @throws DatabaseException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidSearchMethodException
+         */
+        public function update(GeneralizedClassification $generalizedClassification): bool
+        {
+            $this->get(GeneralizedClassificationSearchMethod::byID, $generalizedClassification->ID);
+
+            $last_updated = (int)time();
+            $data = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode($generalizedClassification->Data));
+            $current_pointer = (int)$generalizedClassification->CurrentPointer;
+            $results = (float)$generalizedClassification->Results;
+
+            $Query = QueryBuilder::update("generalized_classification", array(
+                'data' => $data,
+                'results' => $results,
+                'current_pointer' => $current_pointer,
+                'last_updated' => $last_updated
+            ), 'id', (int)$generalizedClassification->ID);
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults)
+            {
+                return true;
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
         }
     }
