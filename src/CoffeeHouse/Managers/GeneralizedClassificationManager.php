@@ -4,8 +4,12 @@
     namespace CoffeeHouse\Managers;
 
 
+    use CoffeeHouse\Abstracts\GeneralizedClassificationSearchMethod;
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\GeneralizedClassificationNotFoundException;
+    use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Objects\GeneralizedClassification;
     use msqg\QueryBuilder;
     use ZiProto\ZiProto;
@@ -52,5 +56,65 @@
             ));
         }
 
-        public function getGeneralizedClassification(s)
+        /**
+         * Returns an existing Generalized Classification row from the database
+         *
+         * @param string $search_method
+         * @param string $value
+         * @return GeneralizedClassification
+         * @throws DatabaseException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidSearchMethodException
+         */
+        public function get(string $search_method, string $value): GeneralizedClassification
+        {
+            switch($search_method)
+            {
+                case GeneralizedClassificationSearchMethod::byID:
+                    $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
+                    $value = (int)$value;
+                    break;
+
+                case GeneralizedClassificationSearchMethod::byPublicID:
+                    $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
+                    $value = $this->coffeeHouse->getDatabase()->real_escape_string($value);
+                    break;
+
+                default:
+                    throw new InvalidSearchMethodException();
+            }
+
+            $Query = QueryBuilder::select("generalized_classification", array(
+                'id',
+                'public_id',
+                'data',
+                'results',
+                'size',
+                'current_pointer',
+                'last_updated',
+                'created'
+            ), $search_method, $value);
+
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults)
+            {
+                $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
+
+                if ($Row == False)
+                {
+                    throw new GeneralizedClassificationNotFoundException();
+                }
+                else
+                {
+                    $Row['data'] = ZiProto::decode($Row['data']);
+                    return(GeneralizedClassification::fromArray($Row));
+                }
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
+
+        }
     }
