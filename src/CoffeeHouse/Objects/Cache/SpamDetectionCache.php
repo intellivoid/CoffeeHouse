@@ -53,6 +53,8 @@
         public $Created;
 
         /**
+         * Returns an array representing this object's structure and data
+         *
          * @return array
          */
         public function toArray(): array
@@ -68,6 +70,8 @@
         }
 
         /**
+         * Constructs object from array data
+         *
          * @param array $data
          * @return SpamDetectionCache
          */
