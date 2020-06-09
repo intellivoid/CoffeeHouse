@@ -5,11 +5,20 @@
 
     $CoffeeHouse = new \CoffeeHouse\CoffeeHouse();
 
-    $Results = $CoffeeHouse->getServerInterface()->sendRequest(
-        \CoffeeHouse\Abstracts\ServerInterfaceModule::SpamDetection, "/",
-        array(
-            "input" => "Hello There!"
-        )
-    );
+    try
+    {
+        $Results = $CoffeeHouse->getServerInterface()->sendRequest(
+            \CoffeeHouse\Abstracts\ServerInterfaceModule::SpamDetection, "/",
+            array(
+                "input" => "Hello There!"
+            )
+        );
+    }
+    catch(Exception $exception)
+    {
+        var_dump($exception);
+        exit(255);
+    }
 
     print($Results . PHP_EOL);
+    exit(0);
