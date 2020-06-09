@@ -152,4 +152,26 @@
                 'generalized_id' => $spam_generalized->PublicID . ":" . $ham_generalized->PublicID
             );
         }
+
+        /**
+         * Updates an existing generalized structure
+         *
+         * @param array $generalization_array
+         * @return bool
+         * @throws DatabaseException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidSearchMethodException
+         */
+        public function updateGeneralized(array $generalization_array): bool
+        {
+            $this->coffeeHouse->getGeneralizedClassificationManager()->update(
+                $generalization_array['spam_generalized']
+            );
+
+            $this->coffeeHouse->getGeneralizedClassificationManager()->update(
+                $generalization_array['ham_generalized']
+            );
+
+            return true;
+        }
     }
