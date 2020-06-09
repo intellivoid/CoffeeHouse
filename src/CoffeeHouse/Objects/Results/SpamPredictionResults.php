@@ -61,6 +61,21 @@
         }
 
         /**
+         * Returns true if the generalized results predict that most of the given data is spam
+         *
+         * @return bool
+         */
+        public function isGeneralizedSpam(): bool
+        {
+            if($this->GeneralizedSpam > $this->GeneralizedHam)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
          * Returns the array structure of this object
          *
          * @return array
