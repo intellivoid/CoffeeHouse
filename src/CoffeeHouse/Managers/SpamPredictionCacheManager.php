@@ -8,7 +8,6 @@
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\SpamPredictionCacheNotFoundException;
-    use CoffeeHouse\NaturalLanguageProcessing\SpamPrediction;
     use CoffeeHouse\Objects\Cache\SpamPredictionCache;
     use CoffeeHouse\Objects\Results\SpamPredictionResults;
     use msqg\QueryBuilder;
