@@ -25,4 +25,6 @@
         {
             $this->coffeeHouse = $coffeeHouse;
         }
+
+        public function predict(string $input, bool $cache=false):
     }
