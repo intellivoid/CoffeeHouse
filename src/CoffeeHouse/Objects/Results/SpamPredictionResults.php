@@ -3,7 +3,6 @@
 
     namespace CoffeeHouse\Objects\Results;
 
-    use ZiProto\Packet;
 
     /**
      * Class SpamPredictionResults
@@ -19,11 +18,32 @@
         public $SpamPrediction;
 
         /**
+         * The generalized prediction of spam if generalization is used
+         *
+         * @var float|null
+         */
+        public $GeneralizedSpam;
+
+        /**
          * The prediction percentage of the content not being spam
          *
          * @var float
          */
         public $HamPrediction;
+
+        /**
+         * The generalized prediction of ham if generalization is used
+         *
+         * @var float|null
+         */
+        public $GeneralizedHam;
+
+        /**
+         * The ID of the generalization results
+         *
+         * @var string|null
+         */
+        public $GeneralizedID;
 
         /**
          * Returns true if the results predict that the results are spam
@@ -49,7 +69,10 @@
         {
             return array(
                 'spam' => $this->SpamPrediction,
-                'ham' => $this->HamPrediction
+                'spam_generalized' => $this->GeneralizedSpam,
+                'ham' => $this->HamPrediction,
+                'ham_generalized' => $this->GeneralizedHam,
+                'generalized_id' => $this->GeneralizedID
             );
         }
 
@@ -68,9 +91,24 @@
                 $SpamPredictionResultsObject->SpamPrediction = (float)$data['spam'];
             }
 
+            if(isset($data['spam_generalized']))
+            {
+                $SpamPredictionResultsObject->GeneralizedSpam = (float)$data['spam_generalized'];
+            }
+
             if(isset($data['ham']))
             {
                 $SpamPredictionResultsObject->HamPrediction = (float)$data['ham'];
+            }
+
+            if(isset($data['ham_generalized']))
+            {
+                $SpamPredictionResultsObject->GeneralizedHam = (float)$data['ham_generalized'];
+            }
+
+            if(isset($data['generalized_id']))
+            {
+                $SpamPredictionResultsObject->GeneralizedID = $data['generalized_id'];
             }
 
             return $SpamPredictionResultsObject;

@@ -37,13 +37,15 @@
          * Predicts if the given input is spam or not
          *
          * @param string $input
+         * @param bool $generalize
+         * @param string $generalized_id
          * @param bool $cache
          * @return SpamPredictionResults
          * @throws DatabaseException
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
          */
-        public function predict(string $input, bool $cache=true): SpamPredictionResults
+        public function predict(string $input, bool $generalize=false, string $generalized_id="None", bool $cache=true): SpamPredictionResults
         {
             $SpamPredictionCache = null;
 
@@ -97,5 +99,10 @@
             }
 
             return $PredictionResults;
+        }
+
+        public function getGeneralized(string $generalized_id): Geerali
+        {
+
         }
     }
