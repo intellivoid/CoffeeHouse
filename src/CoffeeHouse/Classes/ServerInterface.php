@@ -6,6 +6,7 @@
 
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Objects\ServerInterfaceConnection;
 
     /**
      * Class ServerInterface
@@ -38,5 +39,11 @@
 
         }
 
-        public function resolveModule(string $module)
+        public function resolveInterfaceConnection(string $module): ServerInterfaceConnection
+        {
+            switch($module)
+            {
+
+            }
+        }
     }

@@ -32,4 +32,6 @@
         const PathScopeOutputNotFound = 108;
 
         const UserSubscriptionNotFoundException = 109;
+
+        const InvalidServerInterfaceModuleException = 110;
     }
