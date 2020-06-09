@@ -5,6 +5,7 @@
 
 
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Objects\Results\SpamPredictionResults;
 
     /**
      * Class SpamPrediction
@@ -26,5 +27,8 @@
             $this->coffeeHouse = $coffeeHouse;
         }
 
-        public function predict(string $input, bool $cache=false):
+        public function predict(string $input, bool $cache=false): SpamPredictionResults
+        {
+
+        }
     }
