@@ -123,12 +123,33 @@
             }
 
             return array(
-                'ham_generalized' => $this->coffeeHouse->getGeneralizedClassificationManager()->get(
+                'spam_generalized' => $this->coffeeHouse->getGeneralizedClassificationManager()->get(
                     GeneralizedClassificationSearchMethod::byPublicID, $generalized_ids[0]
                 ),
-                'spam_generalized' => $this->coffeeHouse->getGeneralizedClassificationManager()->get(
+                'ham_generalized' => $this->coffeeHouse->getGeneralizedClassificationManager()->get(
                     GeneralizedClassificationSearchMethod::byPublicID, $generalized_ids[1]
-                )
+                ),
+                'generalized_id' => $generalized_id
+            );
+        }
+
+        /**
+         * Creates a generalized structure
+         *
+         * @return array
+         * @throws DatabaseException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidSearchMethodException
+         */
+        public function createGeneralized(): array
+        {
+            $spam_generalized = $this->coffeeHouse->getGeneralizedClassificationManager()->create(50);
+            $ham_generalized = $this->coffeeHouse->getGeneralizedClassificationManager()->create(50);
+
+            return array(
+                'spam_generalized' => $spam_generalized,
+                'ham_generalized' => $ham_generalized,
+                'generalized_id' => $spam_generalized->PublicID . ":" . $ham_generalized->PublicID
             );
         }
     }
