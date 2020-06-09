@@ -40,7 +40,7 @@
 
         if($Results->isGeneralizedSpam())
         {
-            print("This is is generally spam!" . PHP_EOL);
+            print("This is generally spam!" . PHP_EOL);
         }
 
         $GeneralizedID = $Results->GeneralizedID;
