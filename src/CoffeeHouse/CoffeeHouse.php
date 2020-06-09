@@ -108,6 +108,11 @@
         private $DeepAnalytics;
 
         /**
+         * @var mixed
+         */
+        private $ServerConfiguration;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          */
@@ -115,6 +120,7 @@
         {
             $this->acm = new acm(__DIR__, 'CoffeeHouse');
             $this->DatabaseConfiguration = $this->acm->getConfiguration('Database');
+            $this->ServerConfiguration = $this->acm->getConfiguration('CoffeeHouseServer');
             $this->database = null;
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
@@ -181,6 +187,14 @@
         public function getDeepAnalytics(): DeepAnalytics
         {
             return $this->DeepAnalytics;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getServerConfiguration()
+        {
+            return $this->ServerConfiguration;
         }
 
     }

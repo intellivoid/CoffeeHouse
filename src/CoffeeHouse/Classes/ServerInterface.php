@@ -6,6 +6,7 @@
 
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Objects\ServerInterfaceConnection;
 
     /**
@@ -39,11 +40,29 @@
 
         }
 
+        /**
+         * Resolves the interface connection
+         *
+         * @param string $module
+         * @return ServerInterfaceConnection
+         * @throws InvalidServerInterfaceModuleException
+         */
         public function resolveInterfaceConnection(string $module): ServerInterfaceConnection
         {
+            $ServerInterfaceConnection = new ServerInterfaceConnection();
+            $ServerInterfaceConnection->Host = $this->coffeehouse->getServerConfiguration()['Host'];
+            $ServerInterfaceConnection->Module = $module;
+
             switch($module)
             {
+                case ServerInterfaceModule::SpamDetection:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()['SpamDetectionPort'];
+                    break;
 
+                default:
+                    throw new InvalidServerInterfaceModuleException();
             }
+
+            return $ServerInterfaceConnection;
         }
     }
