@@ -34,6 +34,15 @@
             $this->coffeeHouse = $coffeeHouse;
         }
 
+        /**
+         * Creates a new generalized classification object in the database
+         *
+         * @param int $size
+         * @return GeneralizedClassification
+         * @throws DatabaseException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidSearchMethodException
+         */
         public function create(int $size): GeneralizedClassification
         {
             $data = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode(array()));
@@ -54,6 +63,16 @@
                 'last_updated' => $last_updated,
                 'created' => $created
             ));
+
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+            if($QueryResults)
+            {
+                return($this->get(GeneralizedClassificationSearchMethod::byPublicID, $public_id));
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
         }
 
         /**
