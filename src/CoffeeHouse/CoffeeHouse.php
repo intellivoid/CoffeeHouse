@@ -240,4 +240,12 @@
             return $this->SpamPredictionCacheManager;
         }
 
+        /**
+         * @return SpamPrediction
+         */
+        public function getSpamPrediction(): SpamPrediction
+        {
+            return $this->SpamPrediction;
+        }
+
     }
