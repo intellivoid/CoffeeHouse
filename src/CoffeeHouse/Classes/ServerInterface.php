@@ -37,7 +37,12 @@
          */
         public function sendRequest(string $module, string $path, array $parameters): string
         {
+            $InterfaceConnection = $this->resolveInterfaceConnection($module);
 
+            $CurlClient = curl_init();
+            curl_setopt($CurlClient, CURLOPT_URL, $InterfaceConnection->generateAddress(false) . $path);
+            curl_setopt($CurlClient, CURLOPT_POST, 1);
+            curl_setopt($CurlClient, CURLOPT_POSTFIELDS, http_build_query($parameters));
         }
 
         /**

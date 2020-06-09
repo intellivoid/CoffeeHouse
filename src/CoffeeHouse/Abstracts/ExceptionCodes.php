@@ -34,4 +34,6 @@
         const UserSubscriptionNotFoundException = 109;
 
         const InvalidServerInterfaceModuleException = 110;
+
+        const ServerInterfaceException = 111;
     }
