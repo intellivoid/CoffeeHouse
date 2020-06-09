@@ -50,8 +50,8 @@
 
             $Query = QueryBuilder::insert_into('spam_prediction_cache', array(
                 'hash' => $hash,
-                'ham' => $ham,
-                'spam' => $spam,
+                'ham_calculation' => $ham,
+                'spam_calculation' => $spam,
                 'last_updated' => $last_updated_timestamp,
                 'created' => $created_timestamp
             ));
@@ -124,8 +124,8 @@
             $last_updated_timestamp = (int)time();
 
             $Query = QueryBuilder::update('spam_prediction_cache', array(
-                'ham' => $ham,
-                'spam' => $spam,
+                'ham_calculation' => $ham,
+                'spam_calculation' => $spam,
                 'last_updated' => $last_updated_timestamp
             ), 'id', $id);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);

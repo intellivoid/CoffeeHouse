@@ -43,7 +43,7 @@
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
          */
-        public function predict(string $input, bool $cache=false): SpamPredictionResults
+        public function predict(string $input, bool $cache=true): SpamPredictionResults
         {
             $SpamPredictionCache = null;
 
