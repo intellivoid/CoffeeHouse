@@ -348,7 +348,10 @@
                             $Query .= ', ' . $key . '=' . "'$value'";
                         }
                     }
-
+                    else
+                    {
+                        $Query .= ', ' . $key . '=NULL';
+                    }
                 }
             }
 
