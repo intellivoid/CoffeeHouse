@@ -100,7 +100,7 @@
 
             $Query = QueryBuilder::select('user_subscriptions', [
                 'id', 'account_id', 'subscription_id', 'access_record_id', 'status', 'created_timestamp'
-            ], $search_method, $value);
+            ], $search_method, $value, null, null, 1);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
             if($QueryResults == false)

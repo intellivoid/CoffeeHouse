@@ -87,7 +87,7 @@
                 'spam_calculation',
                 'last_updated',
                 'created'
-            ], 'hash', $hash);
+            ], 'hash', $hash, null, null, 1);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
             if($QueryResults)

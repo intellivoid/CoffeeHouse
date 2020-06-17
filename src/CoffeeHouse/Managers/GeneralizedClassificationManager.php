@@ -113,7 +113,7 @@
                 'current_pointer',
                 'last_updated',
                 'created'
-            ), $search_method, $value);
+            ), $search_method, $value, null, null, 1);
 
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
