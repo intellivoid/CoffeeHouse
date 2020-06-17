@@ -59,6 +59,7 @@
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
             if($QueryResults)
             {
+                $QueryResults->close();
                 return true;
             }
             else
@@ -92,6 +93,7 @@
             if($QueryResults)
             {
                 $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
+                $QueryResults->close();
 
                 if ($Row == False)
                 {
@@ -132,6 +134,7 @@
 
             if($QueryResults)
             {
+                $QueryResults->close();
                 return(True);
             }
             else

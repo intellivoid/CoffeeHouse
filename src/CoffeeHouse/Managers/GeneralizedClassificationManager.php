@@ -67,6 +67,7 @@
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
             if($QueryResults)
             {
+                $QueryResults->close();
                 return($this->get(GeneralizedClassificationSearchMethod::byPublicID, $public_id));
             }
             else
@@ -122,11 +123,13 @@
 
                 if ($Row == False)
                 {
+                    $QueryResults->close();
                     throw new GeneralizedClassificationNotFoundException();
                 }
                 else
                 {
                     $Row['data'] = ZiProto::decode($Row['data']);
+                    $QueryResults->close();
                     return(GeneralizedClassification::fromArray($Row));
                 }
             }
@@ -164,6 +167,7 @@
 
             if($QueryResults)
             {
+                $QueryResults->close();
                 return true;
             }
             else
