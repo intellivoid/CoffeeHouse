@@ -24,6 +24,8 @@
          */
         public $LD_Results;
 
+        public function combineResults()
+
         /**
          * Returns the array that represents this object
          *
@@ -94,6 +96,16 @@
                 }
             }
 
+            if(isset($data["dltc"]))
+            {
+                $LanguagePredictionResultsObject->DLTC_Results = array();
+
+                foreach($data["dltc"] as $datum)
+                {
+                    $LanguagePredictionResultsObject->DLTC_Results = LanguagePrediction::fromArray($datum, $bytes);
+                }
+            }
+
             if(isset($data["cld_results"]))
             {
                 $LanguagePredictionResultsObject->CLD_Results = array();
@@ -104,11 +116,31 @@
                 }
             }
 
+            if(isset($data["cld"]))
+            {
+                $LanguagePredictionResultsObject->CLD_Results = array();
+
+                foreach($data["cld"] as $datum)
+                {
+                    $LanguagePredictionResultsObject->CLD_Results[] = LanguagePrediction::fromArray($datum, $bytes);
+                }
+            }
+
             if(isset($data["ld_results"]))
             {
                 $LanguagePredictionResultsObject->LD_Results = array();
 
                 foreach($data["ld_results"] as $datum)
+                {
+                    $LanguagePredictionResultsObject->LD_Results[] = LanguagePrediction::fromArray($datum, $bytes);
+                }
+            }
+
+            if(isset($data["ld"]))
+            {
+                $LanguagePredictionResultsObject->LD_Results = array();
+
+                foreach($data["ld"] as $datum)
                 {
                     $LanguagePredictionResultsObject->LD_Results[] = LanguagePrediction::fromArray($datum, $bytes);
                 }
