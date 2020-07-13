@@ -119,7 +119,7 @@
 
             if(isset($data["created"]))
             {
-                $LanguagePredictionCacheObject = (int)$data["created"];
+                $LanguagePredictionCacheObject->Created = (int)$data["created"];
             }
 
             return $LanguagePredictionCacheObject;

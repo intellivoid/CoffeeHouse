@@ -7,6 +7,7 @@
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Objects\Cache\LanguagePredictionCache;
     use CoffeeHouse\Objects\Results\LanguagePredictionResults;
     use msqg\QueryBuilder;
     use ZiProto\ZiProto;
@@ -89,7 +90,7 @@
             }
         }
 
-        public function getCache(string $input): SpamPredictionCache
+        public function getCache(string $input): LanguagePredictionCache
         {
             $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input($input));
 
