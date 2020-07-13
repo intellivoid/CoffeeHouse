@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 
     namespace CoffeeHouse\Managers;
@@ -7,6 +7,7 @@
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\LanguagePredictionCacheNotFoundException;
     use CoffeeHouse\Objects\Cache\LanguagePredictionCache;
     use CoffeeHouse\Objects\Results\LanguagePredictionResults;
     use msqg\QueryBuilder;
@@ -70,7 +71,7 @@
                 );
             }
 
-            $Query = QueryBuilder::insert_into('spam_prediction_cache', array(
+            $Query = QueryBuilder::insert_into('language_prediction_cache', array(
                 "hash" => $hash,
                 "dltc_results" => $dltc_results,
                 "cld_results" => $cld_results,
@@ -90,15 +91,25 @@
             }
         }
 
+        /**
+         * Gets an existing cache record from the database
+         *
+         * @param string $input
+         * @return LanguagePredictionCache
+         * @throws DatabaseException
+         * @throws LanguagePredictionCacheNotFoundException
+         */
         public function getCache(string $input): LanguagePredictionCache
         {
+            /** @noinspection DuplicatedCode */
             $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input($input));
 
-            $Query = QueryBuilder::select('spam_prediction_cache', [
+            $Query = QueryBuilder::select('language_prediction_cache', [
                 'id',
                 'hash',
-                'ham_calculation',
-                'spam_calculation',
+                'dltc_results',
+                'cld_results',
+                'ld_results',
                 'last_updated',
                 'created'
             ], 'hash', $hash, null, null, 1);
@@ -110,11 +121,26 @@
 
                 if ($Row == False)
                 {
-                    throw new SpamPredictionCacheNotFoundException();
+                    throw new LanguagePredictionCacheNotFoundException();
                 }
                 else
                 {
-                    return(SpamPredictionCache::fromArray($Row));
+                    if($Row["dltc_results"] !== null)
+                    {
+                        $Row["dltc_results"] = ZiProto::decode($Row["dltc_results"]);
+                    }
+
+                    if($Row["cld_results"] !== null)
+                    {
+                        $Row["cld_results"] = ZiProto::decode($Row["cld_results"]);
+                    }
+
+                    if($Row["ld_results"] !== null)
+                    {
+                        $Row["ld_results"] = ZiProto::decode($Row["ld_results"]);
+                    }
+
+                    return(LanguagePredictionCache::fromArray($Row));
                 }
             }
             else
