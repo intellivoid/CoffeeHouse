@@ -9,13 +9,6 @@
      */
     class LanguagePredictionResults
     {
-        /***
-         * SHA256 Hash of the input
-         *
-         * @var string
-         */
-        public $Hash;
-
         /**
          * @var LanguagePrediction[]|null
          */
@@ -74,7 +67,6 @@
             }
 
             return array(
-                "hash" => $this->Hash,
                 "dltc_results" => $DLTC_Results,
                 "cld_results" => $CLD_Results,
                 "ld_results" => $LD_Results
@@ -91,11 +83,6 @@
         public static function fromArray(array $data, bool $bytes=false): LanguagePredictionResults
         {
             $LanguagePredictionResultsObject = new LanguagePredictionResults();
-
-            if(isset($data["hash"]))
-            {
-                $LanguagePredictionResultsObject->Hash = $data["hash"];
-            }
 
             if(isset($data["dltc_results"]))
             {
