@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 
     namespace CoffeeHouse\Exceptions;
@@ -7,7 +7,7 @@
     use CoffeeHouse\Abstracts\ExceptionCodes;
     use Exception;
 
-    
+
     /**
      * Class LanguagePredictionCacheNotFoundException
      * @package CoffeeHouse\Exceptions
