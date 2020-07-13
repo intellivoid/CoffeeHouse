@@ -1,5 +1,7 @@
 <?php
 
+    /** @noinspection PhpUndefinedClassInspection */
+
 
     namespace CoffeeHouse;
 
@@ -8,8 +10,10 @@
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use CoffeeHouse\Managers\GeneralizedClassificationManager;
+    use CoffeeHouse\Managers\LanguagePredictionCacheManager;
     use CoffeeHouse\Managers\SpamPredictionCacheManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
+    use CoffeeHouse\NaturalLanguageProcessing\LanguagePrediction;
     use CoffeeHouse\NaturalLanguageProcessing\SpamPrediction;
     use DeepAnalytics\DeepAnalytics;
     use Exception;
@@ -105,6 +109,7 @@
 
         /**
          * @var acm
+         * @noinspection PhpUndefinedClassInspection
          */
         private $acm;
 
@@ -154,8 +159,19 @@
         private $GeneralizedClassificationManager;
 
         /**
+         * @var LanguagePrediction
+         */
+        private $LanguagePrediction;
+
+        /**
+         * @var LanguagePredictionCacheManager
+         */
+        private $LanguagePredictionCacheManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
+         * @noinspection PhpUndefinedClassInspection
          */
         public function __construct()
         {
@@ -168,9 +184,11 @@
             $this->ChatDialogsManager = new ChatDialogsManager($this);
             $this->UserSubscriptionManager = new UserSubscriptionManager($this);
             $this->SpamPredictionCacheManager = new SpamPredictionCacheManager($this);
+            $this->LanguagePredictionCacheManager = new LanguagePredictionCacheManager($this);
             $this->GeneralizedClassificationManager = new GeneralizedClassificationManager($this);
             $this->ServerInterface = new ServerInterface($this);
             $this->SpamPrediction = new SpamPrediction($this);
+            $this->LanguagePrediction = new LanguagePrediction($this);
             $this->DeepAnalytics = new DeepAnalytics();
         }
 
@@ -212,6 +230,7 @@
 
         /**
          * @return mixed
+         * @noinspection PhpUnused
          */
         public function getDatabaseConfiguration()
         {
@@ -220,6 +239,7 @@
 
         /**
          * @return UserSubscriptionManager
+         * @noinspection PhpUnused
          */
         public function getUserSubscriptionManager(): UserSubscriptionManager
         {
@@ -272,6 +292,24 @@
         public function getGeneralizedClassificationManager(): GeneralizedClassificationManager
         {
             return $this->GeneralizedClassificationManager;
+        }
+
+        /**
+         * @return LanguagePrediction
+         * @noinspection PhpUnused
+         */
+        public function getLanguagePrediction(): LanguagePrediction
+        {
+            return $this->LanguagePrediction;
+        }
+
+        /**
+         * @return LanguagePredictionCacheManager
+         * @noinspection PhpUnused
+         */
+        public function getLanguagePredictionCacheManager(): LanguagePredictionCacheManager
+        {
+            return $this->LanguagePredictionCacheManager;
         }
 
     }
