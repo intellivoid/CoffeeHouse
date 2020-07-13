@@ -88,4 +88,37 @@
                 throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
             }
         }
+
+        public function getCache(string $input): SpamPredictionCache
+        {
+            $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input($input));
+
+            $Query = QueryBuilder::select('spam_prediction_cache', [
+                'id',
+                'hash',
+                'ham_calculation',
+                'spam_calculation',
+                'last_updated',
+                'created'
+            ], 'hash', $hash, null, null, 1);
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults)
+            {
+                $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
+
+                if ($Row == False)
+                {
+                    throw new SpamPredictionCacheNotFoundException();
+                }
+                else
+                {
+                    return(SpamPredictionCache::fromArray($Row));
+                }
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
+        }
     }
