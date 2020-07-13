@@ -40,6 +40,7 @@
          * @param LanguagePredictionResults $predictionResults
          * @return bool
          * @throws DatabaseException
+         * @noinspection DuplicatedCode
          */
         public function registerCache(string $input, LanguagePredictionResults $predictionResults): bool
         {
@@ -142,6 +143,62 @@
 
                     return(LanguagePredictionCache::fromArray($Row));
                 }
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
+        }
+
+        /**
+         * Updates the cache record in the database
+         *
+         * @param LanguagePredictionCache $languagePredictionCache
+         * @param LanguagePredictionResults $languagePredictionResults
+         * @return bool
+         * @throws DatabaseException
+         * @noinspection DuplicatedCode
+         */
+        public function updateCache(LanguagePredictionCache $languagePredictionCache, LanguagePredictionResults $languagePredictionResults): bool
+        {
+            $id = (int)$languagePredictionCache->ID;
+            $dltc_results = null;
+            $cld_results = null;
+            $ld_results = null;
+            $last_updated_timestamp = (int)time();
+
+            if($languagePredictionResults->DLTC_Results !== null)
+            {
+                $dltc_results = $this->coffeeHouse->getDatabase()->real_escape_string(
+                    ZiProto::encode($languagePredictionResults->toArray()["dltc_results"])
+                );
+            }
+
+            if($languagePredictionResults->CLD_Results !== null)
+            {
+                $cld_results = $this->coffeeHouse->getDatabase()->real_escape_string(
+                    ZiProto::encode($languagePredictionResults->toArray()["cld_results"])
+                );
+            }
+
+            if($languagePredictionResults->LD_Results !== null)
+            {
+                $ld_results = $this->coffeeHouse->getDatabase()->real_escape_string(
+                    ZiProto::encode($languagePredictionResults->toArray()["ld_results"])
+                );
+            }
+
+            $Query = QueryBuilder::update('language_prediction_cache', array(
+                "dltc_results" => $dltc_results,
+                "cld_results" => $cld_results,
+                "ld_results" => $ld_results,
+                "last_updated" => $last_updated_timestamp
+            ), "id", $id);
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults)
+            {
+                return(True);
             }
             else
             {
