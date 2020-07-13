@@ -50,6 +50,7 @@
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'SpamPredictionCacheManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'UserSubscriptionManager.php');
 
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'NaturalLanguageProcessing' . DIRECTORY_SEPARATOR . 'LanguagePrediction.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'NaturalLanguageProcessing' . DIRECTORY_SEPARATOR . 'SpamPrediction.php');
 
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Cache' . DIRECTORY_SEPARATOR . 'LanguagePredictionCache.php');
