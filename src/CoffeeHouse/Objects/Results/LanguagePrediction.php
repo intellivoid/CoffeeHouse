@@ -29,7 +29,7 @@
          * @param bool $bytes
          * @return array
          */
-        public function toArray(bool $bytes=False): array
+        public function toArray(bool $bytes=false): array
         {
             if($bytes)
             {
@@ -49,7 +49,7 @@
          * @param bool $bytes
          * @return LanguagePrediction
          */
-        public static function fromArray(array $data, bool $bytes=False): LanguagePrediction
+        public static function fromArray(array $data, bool $bytes=false): LanguagePrediction
         {
             $LanguagePrediction = new LanguagePrediction();
 
