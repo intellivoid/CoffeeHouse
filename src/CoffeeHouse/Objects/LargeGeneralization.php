@@ -136,12 +136,19 @@
          */
         public function toArray(): array
         {
+            $data_array = array();
+
+            foreach($this->Data as $datum)
+            {
+                $data_array[] = $datum->toArray();
+            }
+
             return array(
                 "id" => (int)$this->ID,
                 "public_id" => $this->PublicID,
                 "top_label" => $this->TopLabel,
                 "top_probability" => (float)$this->TopProbability,
-                "data" => $this->Data,
+                "data" => $data_array,
                 "created" => (int)$this->Created
             );
         }
