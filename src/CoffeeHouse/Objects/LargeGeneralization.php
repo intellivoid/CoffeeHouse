@@ -91,6 +91,45 @@
         }
 
         /**
+         * Adds new data to the generalization model
+         *
+         * @param string $label
+         * @param float $probability
+         * @return bool
+         */
+        public function add(string $label, float $probability): bool
+        {
+            $overwrite = false;
+            $selected_index = 0;
+
+            foreach($this->Data as $datum)
+            {
+                if($datum->Label == $label)
+                {
+                    $overwrite = true;
+                    break;
+                }
+
+                $selected_index += 1;
+            }
+
+            $datum = new LargeGeneralizationDatum();
+            $datum->Label = $label;
+            $datum->Probability = (float)$probability;
+
+            if($overwrite)
+            {
+                $this->Data[$selected_index] = $datum;
+                $this->updateTopK();
+                return true;
+            }
+
+            $this->Data[] = $datum;
+            $this->updateTopK();
+            return false;
+        }
+
+        /**
          * Returns an array that represents this object
          *
          * @return array
