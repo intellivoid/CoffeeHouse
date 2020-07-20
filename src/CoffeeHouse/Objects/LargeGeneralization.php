@@ -54,6 +54,14 @@
         public $Created;
 
         /**
+         * LargeGeneralization constructor.
+         */
+        public function __construct()
+        {
+            $this->Data = array();
+        }
+
+        /**
          * Calculates the Top K result and returns the datum
          *
          * @return LargeGeneralizationDatum
