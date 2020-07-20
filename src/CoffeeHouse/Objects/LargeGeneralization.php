@@ -54,6 +54,28 @@
         public $Created;
 
         /**
+         * Calculates the Top K result and returns the datum
+         *
+         * @return LargeGeneralizationDatum
+         */
+        public function calculateTopK(): LargeGeneralizationDatum
+        {
+            $LargestProbability = null;
+            $CurrentSelection = null;
+
+            foreach($this->Data as $datum)
+            {
+                if($datum->Probability > $LargestProbability)
+                {
+                    $LargestProbability = $datum->Probability;
+                    $CurrentSelection = $datum;
+                }
+            }
+
+            return $CurrentSelection;
+        }
+
+        /**
          * Returns an array that represents this object
          *
          * @return array
