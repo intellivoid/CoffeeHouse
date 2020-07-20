@@ -17,11 +17,36 @@
         public $Language;
 
         /**
+         * The sum of the probability
+         *
+         * @var float
+         */
+        public $Probability;
+
+        /**
          * Array of probabilities
          *
          * @var float[]|int[]
          */
         public $Probabilities;
+
+        /**
+         * Updates the probability calculation
+         *
+         * @return float
+         */
+        public function updateProbability(): float
+        {
+            $Results = (float)0;
+
+            foreach($this->Probabilities as $datum)
+            {
+                $Results += $datum;
+            }
+
+            $this->Probability = ($Results / count($this->Probabilities));
+            return $this->Probability;
+        }
 
         /**
          * Returns an array which represents this object
