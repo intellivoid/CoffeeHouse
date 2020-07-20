@@ -76,6 +76,21 @@
         }
 
         /**
+         * Updates the top K Result.
+         *
+         * @return bool
+         */
+        public function updateTopK(): bool
+        {
+            $TopDatum = $this->calculateTopK();
+
+            $this->TopLabel = $TopDatum->Label;
+            $this->TopProbability = $TopDatum->Probability;
+
+            return True;
+        }
+
+        /**
          * Returns an array that represents this object
          *
          * @return array
