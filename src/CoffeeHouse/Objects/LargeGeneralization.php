@@ -193,7 +193,10 @@
 
             if(isset($data["data"]))
             {
-                $LargeGeneralizationObject->Data = $data["data"];
+                foreach($data["data"] as $datum)
+                {
+                    $LargeGeneralizationObject->add($datum[0], $datum[1]);
+                }
             }
 
             if(isset($data["created"]))
