@@ -4,6 +4,8 @@
     namespace CoffeeHouse\Objects;
 
 
+    use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
+
     /**
      * Class LargeGeneralization
      * @package CoffeeHouse\Objects
@@ -39,9 +41,16 @@
         public $TopProbability;
 
         /**
-         * @var array
+         * @var LargeGeneralizationDatum[]
          */
         public $Data;
+
+        /**
+         * The data limit for the large generalization model
+         *
+         * @var int
+         */
+        public $Limit;
 
         /**
          * Unix Timestamp of when this row was created
@@ -49,6 +58,29 @@
          * @var int
          */
         public $Created;
+
+        /**
+         * Adds a new entry to the the generalization model
+         *
+         * @param string $label
+         * @param float $probability
+         * @return bool
+         */
+        public function add(string $label, float $probability): bool
+        {
+            if(count($this->Data) == $this->Limit)
+            {
+                array_shift($this->Data);
+            }
+
+            $datum = new LargeGeneralizationDatum();
+            $datum->Label = $label;
+            $datum->Probability = (float)$probability;
+
+            $this->Data[] = $datum;
+
+            return True;
+        }
 
         /**
          * Returns an array that represents this object
