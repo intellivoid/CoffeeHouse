@@ -11,6 +11,7 @@
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use CoffeeHouse\Managers\GeneralizedClassificationManager;
     use CoffeeHouse\Managers\LanguagePredictionCacheManager;
+    use CoffeeHouse\Managers\LargeGeneralizedClassificationManager;
     use CoffeeHouse\Managers\SpamPredictionCacheManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
     use CoffeeHouse\NaturalLanguageProcessing\LanguagePrediction;
@@ -51,6 +52,7 @@
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'ForeignSessionsManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'GeneralizedClassificationManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'LanguagePredictionCacheManager.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'LargeGeneralizedClassificationManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'SpamPredictionCacheManager.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Managers' . DIRECTORY_SEPARATOR . 'UserSubscriptionManager.php');
 
@@ -172,6 +174,11 @@
         private $LanguagePredictionCacheManager;
 
         /**
+         * @var LargeGeneralizedClassificationManager
+         */
+        private $LargeGeneralizedClassificationManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          * @noinspection PhpUndefinedClassInspection
@@ -189,6 +196,7 @@
             $this->SpamPredictionCacheManager = new SpamPredictionCacheManager($this);
             $this->LanguagePredictionCacheManager = new LanguagePredictionCacheManager($this);
             $this->GeneralizedClassificationManager = new GeneralizedClassificationManager($this);
+            $this->LargeGeneralizedClassificationManager = new LargeGeneralizedClassificationManager($this);
             $this->ServerInterface = new ServerInterface($this);
             $this->SpamPrediction = new SpamPrediction($this);
             $this->LanguagePrediction = new LanguagePrediction($this);
@@ -313,6 +321,14 @@
         public function getLanguagePredictionCacheManager(): LanguagePredictionCacheManager
         {
             return $this->LanguagePredictionCacheManager;
+        }
+
+        /**
+         * @return LargeGeneralizedClassificationManager
+         */
+        public function getLargeGeneralizedClassificationManager(): LargeGeneralizedClassificationManager
+        {
+            return $this->LargeGeneralizedClassificationManager;
         }
 
     }
