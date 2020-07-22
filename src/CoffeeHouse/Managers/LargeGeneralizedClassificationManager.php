@@ -5,6 +5,8 @@
 
 
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
+    use CoffeeHouse\Objects\LargeGeneralization;
 
     /**
      * Class LargeGeneralizedClassificationManager
@@ -24,5 +26,22 @@
         public function __construct(CoffeeHouse $coffeeHouse)
         {
             $this->coffeeHouse = $coffeeHouse;
+        }
+
+        /**
+         * @param LargeGeneralizationDatum[] $largeGeneralizationData
+         * @param string|null $generalization_public_id
+         * @return LargeGeneralization
+         */
+        public function add(array $largeGeneralizationData, string $generalization_public_id=null): LargeGeneralization
+        {
+            $LargeGeneralizationObject = new LargeGeneralization();
+
+            foreach($largeGeneralizationData as $generalizationDatum)
+            {
+                $LargeGeneralizationObject->add($generalizationDatum->Label, $generalizationDatum->Probability);
+            }
+            $LargeGeneralizationObject->Created = (int)time();
+
         }
     }
