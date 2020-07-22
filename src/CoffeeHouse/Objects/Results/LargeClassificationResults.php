@@ -35,6 +35,16 @@
             $this->LargeGeneralizations = array();
         }
 
+        public function calculateResults(): array
+        {
+            $WorkingData = array();
+
+            foreach($this->LargeGeneralizations as $largeGeneralization)
+            {
+                $largeGeneralization->Data
+            }
+        }
+
         /**
          * Returns an array which represents this object
          *

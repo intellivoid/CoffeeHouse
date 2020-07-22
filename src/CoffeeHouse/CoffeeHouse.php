@@ -63,6 +63,7 @@
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Cache' . DIRECTORY_SEPARATOR . 'LanguagePredictionCache.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Cache' . DIRECTORY_SEPARATOR . 'SpamPredictionCache.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Datums' . DIRECTORY_SEPARATOR . 'LargeGeneralizationDatum.php');
+    include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Results' . DIRECTORY_SEPARATOR . 'LargeClassificationResults' . DIRECTORY_SEPARATOR . 'Probabilities.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Results' . DIRECTORY_SEPARATOR . 'LanguagePrediction.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Results' . DIRECTORY_SEPARATOR . 'LanguagePredictionResults.php');
     include_once(__DIR__ . DIRECTORY_SEPARATOR . 'Objects' . DIRECTORY_SEPARATOR . 'Results' . DIRECTORY_SEPARATOR . 'LanguagePredictions.php');
