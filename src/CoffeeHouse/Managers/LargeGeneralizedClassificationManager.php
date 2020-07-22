@@ -71,4 +71,15 @@
                 throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
             }
         }
+
+        /**
+         * @param string $search_method
+         * @param string $value
+         * @param int $limit
+         * @return array
+         */
+        public function get(string $search_method, string $value, int $limit): array
+        {
+
+        }
     }
