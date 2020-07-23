@@ -95,6 +95,18 @@
         }
 
         /**
+         * Updates the Top Results properties
+         *
+         * @return Probabilities
+         */
+        public function updateTopK(): Probabilities
+        {
+            $this->TopProbability = $this->CombinedProbabilities[0]->CalculatedProbability;
+            $this->TopLabel = $this->CombinedProbabilities[0]->Label;
+            return $this->CombinedProbabilities[0];
+        }
+
+        /**
          * Returns an array which represents this object
          *
          * @return array
