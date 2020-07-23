@@ -31,6 +31,35 @@
         public $CalculatedProbability;
 
         /**
+         * Probabilities constructor.
+         */
+        public function __construct()
+        {
+            $this->Probabilities = array();
+            $this->CalculatedProbability = 0;
+        }
+
+        /**
+         * Adds a new entry to the probability sum
+         *
+         * @param float $probability
+         * @return float
+         */
+        public function add(float $probability): float
+        {
+            $this->Probabilities[] = $probability;
+            $calculation = 0;
+
+            foreach($this->Probabilities as $probability)
+            {
+                $calculation += $probability;
+            }
+
+            $this->CalculatedProbability = ($calculation / count($this->Probabilities));
+            return $calculation;
+        }
+
+        /**
          * Returns an array which represents this object
          *
          * @return array

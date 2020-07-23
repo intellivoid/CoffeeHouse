@@ -5,6 +5,7 @@
 
 
     use CoffeeHouse\Objects\LargeGeneralization;
+    use CoffeeHouse\Objects\Results\LargeClassificationResults\Probabilities;
 
     /**
      * Class LargeClassificationResults
@@ -16,6 +17,11 @@
          * @var LargeGeneralization[]
          */
         public $LargeGeneralizations;
+
+        /**
+         * @var Probabilities[]
+         */
+        public $CombinedProbabilities;
 
         /**
          * @var string
@@ -35,14 +41,57 @@
             $this->LargeGeneralizations = array();
         }
 
-        public function calculateResults(): array
+        /**
+         * Combines the results of all the large generalization results
+         *
+         * @return array|Probabilities[]
+         */
+        public function combineProbabilities(): array
         {
             $WorkingData = array();
 
             foreach($this->LargeGeneralizations as $largeGeneralization)
             {
-                $largeGeneralization->Data
+                foreach($largeGeneralization->Data as $generalizationDatum)
+                {
+                    if(isset($WorkingData[$generalizationDatum->Label]) == false)
+                    {
+                        $WorkingData[$generalizationDatum->Label] = new Probabilities();
+                        $WorkingData[$generalizationDatum->Label]->Label = $generalizationDatum->Label;
+                    }
+
+                    $WorkingData[$generalizationDatum->Label]->add($generalizationDatum->Probability);
+                }
             }
+
+            $SortedResults = array();
+            for ($i = 0; $i < count($WorkingData); $i++)
+            {
+                $LargestProbability = null;
+                $CurrentSelection = null;
+
+                foreach($WorkingData as $prediction)
+                {
+                    if(isset($SortedResults[$prediction->Label]) == false)
+                    {
+                        if($prediction->CalculatedProbability > $LargestProbability)
+                        {
+                            $LargestProbability = $prediction->CalculatedProbability;
+                            $CurrentSelection = $prediction;
+                        }
+                    }
+                }
+
+                $SortedResults[$CurrentSelection->Label] = $CurrentSelection;
+            }
+
+            $this->CombinedProbabilities = array();
+            foreach($SortedResults as $result)
+            {
+                $this->CombinedProbabilities[] = $result;
+            }
+
+            return $this->CombinedProbabilities;
         }
 
         /**
