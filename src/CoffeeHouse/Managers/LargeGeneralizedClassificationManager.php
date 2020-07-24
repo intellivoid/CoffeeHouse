@@ -4,6 +4,7 @@
     namespace CoffeeHouse\Managers;
 
 
+    use CoffeeHouse\Abstracts\GeneralizedClassificationSearchMethod;
     use CoffeeHouse\Abstracts\LargeGeneralizedClassificationSearchMethod;
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\CoffeeHouse;
@@ -41,10 +42,12 @@
          *
          * @param LargeGeneralizationDatum[] $largeGeneralizationData
          * @param string|null $generalization_public_id
-         * @return LargeGeneralization
+         * @param int $limit
+         * @return LargeClassificationResults
          * @throws DatabaseException
+         * @throws InvalidSearchMethodException
          */
-        public function add(array $largeGeneralizationData, string $generalization_public_id=null): LargeGeneralization
+        public function add(array $largeGeneralizationData, string $generalization_public_id=null, int $limit=100): LargeClassificationResults
         {
             $LargeGeneralizationObject = new LargeGeneralization();
 
@@ -54,8 +57,16 @@
             }
 
             $LargeGeneralizationObject->Created = (int)time();
-            $LargeGeneralizationObject->PublicID = Hashing::largeGeneralizationPublicId($LargeGeneralizationObject);
             $LargeGeneralizationData = $LargeGeneralizationObject->toArray()["data"];
+
+            if($generalization_public_id == null)
+            {
+                $LargeGeneralizationObject->PublicID = Hashing::largeGeneralizationPublicId($LargeGeneralizationObject);
+            }
+            else
+            {
+                $LargeGeneralizationObject->PublicID = $generalization_public_id;
+            }
 
             $Query = QueryBuilder::insert_into("large_generalization", array(
                 "public_id" => $this->coffeeHouse->getDatabase()->real_escape_string($LargeGeneralizationObject->PublicID),
@@ -68,7 +79,12 @@
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
             if($QueryResults)
             {
-                //return($this->get(GeneralizedClassificationSearchMethod::byPublicID, $public_id));
+                if($generalization_public_id == null)
+                {
+                    return($this->get(GeneralizedClassificationSearchMethod::byPublicID, $LargeGeneralizationObject->PublicID, $limit));
+                }
+
+                return($this->get(GeneralizedClassificationSearchMethod::byPublicID, $generalization_public_id, $limit));
             }
             else
             {
