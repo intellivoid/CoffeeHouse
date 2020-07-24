@@ -10,6 +10,7 @@
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
+    use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
     use CoffeeHouse\Objects\LargeGeneralization;
     use CoffeeHouse\Objects\Results\LargeClassificationResults;
@@ -46,6 +47,7 @@
          * @return LargeClassificationResults
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
+         * @throws NoResultsFoundException
          */
         public function add(array $largeGeneralizationData, string $generalization_public_id=null, int $limit=100): LargeClassificationResults
         {
@@ -101,6 +103,7 @@
          * @return LargeClassificationResults
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
+         * @throws NoResultsFoundException
          * @noinspection PhpUnused
          */
         public function get(string $search_method, string $value, int $limit=100): LargeClassificationResults
@@ -133,6 +136,11 @@
 
             if($QueryResults)
             {
+                if($QueryResults->num_rows == 0)
+                {
+                    throw new NoResultsFoundException();
+                }
+
                 $large_classification_results = new LargeClassificationResults();
 
                 foreach($QueryResults->fetch_array(MYSQLI_ASSOC) as $row)
