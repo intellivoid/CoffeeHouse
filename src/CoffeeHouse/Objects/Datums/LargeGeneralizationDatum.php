@@ -49,7 +49,7 @@
          * @param bool $as_object
          * @return LargeGeneralizationDatum
          */
-        public function fromArray(array $data, bool $as_object=False): LargeGeneralizationDatum
+        public static function fromArray(array $data, bool $as_object=False): LargeGeneralizationDatum
         {
             $LargeGeneralizationDatumObject = new LargeGeneralizationDatum();
 

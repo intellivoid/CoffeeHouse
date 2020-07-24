@@ -7,10 +7,14 @@
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\LanguagePredictionCacheNotFoundException;
+    use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
+    use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
     use CoffeeHouse\Objects\Results\LanguagePredictionResults;
+    use CoffeeHouse\Objects\Results\LargeClassificationResults;
 
     /**
      * Class LanguagePrediction
@@ -132,5 +136,32 @@
             }
 
             return $PredictionResults;
+        }
+
+        /**
+         * Generalized the language predictions and returns the results
+         *
+         * @param LanguagePredictionResults $languagePredictionResults
+         * @param string|null $public_id
+         * @param int $limit
+         * @param bool $verify_public_id
+         * @return LargeClassificationResults
+         * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws NoResultsFoundException
+         * @noinspection PhpUnused
+         */
+        public function generalize(LanguagePredictionResults $languagePredictionResults, string $public_id=null, int $limit=100, bool $verify_public_id=false): LargeClassificationResults
+        {
+            $combined_results = $languagePredictionResults->combineResults();
+            $results = array();
+            foreach($combined_results as $languagePredictions)
+            {
+                $results[] = LargeGeneralizationDatum::fromArray(array(
+                    $languagePredictions->Language, $languagePredictions->Probability
+                ));
+            }
+
+            return $this->coffeeHouse->getLargeGeneralizedClassificationManager()->add($results, $public_id, $limit, $verify_public_id);
         }
     }
