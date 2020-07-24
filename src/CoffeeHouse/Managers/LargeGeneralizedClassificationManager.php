@@ -149,7 +149,7 @@
 
                 $large_classification_results = new LargeClassificationResults();
 
-                foreach($QueryResults->fetch_array(MYSQLI_ASSOC) as $row)
+                while($row = $QueryResults->fetch_assoc())
                 {
                     $row["data"] = ZiProto::decode($row["data"]);
                     $large_generalization = LargeGeneralization::fromArray($row);
@@ -158,6 +158,7 @@
 
                 $large_classification_results->combineProbabilities();
                 $large_classification_results->updateTopK();
+                $large_classification_results->updatePublicID();
 
                 return $large_classification_results;
             }

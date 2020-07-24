@@ -14,6 +14,13 @@
     class LargeClassificationResults
     {
         /**
+         * The Public ID of the generalization results
+         *
+         * @var string
+         */
+        public $PublicID;
+
+        /**
          * @var LargeGeneralization[]
          */
         public $LargeGeneralizations;
@@ -104,6 +111,17 @@
             $this->TopProbability = $this->CombinedProbabilities[0]->CalculatedProbability;
             $this->TopLabel = $this->CombinedProbabilities[0]->Label;
             return $this->CombinedProbabilities[0];
+        }
+
+        /**
+         * Updates the public ID
+         *
+         * @return string
+         */
+        public function updatePublicID(): string
+        {
+            $this->PublicID = $this->LargeGeneralizations[0]->PublicID;
+            return $this->PublicID;
         }
 
         /**
