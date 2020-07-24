@@ -48,6 +48,7 @@
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
+         * @noinspection PhpUnused
          */
         public function add(array $largeGeneralizationData, string $generalization_public_id=null, int $limit=100, bool $verify_public_id=false): LargeClassificationResults
         {
@@ -115,12 +116,12 @@
         {
             switch($search_method)
             {
-                case LargeGeneralizedClassificationSearchMethod::byPublicId:
+                case LargeGeneralizedClassificationSearchMethod::byPublicID:
                     $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
                     $value = $this->coffeeHouse->getDatabase()->real_escape_string($value);
                     break;
 
-                case LargeGeneralizedClassificationSearchMethod::byId:
+                case LargeGeneralizedClassificationSearchMethod::byID:
                     $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
                     $value = (int)$value;
                     break;
