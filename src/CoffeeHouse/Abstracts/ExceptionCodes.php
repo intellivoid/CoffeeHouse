@@ -44,4 +44,6 @@
         const GeneralizedClassificationLimitException = 114;
 
         const LanguagePredictionCacheNotFoundException = 115;
+
+        const NoResultsFoundException = 116;
     }
