@@ -4,7 +4,6 @@
     namespace CoffeeHouse\Managers;
 
 
-    use CoffeeHouse\Abstracts\GeneralizedClassificationSearchMethod;
     use CoffeeHouse\Abstracts\LargeGeneralizedClassificationSearchMethod;
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\CoffeeHouse;
@@ -44,12 +43,13 @@
          * @param LargeGeneralizationDatum[] $largeGeneralizationData
          * @param string|null $generalization_public_id
          * @param int $limit
+         * @param bool $verify_public_id
          * @return LargeClassificationResults
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
          */
-        public function add(array $largeGeneralizationData, string $generalization_public_id=null, int $limit=100): LargeClassificationResults
+        public function add(array $largeGeneralizationData, string $generalization_public_id=null, int $limit=100, bool $verify_public_id=false): LargeClassificationResults
         {
             $LargeGeneralizationObject = new LargeGeneralization();
 
@@ -63,6 +63,11 @@
 
             if($generalization_public_id == null)
             {
+                if($verify_public_id)
+                {
+                    $this->get(LargeGeneralizedClassificationSearchMethod::byPublicID, $generalization_public_id, 1);
+                }
+
                 $LargeGeneralizationObject->PublicID = Hashing::largeGeneralizationPublicId($LargeGeneralizationObject);
             }
             else
@@ -83,10 +88,10 @@
             {
                 if($generalization_public_id == null)
                 {
-                    return($this->get(GeneralizedClassificationSearchMethod::byPublicID, $LargeGeneralizationObject->PublicID, $limit));
+                    return($this->get(LargeGeneralizedClassificationSearchMethod::byPublicID, $LargeGeneralizationObject->PublicID, $limit));
                 }
 
-                return($this->get(GeneralizedClassificationSearchMethod::byPublicID, $generalization_public_id, $limit));
+                return($this->get(LargeGeneralizedClassificationSearchMethod::byPublicID, $generalization_public_id, $limit));
             }
             else
             {

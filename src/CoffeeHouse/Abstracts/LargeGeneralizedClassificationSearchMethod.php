@@ -9,7 +9,7 @@
      */
     abstract class LargeGeneralizedClassificationSearchMethod
     {
-        const byId = "id";
+        const byID = "id";
 
-        const byPublicId = "public_id";
+        const byPublicID = "public_id";
     }
