@@ -126,7 +126,10 @@
                     }
                 }
 
-                $SortedResults[$CurrentSelection->Language] = $CurrentSelection;
+                if($CurrentSelection !== null)
+                {
+                    $SortedResults[$CurrentSelection->Language] = $CurrentSelection;
+                }
             }
 
             // Organize the results into an array

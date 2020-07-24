@@ -24,8 +24,8 @@
         $Generalized = $CoffeeHouse->getLanguagePrediction()->generalize($Results, $GeneralizedPublicID, $Limit, false);
         $GeneralizedPublicID = $Generalized->PublicID;
 
-        var_dump($Generalized->combineProbabilities());
-        var_dump($Generalized->combineProbabilities()[0]);
+        //var_dump($Generalized->combineProbabilities());
+        //var_dump($Generalized->combineProbabilities()[0]);
         print("Language: " . $Generalized->TopLabel . "(" . $Generalized->TopProbability . ")" . PHP_EOL);
-        print("Public ID: " . $Generalized->TopLabel . "(" . $Generalized->PublicID . ")" . PHP_EOL);
+        //print("Public ID: " . $Generalized->TopLabel . "(" . $Generalized->PublicID . ")" . PHP_EOL);
     }

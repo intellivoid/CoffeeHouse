@@ -56,7 +56,10 @@
 
             foreach($largeGeneralizationData as $generalizationDatum)
             {
-                $LargeGeneralizationObject->add($generalizationDatum->Label, $generalizationDatum->Probability);
+                if($generalizationDatum->Label !== null)
+                {
+                    $LargeGeneralizationObject->add($generalizationDatum->Label, $generalizationDatum->Probability);
+                }
             }
 
             $LargeGeneralizationObject->Created = (int)time();
