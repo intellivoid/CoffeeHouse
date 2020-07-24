@@ -7,6 +7,7 @@
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\InvalidInputException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\LanguagePredictionCacheNotFoundException;
@@ -48,9 +49,15 @@
          * @throws DatabaseException
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
+         * @throws InvalidInputException
          */
         public function predict(string $input, $dltc=true, $cld=true, $ld=true, bool $cache=true): LanguagePredictionResults
         {
+            if(strlen($input) == 0)
+            {
+                throw new InvalidInputException();
+            }
+
             $LanguagePredictionCache = null;
 
             if($cache)
@@ -73,7 +80,6 @@
                 {
                     if(((int)time() - $LanguagePredictionCache->LastUpdated) < 86400)
                     {
-                        print("From cache" . PHP_EOL);
                         $PredictionResults = new LanguagePredictionResults();
 
                         if($LanguagePredictionCache->DLTC_Results !== null)

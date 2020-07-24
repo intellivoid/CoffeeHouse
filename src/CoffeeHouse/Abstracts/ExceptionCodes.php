@@ -46,4 +46,6 @@
         const LanguagePredictionCacheNotFoundException = 115;
 
         const NoResultsFoundException = 116;
+
+        const InvalidInputException = 117;
     }
