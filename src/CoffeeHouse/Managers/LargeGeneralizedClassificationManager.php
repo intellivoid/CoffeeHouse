@@ -4,11 +4,15 @@
     namespace CoffeeHouse\Managers;
 
 
+    use CoffeeHouse\Abstracts\LargeGeneralizedClassificationSearchMethod;
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
     use CoffeeHouse\Objects\LargeGeneralization;
+    use CoffeeHouse\Objects\Results\LargeClassificationResults;
+    use msqg\Abstracts\SortBy;
     use msqg\QueryBuilder;
     use ZiProto\ZiProto;
 
@@ -73,13 +77,63 @@
         }
 
         /**
+         * Returns Large Classification Results from the database
+         *
          * @param string $search_method
          * @param string $value
          * @param int $limit
-         * @return array
+         * @return LargeClassificationResults
+         * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @noinspection PhpUnused
          */
-        public function get(string $search_method, string $value, int $limit): array
+        public function get(string $search_method, string $value, int $limit=100): LargeClassificationResults
         {
+            switch($search_method)
+            {
+                case LargeGeneralizedClassificationSearchMethod::byPublicId:
+                    $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
+                    $value = $this->coffeeHouse->getDatabase()->real_escape_string($value);
+                    break;
 
+                case LargeGeneralizedClassificationSearchMethod::byId:
+                    $search_method = $this->coffeeHouse->getDatabase()->real_escape_string($search_method);
+                    $value = (int)$value;
+                    break;
+
+                default:
+                    throw new InvalidSearchMethodException();
+            }
+
+            $Query = QueryBuilder::select("large_generalization", array(
+                "id",
+                "public_id",
+                "top_label",
+                "top_probability",
+                "data",
+                "created"
+            ), $search_method, $value, "created", SortBy::descending, $limit);
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults)
+            {
+                $large_classification_results = new LargeClassificationResults();
+
+                foreach($QueryResults->fetch_array(MYSQLI_ASSOC) as $row)
+                {
+                    $row["data"] = ZiProto::decode($row["data"]);
+                    $large_generalization = LargeGeneralization::fromArray($row);
+                    $large_classification_results->LargeGeneralizations[] = $large_generalization;
+                }
+
+                $large_classification_results->combineProbabilities();
+                $large_classification_results->updateTopK();
+
+                return $large_classification_results;
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
         }
     }
