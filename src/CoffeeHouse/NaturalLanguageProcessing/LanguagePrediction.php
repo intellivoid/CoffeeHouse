@@ -7,7 +7,9 @@
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\LanguagePredictionCacheNotFoundException;
+    use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Objects\Results\LanguagePredictionResults;
 
     /**
@@ -30,6 +32,19 @@
             $this->coffeeHouse = $coffeeHouse;
         }
 
+        /**
+         * Predicts the language of a given input
+         *
+         * @param string $input
+         * @param bool $dltc
+         * @param bool $cld
+         * @param bool $ld
+         * @param bool $cache
+         * @return LanguagePredictionResults
+         * @throws DatabaseException
+         * @throws InvalidServerInterfaceModuleException
+         * @throws ServerInterfaceException
+         */
         public function predict(string $input, $dltc=true, $cld=true, $ld=true, bool $cache=true): LanguagePredictionResults
         {
             $LanguagePredictionCache = null;
