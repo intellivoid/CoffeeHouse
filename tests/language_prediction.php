@@ -17,7 +17,7 @@
 
     while(true)
     {
-        $Results = $CoffeeHouse->getLanguagePrediction()->predict(getInput(), true, true, true);
+        $Results = $CoffeeHouse->getLanguagePrediction()->predict(getInput(), false, true, true);
         print("Language: " . $Results->combineResults()[0]->Language . "(" . $Results->combineResults()[0]->Probability . ")");
         print(PHP_EOL);
     }
