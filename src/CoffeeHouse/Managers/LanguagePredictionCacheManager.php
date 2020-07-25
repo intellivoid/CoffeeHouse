@@ -54,21 +54,21 @@
             if($predictionResults->DLTC_Results !== null)
             {
                 $dltc_results = $this->coffeeHouse->getDatabase()->real_escape_string(
-                    ZiProto::encode($predictionResults->toArray()["dltc_results"])
+                    ZiProto::encode($predictionResults->toArray(true)["dltc_results"])
                 );
             }
 
             if($predictionResults->CLD_Results !== null)
             {
                 $cld_results = $this->coffeeHouse->getDatabase()->real_escape_string(
-                    ZiProto::encode($predictionResults->toArray()["cld_results"])
+                    ZiProto::encode($predictionResults->toArray(true)["cld_results"])
                 );
             }
 
             if($predictionResults->LD_Results !== null)
             {
                 $ld_results = $this->coffeeHouse->getDatabase()->real_escape_string(
-                    ZiProto::encode($predictionResults->toArray()["ld_results"])
+                    ZiProto::encode($predictionResults->toArray(true)["ld_results"])
                 );
             }
 

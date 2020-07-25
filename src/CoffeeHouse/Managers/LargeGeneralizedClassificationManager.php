@@ -63,7 +63,11 @@
             }
 
             $LargeGeneralizationObject->Created = (int)time();
-            $LargeGeneralizationData = $LargeGeneralizationObject->toArray()["data"];
+            $LargeGeneralizationData = array();
+            foreach($LargeGeneralizationObject->Data as $datum)
+            {
+                $LargeGeneralizationData[] = $datum->toArray(false);
+            }
 
             if($generalization_public_id == null)
             {

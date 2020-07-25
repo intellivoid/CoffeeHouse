@@ -87,7 +87,7 @@
                             $PredictionResults->DLTC_Results = array();
                             foreach($LanguagePredictionCache->DLTC_Results as $result)
                             {
-                                $PredictionResults->DLTC_Results[] = \CoffeeHouse\Objects\Results\LanguagePrediction::fromArray($result);
+                                $PredictionResults->DLTC_Results[] = \CoffeeHouse\Objects\Results\LanguagePrediction::fromArray($result, true);
                             }
                         }
 
@@ -96,7 +96,7 @@
                             $PredictionResults->CLD_Results = array();
                             foreach($LanguagePredictionCache->CLD_Results as $result)
                             {
-                                $PredictionResults->CLD_Results[] = \CoffeeHouse\Objects\Results\LanguagePrediction::fromArray($result);
+                                $PredictionResults->CLD_Results[] = \CoffeeHouse\Objects\Results\LanguagePrediction::fromArray($result, true);
                             }
                         }
 
@@ -105,7 +105,7 @@
                             $PredictionResults->LD_Results = array();
                             foreach($LanguagePredictionCache->LD_Results as $result)
                             {
-                                $PredictionResults->LD_Results[] = \CoffeeHouse\Objects\Results\LanguagePrediction::fromArray($result);
+                                $PredictionResults->LD_Results[] = \CoffeeHouse\Objects\Results\LanguagePrediction::fromArray($result, true);
                             }
                         }
 
