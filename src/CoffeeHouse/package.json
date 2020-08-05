@@ -1,0 +1,245 @@
+{
+    "package": {
+        "package_name": "net.intellivoid.coffeehouse",
+        "name": "CoffeeHouse",
+        "version": "1.0.2.2",
+        "author": "Zi Xing Narrakas",
+        "organization": "Intellivoid",
+        "description": "Machine Learning / NLP Library",
+        "url": "https://github.com/intellivoid/coffeehouse",
+        "dependencies": [
+            {"package": "net.intellivoid.ziproto", "required": true, "version": "latest"},
+            {"package": "net.intellivoid.acm", "required": true, "version": "latest"},
+            {"package": "net.intellivoid.msqg", "required": true, "version": "latest"},
+            {"package": "net.intellivoid.deepanalytics", "required": true, "version": "latest"}
+        ],
+        "configuration": {
+            "autoload_method": "indexed",
+            "main": null,
+            "post_installation": [],
+            "pre_installation": []
+        }
+    },
+    "components": [
+        {
+            "required": true,
+            "file": "Abstracts/ExceptionCodes.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/ForeignSessionSearchMethod.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/GeneralizedClassificationSearchMethod.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/LargeGeneralizedClassificationSearchMethod.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/ServerInterfaceModule.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/UserSubscriptionSearchMethod.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/UserSubscriptionStatus.php"
+        },
+        {
+            "required": true,
+            "file": "AutoConfig.php"
+        },
+        {
+            "required": true,
+            "file": "Bots/Cleverbot.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/Hashing.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/ServerInterface.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/StringDistance.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/Utilities.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/Validation.php"
+        },
+        {
+            "required": true,
+            "file": "CoffeeHouse.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/BotSessionException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/DatabaseException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/ForeignSessionNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/GeneralizedClassificationLimitException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/GeneralizedClassificationNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidInputException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidMessageException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidSearchMethodException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidServerInterfaceModuleException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/LanguagePredictionCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/NoResultsFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/ServerInterfaceException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/SpamPredictionCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/UserSubscriptionNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/ChatDialogsManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/ForeignSessionsManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/GeneralizedClassificationManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/LanguagePredictionCacheManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/LargeGeneralizedClassificationManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/SpamPredictionCacheManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/UserSubscriptionManager.php"
+        },
+        {
+            "required": true,
+            "file": "NaturalLanguageProcessing/LanguagePrediction.php"
+        },
+        {
+            "required": true,
+            "file": "NaturalLanguageProcessing/SpamPrediction.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/BotThought.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Cache/LanguagePredictionCache.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Cache/SpamPredictionCache.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Datums/LargeGeneralizationDatum.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ForeignSession.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/GeneralizedClassification.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/HttpResponse.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/LargeGeneralization.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LanguagePrediction.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LanguagePredictionResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LanguagePredictions.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LargeClassificationResults/Probabilities.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LargeClassificationResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/SpamPredictionResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ServerInterfaceConnection.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/UserSubscription.php"
+        }
+    ],
+    "files": [
+        "coffee_house.json",
+        "configuration.ini"
+    ]
+}
