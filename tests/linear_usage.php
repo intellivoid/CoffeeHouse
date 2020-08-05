@@ -2,10 +2,12 @@
 
     use CoffeeHouse\Classes\StringDistance;
 
-    $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+    //$SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+    //include_once($SourceDirectory . 'CoffeeHouse' . DIRECTORY_SEPARATOR . 'CoffeeHouse.php');
+
     /** @noinspection PhpIncludeInspection */
     require("ppm");
-    include_once($SourceDirectory . 'CoffeeHouse' . DIRECTORY_SEPARATOR . 'CoffeeHouse.php');
+    \ppm\ppm::import("net.intellivoid.coffeehouse");
 
     print("String 1: 'Hello World'\n");
     print("String 2: 'Hello World'\n");

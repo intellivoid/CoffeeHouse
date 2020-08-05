@@ -3,10 +3,12 @@
     use CoffeeHouse\Bots\Cleverbot;
     use CoffeeHouse\Exceptions\BotSessionException;
 
-    $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+    //$SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+    //include_once($SourceDirectory . 'CoffeeHouse' . DIRECTORY_SEPARATOR . 'CoffeeHouse.php');
+
     /** @noinspection PhpIncludeInspection */
     require("ppm");
-    include_once($SourceDirectory . 'CoffeeHouse' . DIRECTORY_SEPARATOR . 'CoffeeHouse.php');
+    \ppm\ppm::import("net.intellivoid.coffeehouse");
 
     function getInput(): string
     {
