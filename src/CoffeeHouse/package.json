@@ -30,7 +30,7 @@
             }
         ],
         "configuration": {
-            "autoload_method": "generated_spl",
+            "autoload_method": "indexed",
             "main": null,
             "post_installation": [],
             "pre_installation": []
@@ -136,6 +136,10 @@
         {
             "required": true,
             "file": "Exceptions/LanguagePredictionCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/MalformedDataException.php"
         },
         {
             "required": true,
