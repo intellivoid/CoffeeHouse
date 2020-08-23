@@ -48,4 +48,6 @@
         const NoResultsFoundException = 116;
 
         const InvalidInputException = 117;
+
+        const MalformedDataException = 118;
     }

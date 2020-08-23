@@ -3,6 +3,8 @@
 
     namespace CoffeeHouse\Objects\Results;
 
+    use CoffeeHouse\Exceptions\MalformedDataException;
+
     /**
      * Class LanguagePrediction
      * @package CoffeeHouse\Objects\Results
@@ -48,6 +50,7 @@
          * @param array $data
          * @param bool $bytes
          * @return LanguagePrediction
+         * @throws MalformedDataException
          */
         public static function fromArray(array $data, bool $bytes=false): LanguagePrediction
         {
@@ -55,8 +58,31 @@
 
             if($bytes)
             {
-                $LanguagePrediction->Language = $data[0];
-                $LanguagePrediction->Probability = (float)$data[1];
+                if(isset($data[0]))
+                {
+                    $LanguagePrediction->Language = $data[0];
+                }
+                elseif(isset($data["language"]))
+                {
+                    $LanguagePrediction->Language = $data["language"];
+                }
+                else
+                {
+                    throw new MalformedDataException("Unable to find the language byte, decoding as bytes");
+                }
+
+                if(isset($data[1]))
+                {
+                    $LanguagePrediction->Probability = (float)$data[1];
+                }
+                elseif(isset($data["probability"]))
+                {
+                    $LanguagePrediction->Probability = $data["probability"];
+                }
+                else
+                {
+                    throw new MalformedDataException("Unable to find the language byte, decoding as bytes");
+                }
             }
             else
             {

@@ -24,7 +24,7 @@
 
     while(true)
     {
-        $Results = $CoffeeHouse->getLanguagePrediction()->predict(getInput(), false, true, true);
+        $Results = $CoffeeHouse->getLanguagePrediction()->predict(getInput(), true, true, true);
         $Generalized = $CoffeeHouse->getLanguagePrediction()->generalize($Results, $GeneralizedPublicID, $Limit, false);
         $GeneralizedPublicID = $Generalized->PublicID;
 
