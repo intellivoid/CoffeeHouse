@@ -22,14 +22,40 @@
     $GeneralizedPublicID = null;
     $Limit = 100;
 
+    $AutomatedSentences = [
+        "I ate dinner.",
+        "We had a three-course meal.",
+        "Brad came to dinner with us.",
+        "He loves fish tacos.",
+        "In the end, we all felt like we ate too much.",
+        "We all agreed; it was a magnificent evening.",
+        "I hope that, when I've built up my savings, I'll be able to travel to Mexico.",
+        "Did you know that, along with gorgeous architecture, it's home to the largest tamale?",
+        "Wouldn't it be lovely to enjoy a week soaking up the culture?",
+        "Oh, how I'd love to go!",
+        "Of all the places to travel, Mexico is at the top of my list.",
+        "Would you like to travel with me?",
+        "Isn't language learning fun?",
+        "There is so much to understand.",
+        "I love learning!",
+        "Sentences come in many shapes and sizes.",
+        "Nothing beats a complete sentence.",
+        "Once you know all the elements, it's not difficult to pull together a sentence."
+    ];
+
     while(true)
     {
-        $Results = $CoffeeHouse->getLanguagePrediction()->predict(getInput(), true, true, true);
-        $Generalized = $CoffeeHouse->getLanguagePrediction()->generalize($Results, $GeneralizedPublicID, $Limit, false);
-        $GeneralizedPublicID = $Generalized->PublicID;
+        foreach($AutomatedSentences as $sentence)
+        {
+            print(" > " . $sentence . PHP_EOL);
+            $Results = $CoffeeHouse->getLanguagePrediction()->predict($sentence, true, true, true, false);
+            $Generalized = $CoffeeHouse->getLanguagePrediction()->generalize($Results, $GeneralizedPublicID, $Limit, false);
+            $GeneralizedPublicID = $Generalized->PublicID;
 
-        //var_dump($Generalized->combineProbabilities());
-        //var_dump($Generalized->combineProbabilities()[0]);
-        print("Language: " . $Generalized->TopLabel . "(" . $Generalized->TopProbability . ")" . PHP_EOL);
-        //print("Public ID: " . $Generalized->TopLabel . "(" . $Generalized->PublicID . ")" . PHP_EOL);
+            //var_dump($Generalized->combineProbabilities());
+            //var_dump($Generalized->combineProbabilities()[0]);
+            print("Language: " . $Generalized->TopLabel . "(" . $Generalized->TopProbability . ")" . PHP_EOL);
+            //print("Public ID: " . $Generalized->TopLabel . "(" . $Generalized->PublicID . ")" . PHP_EOL);
+        }
+
     }

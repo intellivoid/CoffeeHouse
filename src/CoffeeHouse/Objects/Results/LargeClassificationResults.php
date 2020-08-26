@@ -4,6 +4,7 @@
     namespace CoffeeHouse\Objects\Results;
 
 
+    use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Objects\LargeGeneralization;
     use CoffeeHouse\Objects\Results\LargeClassificationResults\Probabilities;
 
@@ -52,6 +53,7 @@
          * Combines the results of all the large generalization results
          *
          * @return array|Probabilities[]
+         * @throws MalformedDataException
          */
         public function combineProbabilities(): array
         {
@@ -79,6 +81,16 @@
 
                 foreach($WorkingData as $prediction)
                 {
+                    if($prediction->CalculatedProbability == null)
+                    {
+                        throw new MalformedDataException("The CalculatedProbability of a prediction is null (LargeClassification::combineProbabilities)");
+                    }
+
+                    if($prediction->Label == null)
+                    {
+                        throw new MalformedDataException("The Label of a prediction is null (LargeClassification::combineProbabilities)");
+                    }
+
                     if(isset($SortedResults[$prediction->Label]) == false)
                     {
                         if($prediction->CalculatedProbability > $LargestProbability)
@@ -105,11 +117,23 @@
          * Updates the Top Results properties
          *
          * @return Probabilities
+         * @throws MalformedDataException
          */
         public function updateTopK(): Probabilities
         {
+            if($this->CombinedProbabilities == null)
+            {
+                throw new MalformedDataException("The property 'CombinedProbabilities' is null");
+            }
+
+            if($this->CombinedProbabilities[0] == null)
+            {
+                throw new MalformedDataException("The CombinedProbabilities results of the first index is null");
+            }
+
             $this->TopProbability = $this->CombinedProbabilities[0]->CalculatedProbability;
             $this->TopLabel = $this->CombinedProbabilities[0]->Label;
+
             return $this->CombinedProbabilities[0];
         }
 

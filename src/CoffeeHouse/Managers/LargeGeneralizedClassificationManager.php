@@ -9,6 +9,7 @@
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
+    use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
     use CoffeeHouse\Objects\LargeGeneralization;
@@ -48,6 +49,7 @@
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
+         * @throws MalformedDataException
          * @noinspection PhpUnused
          */
         public function add(array $largeGeneralizationData, string $generalization_public_id=null, int $limit=100, bool $verify_public_id=false): LargeClassificationResults
@@ -117,6 +119,8 @@
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
+         * @throws MalformedDataException
+         * @throws MalformedDataException
          * @noinspection PhpUnused
          */
         public function get(string $search_method, string $value, int $limit=100): LargeClassificationResults

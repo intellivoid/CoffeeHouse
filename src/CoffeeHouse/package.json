@@ -2,7 +2,7 @@
     "package": {
         "package_name": "net.intellivoid.coffeehouse",
         "name": "CoffeeHouse",
-        "version": "1.0.2.3",
+        "version": "1.0.2.4",
         "author": "Zi Xing Narrakas",
         "organization": "Intellivoid",
         "description": "Machine Learning / NLP Library",

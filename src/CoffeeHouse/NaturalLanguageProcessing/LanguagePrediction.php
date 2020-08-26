@@ -11,6 +11,7 @@
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\LanguagePredictionCacheNotFoundException;
+    use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
@@ -50,6 +51,7 @@
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
          * @throws InvalidInputException
+         * @throws MalformedDataException
          */
         public function predict(string $input, $dltc=true, $cld=true, $ld=true, bool $cache=true): LanguagePredictionResults
         {
@@ -154,6 +156,7 @@
          * @return LargeClassificationResults
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
+         * @throws MalformedDataException
          * @throws NoResultsFoundException
          * @noinspection PhpUnused
          */
