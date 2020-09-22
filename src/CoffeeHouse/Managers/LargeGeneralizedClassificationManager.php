@@ -3,18 +3,13 @@
 
     namespace CoffeeHouse\Managers;
 
-
     use CoffeeHouse\Abstracts\LargeGeneralizedClassificationSearchMethod;
     use CoffeeHouse\Classes\Hashing;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
-    use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Exceptions\NoResultsFoundException;
-    use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
     use CoffeeHouse\Objects\LargeGeneralization;
-    use CoffeeHouse\Objects\Results\LargeClassificationResults;
-    use msqg\Abstracts\SortBy;
     use msqg\QueryBuilder;
     use ZiProto\ZiProto;
 
@@ -39,74 +34,38 @@
         }
 
         /**
-         * Adds a new large generalization row into the database
+         * Creates a new large generalization object in the database
          *
-         * @param LargeGeneralizationDatum[] $largeGeneralizationData
-         * @param string|null $generalization_public_id
-         * @param int $limit
-         * @param bool $verify_public_id
-         * @return LargeClassificationResults
+         * @param int $max_probabilities
+         * @return LargeGeneralization
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
-         * @throws MalformedDataException
-         * @noinspection PhpUnused
          */
-        public function add(array $largeGeneralizationData, string $generalization_public_id=null, int $limit=100, bool $verify_public_id=false): LargeClassificationResults
+        public function create(int $max_probabilities=50): LargeGeneralization
         {
-            $LargeGeneralizationObject = new LargeGeneralization();
-
-            foreach($largeGeneralizationData as $generalizationDatum)
-            {
-                if($generalizationDatum->Label !== null)
-                {
-                    $LargeGeneralizationObject->add($generalizationDatum->Label, $generalizationDatum->Probability);
-                }
-            }
-
-            $LargeGeneralizationObject->Created = (int)time();
-            $LargeGeneralizationData = array();
-            foreach($LargeGeneralizationObject->Data as $datum)
-            {
-                $LargeGeneralizationData[] = $datum->toArray(false);
-            }
-
-            if($generalization_public_id == null)
-            {
-                if($verify_public_id)
-                {
-                    $this->get(LargeGeneralizedClassificationSearchMethod::byPublicID, $generalization_public_id, 1);
-                }
-
-                $LargeGeneralizationObject->PublicID = Hashing::largeGeneralizationPublicId($LargeGeneralizationObject);
-            }
-            else
-            {
-                $LargeGeneralizationObject->PublicID = $generalization_public_id;
-            }
+            $PublicID = Hashing::largeGeneralizationPublicId();
 
             $Query = QueryBuilder::insert_into("large_generalization", array(
-                "public_id" => $this->coffeeHouse->getDatabase()->real_escape_string($LargeGeneralizationObject->PublicID),
-                "top_label" => $this->coffeeHouse->getDatabase()->real_escape_string($LargeGeneralizationObject->TopLabel),
-                "top_probability" => $this->coffeeHouse->getDatabase()->real_escape_string($LargeGeneralizationObject->TopProbability),
-                "data" => $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode($LargeGeneralizationData)),
-                "created" => (int)$LargeGeneralizationObject->Created
+                "public_id" => $this->coffeeHouse->getDatabase()->real_escape_string($PublicID),
+                "max_probabilities" => (int)$max_probabilities,
+                "probabilities" => $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode(array())),
+                "top_label" => null,
+                "top_probability" => (float)0,
+                "created_timestamp" => (int)time(),
+                "last_updated_timestamp" => (int)time()
             ));
 
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
             if($QueryResults)
             {
-                if($generalization_public_id == null)
-                {
-                    return($this->get(LargeGeneralizedClassificationSearchMethod::byPublicID, $LargeGeneralizationObject->PublicID, $limit));
-                }
-
-                return($this->get(LargeGeneralizedClassificationSearchMethod::byPublicID, $generalization_public_id, $limit));
+                return($this->get(LargeGeneralizedClassificationSearchMethod::byPublicID, $PublicID));
             }
             else
             {
                 throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
             }
+
         }
 
         /**
@@ -114,16 +73,13 @@
          *
          * @param string $search_method
          * @param string $value
-         * @param int $limit
-         * @return LargeClassificationResults
+         * @return LargeGeneralization
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
-         * @throws MalformedDataException
-         * @throws MalformedDataException
          * @noinspection PhpUnused
          */
-        public function get(string $search_method, string $value, int $limit=100): LargeClassificationResults
+        public function get(string $search_method, string $value): LargeGeneralization
         {
             switch($search_method)
             {
@@ -144,11 +100,13 @@
             $Query = QueryBuilder::select("large_generalization", array(
                 "id",
                 "public_id",
+                "max_probabilities",
+                "probabilities",
                 "top_label",
                 "top_probability",
-                "data",
-                "created"
-            ), $search_method, $value, "created", SortBy::descending, $limit);
+                "created_timestamp",
+                "last_updated_timestamp"
+            ), $search_method, $value);
             $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
 
             if($QueryResults)
@@ -158,24 +116,59 @@
                     throw new NoResultsFoundException();
                 }
 
-                $large_classification_results = new LargeClassificationResults();
+                $Row = $QueryResults->fetch_array(MYSQLI_ASSOC);
 
-                while($row = $QueryResults->fetch_assoc())
+                if($Row == null)
                 {
-                    $row["data"] = ZiProto::decode($row["data"]);
-                    $large_generalization = LargeGeneralization::fromArray($row);
-                    $large_classification_results->LargeGeneralizations[] = $large_generalization;
+                    throw new NoResultsFoundException();
                 }
 
-                $large_classification_results->combineProbabilities();
-                $large_classification_results->updateTopK();
-                $large_classification_results->updatePublicID();
-
-                return $large_classification_results;
+                $Row["probabilities"] = ZiProto::decode($Row["probabilities"]);
+                return LargeGeneralization::fromArray($Row);
             }
             else
             {
                 throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
             }
+        }
+
+        /**
+         * Updates an existing large generalization object in the database
+         *
+         * @param LargeGeneralization $largeGeneralization
+         * @return bool
+         * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws NoResultsFoundException
+         */
+        public function update(LargeGeneralization $largeGeneralization)
+        {
+            $this->get(LargeGeneralizedClassificationSearchMethod::byID, $largeGeneralization->ID);
+            $array_results = $largeGeneralization->toArray();
+
+            $max_probabilities = (int)$largeGeneralization->MaxProbabilitiesSize;
+            $probabilities = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode($array_results["probabilities"]));
+            $top_label = $largeGeneralization->TopLabel;
+            $top_probability = (float)$largeGeneralization->TopProbability;
+            $last_updated_timestamp = (int)time();
+
+            $Query = QueryBuilder::update("large_generalization", array(
+                "max_probabilities" => $max_probabilities,
+                "probabilities" => $probabilities,
+                "top_label" => $top_label,
+                "top_probability" => $top_probability,
+                "last_updated_timestamp" => $last_updated_timestamp
+            ), "id", (int)$largeGeneralization->ID);
+            $QueryResults = $this->coffeeHouse->getDatabase()->query($Query);
+
+            if($QueryResults)
+            {
+                return(True);
+            }
+            else
+            {
+                throw new DatabaseException($this->coffeeHouse->getDatabase()->error);
+            }
+
         }
     }

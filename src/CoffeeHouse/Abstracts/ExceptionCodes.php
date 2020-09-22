@@ -50,4 +50,6 @@
         const InvalidInputException = 117;
 
         const MalformedDataException = 118;
+
+        const ProbabilitySearchNoResultsFoundException = 119;
     }

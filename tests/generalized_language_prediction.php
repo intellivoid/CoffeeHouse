@@ -19,7 +19,10 @@
         return $line;
     }
 
-    $GeneralizedPublicID = null;
+    $LargeGeneralization = $CoffeeHouse->getLargeGeneralizedClassificationManager()->create(30);
+    var_dump($LargeGeneralization);
+
+    $GeneralizedPublicID = $LargeGeneralization->PublicID;
     $Limit = 100;
 
     $AutomatedSentences = [
@@ -48,13 +51,12 @@
         foreach($AutomatedSentences as $sentence)
         {
             print(" > " . $sentence . PHP_EOL);
-            $Results = $CoffeeHouse->getLanguagePrediction()->predict($sentence, true, true, true, false);
-            $Generalized = $CoffeeHouse->getLanguagePrediction()->generalize($Results, $GeneralizedPublicID, $Limit, false);
-            $GeneralizedPublicID = $Generalized->PublicID;
+            $Results = $CoffeeHouse->getLanguagePrediction()->predict($sentence, true, true, true, true);
+            $LargeGeneralization = $CoffeeHouse->getLanguagePrediction()->generalize($LargeGeneralization, $Results);
 
             //var_dump($Generalized->combineProbabilities());
             //var_dump($Generalized->combineProbabilities()[0]);
-            print("Language: " . $Generalized->TopLabel . "(" . $Generalized->TopProbability . ")" . PHP_EOL);
+            print("Language: " . $LargeGeneralization->TopLabel . "(" . $LargeGeneralization->TopProbability . ")" . PHP_EOL);
             //print("Public ID: " . $Generalized->TopLabel . "(" . $Generalized->PublicID . ")" . PHP_EOL);
         }
 

@@ -6,6 +6,7 @@
     /**
      * Class LargeGeneralizationDatum
      * @package CoffeeHouse\Objects\Datums
+     * @deprecated
      */
     class LargeGeneralizationDatum
     {

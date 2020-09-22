@@ -14,9 +14,8 @@
     use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
-    use CoffeeHouse\Objects\Datums\LargeGeneralizationDatum;
+    use CoffeeHouse\Objects\LargeGeneralization;
     use CoffeeHouse\Objects\Results\LanguagePredictionResults;
-    use CoffeeHouse\Objects\Results\LargeClassificationResults;
 
     /**
      * Class LanguagePrediction
@@ -149,28 +148,25 @@
         /**
          * Generalized the language predictions and returns the results
          *
+         * @param LargeGeneralization $largeGeneralization
          * @param LanguagePredictionResults $languagePredictionResults
-         * @param string|null $public_id
-         * @param int $limit
-         * @param bool $verify_public_id
-         * @return LargeClassificationResults
+         * @return LargeGeneralization
          * @throws DatabaseException
-         * @throws InvalidSearchMethodException
          * @throws MalformedDataException
+         * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
-         * @noinspection PhpUnused
          */
-        public function generalize(LanguagePredictionResults $languagePredictionResults, string $public_id=null, int $limit=100, bool $verify_public_id=false): LargeClassificationResults
+        public function generalize(LargeGeneralization $largeGeneralization, LanguagePredictionResults $languagePredictionResults): LargeGeneralization
         {
             $combined_results = $languagePredictionResults->combineResults();
-            $results = array();
+
             foreach($combined_results as $languagePredictions)
             {
-                $results[] = LargeGeneralizationDatum::fromArray(array(
-                    $languagePredictions->Language, $languagePredictions->Probability
-                ));
+                $largeGeneralization->add($languagePredictions->Language, $languagePredictions->Probability, false);
             }
 
-            return $this->coffeeHouse->getLargeGeneralizedClassificationManager()->add($results, $public_id, $limit, $verify_public_id);
+            $largeGeneralization->sortProbabilities(true);
+            $this->coffeeHouse->getLargeGeneralizedClassificationManager()->update($largeGeneralization);
+            return $largeGeneralization;
         }
     }

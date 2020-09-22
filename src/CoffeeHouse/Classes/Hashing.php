@@ -89,13 +89,18 @@
         /**
          * Generates a unique large generalization Public ID
          *
-         * @param LargeGeneralization $largeGeneralization
          * @return string
          */
-        public static function largeGeneralizationPublicId(LargeGeneralization $largeGeneralization): string
+        public static function largeGeneralizationPublicId(): string
         {
-            $data_pepper = self::pepper(json_encode($largeGeneralization->toArray()["data"]));
-            $top_k = hash('crc32b', $largeGeneralization->TopProbability . $largeGeneralization->TopLabel);
-            return hash('sha256', $data_pepper . $largeGeneralization->Created . $top_k);
+            $data_pepper = self::pepper((int)time());
+            $chunks = array();
+
+            foreach(str_split($data_pepper) as $char)
+            {
+                $chunks[] = self::pepper(hash('crc32b', $char));
+            }
+
+            return hash('sha256', hash("sha256", json_encode($chunks)));
         }
     }
