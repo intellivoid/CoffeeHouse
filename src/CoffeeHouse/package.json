@@ -18,13 +18,13 @@
                 "package": "net.intellivoid.acm",
                 "version": "latest",
                 "required": true,
-		"source":" "default@github/intellivoid/acm"
+		"source": "default@github/intellivoid/acm"
             },
             {
                 "package": "net.intellivoid.msqg",
                 "version": "latest",
                 "required": true,
-		"source": "default@github/intellivoid//msqg"
+		"source": "default@github/intellivoid/msqg"
             },
             {
                 "package": "net.intellivoid.deepanalytics",
