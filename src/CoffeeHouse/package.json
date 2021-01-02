@@ -12,25 +12,31 @@
                 "package": "net.intellivoid.ziproto",
                 "version": "latest",
                 "required": true,
-		"source": "default@github/intellivoid/ziproto"
+                "source": "default@github/intellivoid/ziproto"
             },
             {
                 "package": "net.intellivoid.acm",
                 "version": "latest",
                 "required": true,
-		"source": "default@github/intellivoid/acm"
+		        "source": "default@github/intellivoid/acm"
             },
             {
                 "package": "net.intellivoid.msqg",
                 "version": "latest",
                 "required": true,
-		"source": "default@github/intellivoid/msqg"
+		        "source": "default@github/intellivoid/msqg"
             },
             {
                 "package": "net.intellivoid.deepanalytics",
                 "version": "latest",
                 "required": true,
-		"source": "default@github/intellivoid/deepanalytics"
+		        "source": "default@github/intellivoid/deepanalytics"
+            },
+            {
+                "package": "com.stichoza.google_translate_php",
+                "version": "latest",
+                "required":  true,
+                "source": "stichoza@composer/google-translate-php"
             }
         ],
         "configuration": {

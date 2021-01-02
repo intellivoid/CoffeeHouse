@@ -51,7 +51,7 @@
         foreach($AutomatedSentences as $sentence)
         {
             print(" > " . $sentence . PHP_EOL);
-            $Results = $CoffeeHouse->getLanguagePrediction()->predict($sentence, true, true, true, true);
+            $Results = $CoffeeHouse->getLanguagePrediction()->predict($sentence, false, true, true, true);
             $LargeGeneralization = $CoffeeHouse->getLanguagePrediction()->generalize($LargeGeneralization, $Results);
 
             //var_dump($Generalized->combineProbabilities());
