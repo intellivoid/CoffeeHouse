@@ -19,7 +19,6 @@
     use DeepAnalytics\DeepAnalytics;
     use Exception;
     use mysqli;
-    use ppm\ppm;
 
     require_once(__DIR__ . DIRECTORY_SEPARATOR . 'AutoConfig.php');
 
@@ -137,13 +136,7 @@
         {
             if($this->database == null)
             {
-                $this->database = new mysqli(
-                    $this->DatabaseConfiguration['Host'],
-                    $this->DatabaseConfiguration['Username'],
-                    $this->DatabaseConfiguration['Password'],
-                    $this->DatabaseConfiguration['Name'],
-                    $this->DatabaseConfiguration['Port']
-                );
+                $this->connectDatabase();
             }
 
             return $this->database;
@@ -256,6 +249,34 @@
         public function getLargeGeneralizedClassificationManager(): LargeGeneralizedClassificationManager
         {
             return $this->LargeGeneralizedClassificationManager;
+        }
+
+        /**
+         * Closes the current database connection
+         */
+        public function disconnectDatabase()
+        {
+            $this->database->close();
+            $this->database = null;
+        }
+
+        /**
+         * Creates a new database connection
+         */
+        public function connectDatabase()
+        {
+            if($this->database !== null)
+            {
+                $this->disconnectDatabase();
+            }
+
+            $this->database = new mysqli(
+                $this->DatabaseConfiguration['Host'],
+                $this->DatabaseConfiguration['Username'],
+                $this->DatabaseConfiguration['Password'],
+                $this->DatabaseConfiguration['Name'],
+                $this->DatabaseConfiguration['Port']
+            );
         }
 
     }
