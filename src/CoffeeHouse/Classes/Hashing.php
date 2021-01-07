@@ -103,4 +103,17 @@
 
             return hash('sha256', hash("sha256", json_encode($chunks)));
         }
+
+        /**
+         * Generates a Public ID from a translation source
+         *
+         * @param string $source
+         * @param string $target
+         * @param string $input
+         * @return string
+         */
+        public static function translateCachePublicId(string $source, string $target, string $input): string
+        {
+            return hash("sha256", $target . $source . $input);
+        }
     }

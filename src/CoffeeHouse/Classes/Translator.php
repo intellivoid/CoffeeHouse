@@ -3,6 +3,8 @@
 
     namespace CoffeeHouse\Classes;
 
+    use CoffeeHouse\Abstracts\TranslateProcessingEngine;
+    use CoffeeHouse\Objects\Results\TranslationResults;
     use ErrorException;
     use Stichoza\GoogleTranslate\GoogleTranslate;
 
@@ -57,7 +59,7 @@
          * @return string
          * @throws ErrorException
          */
-        public function googleTranslate(string $input, string $target, string $source="", bool $use_cache=True): string
+        public function googleTranslate(string $input, string $target, string $source="", bool $use_cache=True): TranslationResults
         {
             if($this->needsRefresh())
             {
@@ -69,6 +71,13 @@
                 $this->GoogleTranslate = new GoogleTranslate();
             }
 
-            return $this->GoogleTranslate->setTarget($target)->setSource($source)->translate($input);
+            $results = new TranslationResults();
+            $results->ProcessingEngine = TranslateProcessingEngine::GoogleTranslate;
+            $results->Source = $source;
+            $results->Target = $target;
+            $results->Input = $input;
+            $results->Output = $this->GoogleTranslate->setTarget($target)->setSource($source)->translate($input);
+
+            return $results;
         }
     }
