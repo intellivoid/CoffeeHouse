@@ -8,6 +8,7 @@
       <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/net.intellivoid.deepanalytics==1.0.0.3" />
       <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/net.intellivoid.msqg==1.0.0.2" />
       <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/net.intellivoid.ziproto==1.0.0.1" />
+      <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/com.stichoza.google_translate_php==4.1.2" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -78,5 +79,5 @@
       </interpreter>
     </phpInfoCache>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
 </project>

@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf24a7e6-5d8a-463f-84a8-235ed02969f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/TranslationCacheSearchMethod.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/EngineNotImplementedException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/TranslationCacheNotFoundException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/translate_test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Netkas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Netkas.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Translator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Translator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Utilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Utilities.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Managers/TranslationCacheManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Managers/TranslationCacheManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/TranslationResults.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/TranslationResults.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +45,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="production" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -66,7 +81,17 @@
       </list>
     </option>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="Ubuntu 18.04">
+    <include_path>
+      <path value="//wsl$/Ubuntu-18.04/var/ppm" />
+      <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/net.intellivoid.mongodb_driver==1.6.0.0" />
+      <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/net.intellivoid.acm==1.0.0.3" />
+      <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/net.intellivoid.deepanalytics==1.0.0.3" />
+      <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/net.intellivoid.msqg==1.0.0.2" />
+      <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/net.intellivoid.ziproto==1.0.0.1" />
+      <path value="//wsl$/Ubuntu-18.04/etc/ppm/packages/com.stichoza.google_translate_php==4.1.2" />
+    </include_path>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="53" />
     <option name="y" value="18" />
@@ -132,7 +157,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm" value="WSL" />
     <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm" value="WSL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="//wsl$/Ubuntu-18.04/etc/ppm/packages/com.stichoza.google_translate_php==4.1.2" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -140,16 +166,23 @@
       <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\tests" />
       <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Abstracts" />
+    </key>
   </component>
-  <component name="RunManager" selected="PHP Script.chat.php">
+  <component name="RunManager" selected="PHP Script.translate_test.php">
     <configuration name="chat.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/chat.php">
       <method v="2" />
     </configuration>
     <configuration name="linear_usage.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/linear_usage.php">
       <method v="2" />
     </configuration>
+    <configuration name="translate_test.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/translate_test.php">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHP Script.translate_test.php" />
         <item itemvalue="PHP Script.chat.php" />
         <item itemvalue="PHP Script.linear_usage.php" />
       </list>
@@ -172,6 +205,11 @@
       <workItem from="1562092230953" duration="8696000" />
       <workItem from="1609989909111" duration="1306000" />
       <workItem from="1610052006716" duration="1126000" />
+      <workItem from="1610076598431" duration="598000" />
+      <workItem from="1610123886598" duration="2030000" />
+      <workItem from="1610149953538" duration="2034000" />
+      <workItem from="1610172543492" duration="1556000" />
+      <workItem from="1610228296451" duration="7276000" />
     </task>
     <servers />
   </component>

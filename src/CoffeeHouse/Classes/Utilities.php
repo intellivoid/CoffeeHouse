@@ -830,6 +830,7 @@
                 case "katin":
                 case "latine":
                 case "latina":
+                case "latin":
                 case "lat":
                 case "la":
                     return "la";

@@ -11,32 +11,32 @@
             {
                 "package": "net.intellivoid.ziproto",
                 "version": "latest",
-                "required": true,
-                "source": "default@github/intellivoid/ziproto"
+                "source": "default@github/intellivoid/ziproto",
+                "required": true
             },
             {
                 "package": "net.intellivoid.acm",
                 "version": "latest",
-                "required": true,
-		        "source": "default@github/intellivoid/acm"
+                "source": "default@github/intellivoid/acm",
+                "required": true
             },
             {
                 "package": "net.intellivoid.msqg",
                 "version": "latest",
-                "required": true,
-		        "source": "default@github/intellivoid/msqg"
+                "source": "default@github/intellivoid/msqg",
+                "required": true
             },
             {
                 "package": "net.intellivoid.deepanalytics",
                 "version": "latest",
-                "required": true,
-		        "source": "default@github/intellivoid/deepanalytics"
+                "source": "default@github/intellivoid/deepanalytics",
+                "required": true
             },
             {
                 "package": "com.stichoza.google_translate_php",
                 "version": "latest",
-                "required":  true,
-                "source": "stichoza@composer/google-translate-php"
+                "source": "stichoza@composer/google-translate-php",
+                "required": true
             }
         ],
         "configuration": {
@@ -69,6 +69,14 @@
         },
         {
             "required": true,
+            "file": "Abstracts/TranslateProcessingEngine.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/TranslationCacheSearchMethod.php"
+        },
+        {
+            "required": true,
             "file": "Abstracts/UserSubscriptionSearchMethod.php"
         },
         {
@@ -97,6 +105,10 @@
         },
         {
             "required": true,
+            "file": "Classes/Translator.php"
+        },
+        {
+            "required": true,
             "file": "Classes/Utilities.php"
         },
         {
@@ -117,6 +129,10 @@
         },
         {
             "required": true,
+            "file": "Exceptions/EngineNotImplementedException.php"
+        },
+        {
+            "required": true,
             "file": "Exceptions/ForeignSessionNotFoundException.php"
         },
         {
@@ -130,6 +146,10 @@
         {
             "required": true,
             "file": "Exceptions/InvalidInputException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidLanguageException.php"
         },
         {
             "required": true,
@@ -169,6 +189,10 @@
         },
         {
             "required": true,
+            "file": "Exceptions/TranslationCacheNotFoundException.php"
+        },
+        {
+            "required": true,
             "file": "Exceptions/UserSubscriptionNotFoundException.php"
         },
         {
@@ -197,6 +221,10 @@
         },
         {
             "required": true,
+            "file": "Managers/TranslationCacheManager.php"
+        },
+        {
+            "required": true,
             "file": "Managers/UserSubscriptionManager.php"
         },
         {
@@ -218,6 +246,10 @@
         {
             "required": true,
             "file": "Objects/Cache/SpamPredictionCache.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Cache/TranslateCache.php"
         },
         {
             "required": true,
@@ -258,6 +290,10 @@
         {
             "required": true,
             "file": "Objects/Results/SpamPredictionResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/TranslationResults.php"
         },
         {
             "required": true,

@@ -4,6 +4,7 @@
     namespace CoffeeHouse\Objects\Results;
 
     use CoffeeHouse\Abstracts\TranslateProcessingEngine;
+    use CoffeeHouse\Objects\Cache\TranslateCache;
 
     /**
      * Class TranslationResults
@@ -95,6 +96,25 @@
             {
                 $TranslationResultsObject->Output = $data["output"];
             }
+
+            return $TranslationResultsObject;
+        }
+
+        /**
+         * Constructs object from cache object
+         *
+         * @param TranslateCache $translateCache
+         * @return TranslationResults
+         */
+        public static function fromCache(TranslateCache $translateCache): TranslationResults
+        {
+            $TranslationResultsObject = new TranslationResults();
+
+            $TranslationResultsObject->Input = $translateCache->Input;
+            $TranslationResultsObject->Output = $translateCache->Output;
+            $TranslationResultsObject->Target = $translateCache->Target;
+            $TranslationResultsObject->Source = $translateCache->Source;
+            $TranslationResultsObject->ProcessingEngine = $translateCache->ProcessingEngine;
 
             return $TranslationResultsObject;
         }

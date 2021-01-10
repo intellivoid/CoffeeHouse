@@ -7,12 +7,14 @@
 
     use acm\acm;
     use CoffeeHouse\Classes\ServerInterface;
+    use CoffeeHouse\Classes\Translator;
     use CoffeeHouse\Managers\ChatDialogsManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use CoffeeHouse\Managers\GeneralizedClassificationManager;
     use CoffeeHouse\Managers\LanguagePredictionCacheManager;
     use CoffeeHouse\Managers\LargeGeneralizedClassificationManager;
     use CoffeeHouse\Managers\SpamPredictionCacheManager;
+    use CoffeeHouse\Managers\TranslationCacheManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
     use CoffeeHouse\NaturalLanguageProcessing\LanguagePrediction;
     use CoffeeHouse\NaturalLanguageProcessing\SpamPrediction;
@@ -29,9 +31,9 @@
     class CoffeeHouse
     {
         /**
-         * @var mysqli
+         * @var mysqli|null
          */
-        private $database;
+        private ?mysqli $database;
 
         /**
          * @var mixed
@@ -42,27 +44,27 @@
          * @var acm
          * @noinspection PhpUndefinedClassInspection
          */
-        private $acm;
+        private acm $acm;
 
         /**
          * @var ForeignSessionsManager
          */
-        private $ForeignSessionsManager;
+        private ForeignSessionsManager $ForeignSessionsManager;
 
         /**
          * @var ChatDialogsManager
          */
-        private $ChatDialogsManager;
+        private ChatDialogsManager $ChatDialogsManager;
 
         /**
          * @var UserSubscriptionManager
          */
-        private $UserSubscriptionManager;
+        private UserSubscriptionManager $UserSubscriptionManager;
 
         /**
          * @var DeepAnalytics
          */
-        private $DeepAnalytics;
+        private DeepAnalytics $DeepAnalytics;
 
         /**
          * @var mixed
@@ -72,37 +74,47 @@
         /**
          * @var ServerInterface
          */
-        private $ServerInterface;
+        private ServerInterface $ServerInterface;
 
         /**
          * @var SpamPrediction
          */
-        private $SpamPrediction;
+        private SpamPrediction $SpamPrediction;
 
         /**
          * @var SpamPredictionCacheManager
          */
-        private $SpamPredictionCacheManager;
+        private SpamPredictionCacheManager $SpamPredictionCacheManager;
 
         /**
          * @var GeneralizedClassificationManager
          */
-        private $GeneralizedClassificationManager;
+        private GeneralizedClassificationManager $GeneralizedClassificationManager;
 
         /**
          * @var LanguagePrediction
          */
-        private $LanguagePrediction;
+        private LanguagePrediction $LanguagePrediction;
 
         /**
          * @var LanguagePredictionCacheManager
          */
-        private $LanguagePredictionCacheManager;
+        private LanguagePredictionCacheManager $LanguagePredictionCacheManager;
 
         /**
          * @var LargeGeneralizedClassificationManager
          */
-        private $LargeGeneralizedClassificationManager;
+        private LargeGeneralizedClassificationManager $LargeGeneralizedClassificationManager;
+
+        /**
+         * @var TranslationCacheManager
+         */
+        private TranslationCacheManager $TranslationCacheManager;
+
+        /**
+         * @var Translator
+         */
+        private Translator $Translator;
 
         /**
          * CoffeeHouse constructor.
@@ -121,11 +133,13 @@
             $this->UserSubscriptionManager = new UserSubscriptionManager($this);
             $this->SpamPredictionCacheManager = new SpamPredictionCacheManager($this);
             $this->LanguagePredictionCacheManager = new LanguagePredictionCacheManager($this);
+            $this->TranslationCacheManager = new TranslationCacheManager($this);
             $this->GeneralizedClassificationManager = new GeneralizedClassificationManager($this);
             $this->LargeGeneralizedClassificationManager = new LargeGeneralizedClassificationManager($this);
             $this->ServerInterface = new ServerInterface($this);
             $this->SpamPrediction = new SpamPrediction($this);
             $this->LanguagePrediction = new LanguagePrediction($this);
+            $this->Translator = new Translator($this);
             $this->DeepAnalytics = new DeepAnalytics();
         }
 
@@ -277,6 +291,22 @@
                 $this->DatabaseConfiguration['Name'],
                 $this->DatabaseConfiguration['Port']
             );
+        }
+
+        /**
+         * @return TranslationCacheManager
+         */
+        public function getTranslationCacheManager(): TranslationCacheManager
+        {
+            return $this->TranslationCacheManager;
+        }
+
+        /**
+         * @return Translator
+         */
+        public function getTranslator(): Translator
+        {
+            return $this->Translator;
         }
 
     }
