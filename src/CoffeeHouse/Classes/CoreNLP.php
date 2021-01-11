@@ -8,10 +8,12 @@
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\EngineNotImplementedException;
+    use CoffeeHouse\Exceptions\InvalidInputException;
     use CoffeeHouse\Exceptions\InvalidLanguageException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\InvalidTextInputException;
+    use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Exceptions\TranslationCacheNotFoundException;
     use CoffeeHouse\Exceptions\TranslationException;
@@ -70,16 +72,18 @@
          * @param string $input
          * @param string $source_language
          * @return Sentence[]
-         * @throws InvalidServerInterfaceModuleException
-         * @throws InvalidTextInputException
-         * @throws ServerInterfaceException
-         * @throws UnsupportedLanguageException
          * @throws DatabaseException
          * @throws EngineNotImplementedException
          * @throws InvalidLanguageException
          * @throws InvalidSearchMethodException
+         * @throws InvalidServerInterfaceModuleException
+         * @throws InvalidTextInputException
+         * @throws ServerInterfaceException
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
+         * @throws UnsupportedLanguageException
+         * @throws InvalidInputException
+         * @throws MalformedDataException
          */
         public function processText(string $input, string $source_language="en"): array
         {
@@ -124,7 +128,7 @@
                 "sentences" => $sentences
             ];
 
-            
+
             return $results;
         }
     }
