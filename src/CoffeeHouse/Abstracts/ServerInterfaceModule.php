@@ -21,4 +21,9 @@
          * Language Prediction Module of the CoffeeHouse-Server
          */
         const LanguagePrediction = "LANGUAGE_PREDICTION";
+
+        /**
+         * CoreNLP
+         */
+        const CoreNLP = "CORE_NLP";
     }

@@ -49,6 +49,14 @@
     "components": [
         {
             "required": true,
+            "file": "Abstracts/CoreNLP/NamedEntity.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/Sentiment.php"
+        },
+        {
+            "required": true,
             "file": "Abstracts/ExceptionCodes.php"
         },
         {
@@ -90,6 +98,10 @@
         {
             "required": true,
             "file": "Bots/Cleverbot.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/CoreNLP.php"
         },
         {
             "required": true,
@@ -145,6 +157,10 @@
         },
         {
             "required": true,
+            "file": "Exceptions/InvalidDateException.php"
+        },
+        {
+            "required": true,
             "file": "Exceptions/InvalidInputException.php"
         },
         {
@@ -162,6 +178,14 @@
         {
             "required": true,
             "file": "Exceptions/InvalidServerInterfaceModuleException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTextInputException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimexFormatException.php"
         },
         {
             "required": true,
@@ -190,6 +214,14 @@
         {
             "required": true,
             "file": "Exceptions/TranslationCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/TranslationException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/UnsupportedLanguageException.php"
         },
         {
             "required": true,
@@ -273,6 +305,22 @@
         },
         {
             "required": true,
+            "file": "Objects/ProcessedNLP/NamedEntity.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ProcessedNLP/Sentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ProcessedNLP/Sentiment.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ProcessedNLP/Token.php"
+        },
+        {
+            "required": true,
             "file": "Objects/Results/LanguagePrediction.php"
         },
         {
@@ -289,6 +337,10 @@
         },
         {
             "required": true,
+            "file": "Objects/Results/ProcessedNLP.php"
+        },
+        {
+            "required": true,
             "file": "Objects/Results/SpamPredictionResults.php"
         },
         {
@@ -298,6 +350,22 @@
         {
             "required": true,
             "file": "Objects/ServerInterfaceConnection.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Timex/DateType.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Timex/Range.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Timex/TimeType.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Timex.php"
         },
         {
             "required": true,

@@ -6,6 +6,7 @@
     namespace CoffeeHouse;
 
     use acm\acm;
+    use CoffeeHouse\Classes\CoreNLP;
     use CoffeeHouse\Classes\ServerInterface;
     use CoffeeHouse\Classes\Translator;
     use CoffeeHouse\Managers\ChatDialogsManager;
@@ -117,6 +118,11 @@
         private Translator $Translator;
 
         /**
+         * @var CoreNLP
+         */
+        private CoreNLP $CoreNLP;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          * @noinspection PhpUndefinedClassInspection
@@ -139,6 +145,7 @@
             $this->ServerInterface = new ServerInterface($this);
             $this->SpamPrediction = new SpamPrediction($this);
             $this->LanguagePrediction = new LanguagePrediction($this);
+            $this->CoreNLP = new CoreNLP($this);
             $this->Translator = new Translator($this);
             $this->DeepAnalytics = new DeepAnalytics();
         }
@@ -307,6 +314,14 @@
         public function getTranslator(): Translator
         {
             return $this->Translator;
+        }
+
+        /**
+         * @return CoreNLP
+         */
+        public function getCoreNLP(): CoreNLP
+        {
+            return $this->CoreNLP;
         }
 
     }

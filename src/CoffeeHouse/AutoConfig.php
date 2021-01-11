@@ -25,6 +25,7 @@
     $ServerSchema->setDefinition('Host', '192.168.0.107');
     $ServerSchema->setDefinition('SpamPredictionPort', '5601');
     $ServerSchema->setDefinition('LanguagePredictionPort', '5602');
+    $ServerSchema->setDefinition('CoreNlpPort', '5604');
     $acm->defineSchema('CoffeeHouseServer', $ServerSchema);
 
     $acm->processCommandLine();

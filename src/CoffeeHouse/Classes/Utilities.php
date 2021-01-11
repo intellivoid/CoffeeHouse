@@ -4,10 +4,17 @@
     namespace CoffeeHouse\Classes;
 
 
+    use CoffeeHouse\Abstracts\CoreNLP\NamedEntity;
+    use CoffeeHouse\Abstracts\CoreNLP\Sentiment;
     use CoffeeHouse\Exceptions\BotSessionException;
+    use CoffeeHouse\Exceptions\InvalidDateException;
     use CoffeeHouse\Exceptions\InvalidLanguageException;
+    use CoffeeHouse\Exceptions\InvalidTimexFormatException;
     use CoffeeHouse\Objects\HttpResponse;
-    
+    use CoffeeHouse\Objects\Timex\DateType;
+    use CoffeeHouse\Objects\Timex\TimeType;
+    use DateTime;
+
     /**
      * Class Utilities
      * @package CoffeeHouse\Classes
@@ -401,6 +408,7 @@
                 case "漢語":
                 case "chi":
                 case "zho":
+                case "zh-cn":
                 case "zh":
                     return "zh";
 
@@ -1579,6 +1587,280 @@
 
                 default:
                     throw new InvalidLanguageException("The given language '$input' is not supported");
+            }
+        }
+
+        /**
+         * Converts a sentimental value to a string
+         *
+         * @param int $input
+         * @return string
+         */
+        public static function sentimentValueToString(int $input): string
+        {
+            switch($input)
+            {
+                case 0:
+                    return Sentiment::VeryNegative;
+
+                case 1:
+                    return Sentiment::Negative;
+
+                case 2:
+                    return Sentiment::Neutral;
+
+                case 3:
+                    return Sentiment::Positive;
+
+                case 4:
+                    return Sentiment::VeryPositive;
+
+                default:
+                    return Sentiment::Unknown;
+            }
+        }
+
+        /**
+         * Turns a sentimental string to a value
+         *
+         * @param string $input
+         * @return int
+         */
+        public static function sentimentStringToValue(string $input): int
+        {
+            switch($input)
+            {
+                case Sentiment::VeryNegative:
+                    return 0;
+
+                case Sentiment::Negative:
+                    return 1;
+
+                case Sentiment::Neutral:
+                    return 2;
+
+                case Sentiment::Positive:
+                    return 3;
+
+                case Sentiment::VeryPositive:
+                    return 4;
+
+                default:
+                    return -1;
+            }
+        }
+
+        /**
+         * Converts an XML object to an array
+         *
+         * @param $xmlObject
+         * @return array
+         */
+        public static function xml2array($xmlObject): array
+        {
+            $out = array();
+            foreach((array)$xmlObject as $index => $node)
+                $out[$index] = (is_object($node)) ? self::xml2array($node) : $node;
+            return $out;
+        }
+
+        /**
+         * PHP Implementation of Java's startsWith() function
+         *
+         * @param string $haystack
+         * @param string $needle
+         * @return bool
+         */
+        public static function startsWith(string $haystack, string $needle): bool
+        {
+            $length = strlen( $needle );
+            return substr( $haystack, 0, $length ) === $needle;
+        }
+
+        /**
+         * PHP Implementation of Java's endsWith() function
+         *
+         * @param string $haystack
+         * @param string $needle
+         * @return bool
+         */
+        public static function endsWith(string $haystack, string $needle): bool
+        {
+            $length = strlen( $needle );
+            if( !$length ) {
+                return true;
+            }
+            return substr( $haystack, -$length ) === $needle;
+        }
+
+        /**
+         * Creates a DateTime object from the Timex format
+         *
+         * @param string $input
+         * @return DateTime
+         * @throws InvalidTimexFormatException
+         */
+        public static function getTimexDate(string $input): DateType
+        {
+            $date = new DateType();
+
+            if((bool)preg_match('/\d\d\d\d-\d\d-\d\d/m', $input, $matches))
+            {
+                $date->Year = substr($matches[0], 0, 4);
+                $date->Month = substr($matches[0], 5, 2);
+                $date->Day = substr($matches[0], 8, 2);
+
+                return $date;
+            }
+            elseif((bool)preg_match('/\d\d\d\d\d\d\d\d/m', $input, $matches))
+            {
+                $date->Year = substr($matches[0], 0, 4);
+                $date->Month = substr($matches[0], 4, 2);
+                $date->Day = substr($matches[0], 6, 2);
+
+                return $date;
+            }
+
+            throw new InvalidTimexFormatException("The input '$input' is not a valid Timex expression");
+        }
+
+        /**
+         * @param string $input
+         * @return TimeType
+         * @throws InvalidTimexFormatException
+         */
+        public static function getTimexTime(string $input): TimeType
+        {
+            $time = new TimeType();
+
+            // Remove the TIMEX3 T value if there's any.
+            if(strtolower(substr($input, 0, 1)) == "t")
+            {
+                $input = substr($input, 1, strlen($input));
+            }
+
+            /**
+             * Matches the following time formats
+             *
+             * 01:00, 02:00, 13:00,
+             * 1:00,  2:00, 13:01,
+             * 23:59, 15:00,
+             * 14:34:43, 01:00:00
+             */
+            if((bool)preg_match('/([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?/m', $input, $matches))
+            {
+                $parsed_unix_timestamp = strtotime($matches[0]);
+                $time->Hour = date("H", $parsed_unix_timestamp);
+                $time->Minute = date("i", $parsed_unix_timestamp);
+                $time->Seconds = date("s", $parsed_unix_timestamp);
+
+                return $time;
+            }
+
+            throw new InvalidTimexFormatException("The input '$input' is not a valid Timex expression");
+        }
+
+        /**
+         * Gets the Unix Timestamp from a DateType and TimeType combination
+         *
+         * @param DateType $dateType
+         * @param TimeType $timeType
+         * @return int
+         * @throws InvalidDateException
+         */
+        public static function getUnixTimestamp(DateType $dateType, TimeType $timeType): int
+        {
+            $date_format = $dateType->Year . "-" . $dateType->Month . "-" . $dateType->Day;
+            $time_format = $timeType->Hour . ":" . $timeType->Minute . ":" . $timeType->Seconds;
+            $parsed = strtotime($date_format . " " . $time_format);
+
+            if($parsed == false)
+                throw new InvalidDateException("The string '$parsed' cannot be parsed.");
+
+            return (int)$parsed;
+        }
+
+        /**
+         * Parses the ner type into a CoffeeHouse NerType
+         *
+         * @param string $input
+         * @return string
+         */
+        public static function parseNerType(string $input): string
+        {
+            switch(strtolower($input))
+            {
+                case "person":
+                    return NamedEntity::Person;
+
+                case "location":
+                    return NamedEntity::Location;
+
+                case "organization":
+                    return NamedEntity::Organization;
+
+                case "misc":
+                    return NamedEntity::Miscellaneous;
+
+                case "money":
+                    return NamedEntity::Money;
+
+                case "number":
+                    return NamedEntity::Number;
+
+                case "ordinal":
+                    return NamedEntity::Ordinal;
+
+                case "percent":
+                    return NamedEntity::Percent;
+
+                case "date":
+                    return NamedEntity::Date;
+
+                case "time":
+                    return NamedEntity::Time;
+
+                case "duration":
+                    return NamedEntity::Duration;
+
+                case "set":
+                    return NamedEntity::Set;
+
+                case "state_or_province":
+                    return NamedEntity::StateOrProvince;
+
+                case "country":
+                    return NamedEntity::Country;
+
+                case "nationality":
+                    return NamedEntity::Nationality;
+
+                case "religion":
+                    return NamedEntity::Religion;
+
+                case "title":
+                    return NamedEntity::JobTitle;
+
+                case "ideology":
+                    return NamedEntity::Ideology;
+
+                case "criminal_charge":
+                    return NamedEntity::CriminalCharge;
+
+                case "cause_of_death":
+                    return NamedEntity::CauseOfDeath;
+
+                case "handle":
+                    return NamedEntity::UsernameHandle;
+
+                case "email":
+                    return NamedEntity::Email;
+
+                case "city":
+                    return NamedEntity::City;
+
+                default:
+                    return NamedEntity::Unknown;
             }
         }
     }

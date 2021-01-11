@@ -10,9 +10,11 @@
     use CoffeeHouse\Exceptions\EngineNotImplementedException;
     use CoffeeHouse\Exceptions\InvalidLanguageException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
+    use CoffeeHouse\Exceptions\InvalidTextInputException;
     use CoffeeHouse\Exceptions\TranslationCacheNotFoundException;
+    use CoffeeHouse\Exceptions\TranslationException;
     use CoffeeHouse\Objects\Results\TranslationResults;
-    use ErrorException;
+    use Exception;
     use Stichoza\GoogleTranslate\GoogleTranslate;
 
     /**
@@ -80,11 +82,13 @@
          * @param string $engine The engine to use
          * @param bool $use_cache If cache should be used
          * @return TranslationResults
-         * @throws EngineNotImplementedException
-         * @throws ErrorException
-         * @throws TranslationCacheNotFoundException
          * @throws DatabaseException
+         * @throws EngineNotImplementedException
+         * @throws InvalidLanguageException
          * @throws InvalidSearchMethodException
+         * @throws InvalidTextInputException
+         * @throws TranslationCacheNotFoundException
+         * @throws TranslationException
          */
         public function translate(string $input, string $output, string $source, string $engine="auto", bool $use_cache=True): TranslationResults
         {
@@ -158,11 +162,16 @@
          * @param string $target
          * @param string $source
          * @return TranslationResults
-         * @throws ErrorException
-         * @throws InvalidLanguageException
+         * @throws InvalidTextInputException
+         * @throws TranslationException
          */
         public function googleTranslate(string $input, string $target, string $source=""): TranslationResults
         {
+            if(Validation::translationInput($input) == false)
+            {
+                throw new InvalidTextInputException("The given input cannot be empty");
+            }
+
             if($this->needsRefresh())
             {
                 $this->GoogleTranslate = new GoogleTranslate();
@@ -178,7 +187,33 @@
             $results->Source = $source;
             $results->Target = $target;
             $results->Input = $input;
-            $results->Output = $this->GoogleTranslate->setTarget($target)->setSource($source)->translate($input);
+
+            try
+            {
+                if(strlen($results->Input) > 5000)
+                {
+                    // To process this, we need to split it in batches.
+                    $batch_query = str_split($results->Input, 5000);
+                    $results->Output = "";
+
+                    foreach($batch_query as $item)
+                        $results->Output .= $this->GoogleTranslate->setTarget($target)->setSource($source)->translate($item);
+                }
+                else
+                {
+                    $results->Output = $this->GoogleTranslate->setTarget($target)->setSource($source)->translate($input);
+                }
+
+                if(strlen($results->Output) == 0)
+                {
+                    throw new TranslationException("The Translation engine returned empty results");
+                }
+
+            }
+            catch(Exception $e)
+            {
+                throw new TranslationException("There was an error with the Translation Engine", 0, $e);
+            }
 
             return $results;
         }
