@@ -111,7 +111,7 @@
             return [
                 "top_sentiment" => $this->TopSentiment,
                 "top_prediction" => $this->TopPrediction,
-                "predictions" => $this->Predictions,
+                "predictions" => $this->Predictions
             ];
         }
     }

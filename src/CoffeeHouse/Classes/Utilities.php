@@ -4,15 +4,27 @@
     namespace CoffeeHouse\Classes;
 
 
+    use Cassandra\Time;
+    use CoffeeHouse\Abstracts\CoreNLP\DurationDateTypes;
+    use CoffeeHouse\Abstracts\CoreNLP\DurationTimeTypes;
+    use CoffeeHouse\Abstracts\CoreNLP\DurationType;
     use CoffeeHouse\Abstracts\CoreNLP\NamedEntity;
     use CoffeeHouse\Abstracts\CoreNLP\Sentiment;
+    use CoffeeHouse\Abstracts\CoreNLP\TimexDateDuration;
+    use CoffeeHouse\Abstracts\CoreNLP\TimexDurationType;
+    use CoffeeHouse\Abstracts\CoreNLP\TimexTimeDuration;
     use CoffeeHouse\Exceptions\BotSessionException;
+    use CoffeeHouse\Exceptions\CannotDetermineDurationTypeException;
     use CoffeeHouse\Exceptions\InvalidDateException;
     use CoffeeHouse\Exceptions\InvalidLanguageException;
+    use CoffeeHouse\Exceptions\InvalidTimexDateDurationException;
+    use CoffeeHouse\Exceptions\InvalidTimexDurationTypeException;
     use CoffeeHouse\Exceptions\InvalidTimexFormatException;
+    use CoffeeHouse\Exceptions\InvalidTimexTimeDurationException;
+    use CoffeeHouse\Exceptions\TimexDurationParseException;
     use CoffeeHouse\Objects\HttpResponse;
-    use CoffeeHouse\Objects\Timex\DateType;
-    use CoffeeHouse\Objects\Timex\TimeType;
+    use CoffeeHouse\Objects\ProcessedNLP\Types\DateType;
+    use CoffeeHouse\Objects\ProcessedNLP\Types\TimeType;
     use DateTime;
 
     /**
@@ -1861,6 +1873,265 @@
 
                 default:
                     return NamedEntity::Unknown;
+            }
+        }
+
+        /**
+         * Parses the duration type from a TIMEX3 value format
+         *
+         * @param string $input
+         * @return string
+         * @throws CannotDetermineDurationTypeException
+         */
+        public static function parseTimexDurationType(string $input): string
+        {
+            $input = strtoupper($input);
+
+            if(
+                strlen($input) > 3 &&
+                substr($input, 0, 3) !== "PTX" &&
+                substr($input, 0, 2) == "PT" || substr($input, 0, 4) == "PT0."
+            )
+            {
+                return TimexDurationType::Time;
+            }
+
+            if(strlen($input) == 6)
+            {
+                if($input == TimexDurationType::SeveralMilliseconds)
+                    return TimexDurationType::SeveralMilliseconds;
+            }
+
+            if(strlen($input) == 4)
+            {
+                if($input == TimexDurationType::SeveralHours)
+                    return TimexDurationType::SeveralHours;
+
+                if($input == TimexDurationType::SeveralMinutes)
+                    return TimexDurationType::SeveralMinutes;
+
+                if($input == TimexDurationType::SeveralSeconds)
+                    return TimexDurationType::SeveralSeconds;
+            }
+
+            if(strlen($input) == 3)
+            {
+                if($input == TimexDurationType::SeveralWeeks)
+                    return TimexDurationType::SeveralWeeks;
+
+                if($input == TimexDurationType::SeveralYears)
+                    return TimexDurationType::SeveralYears;
+
+                if($input == TimexDurationType::SeveralMonths)
+                    return TimexDurationType::SeveralMonths;
+
+                if($input == TimexDurationType::SeveralDays)
+                    return TimexDurationType::SeveralDays;
+            }
+
+            if(
+                strlen($input) > 2 && // This checks out
+                substr($input, 0, 3) !== "PTX" && // This checks out
+                substr($input, 0, 1) == "P" // This checks out
+            )
+            {
+                return TimexDurationType::Date;
+            }
+
+            throw new CannotDetermineDurationTypeException("The Timex Duration '$input' cannot be determined");
+        }
+
+        /**
+         * Attempts to parse the Timex Time duration type
+         *
+         * Parses the time duration type
+         *
+         * @param string $input
+         * @return TimexTimeDuration|string
+         * @throws InvalidTimexTimeDurationException
+         * @throws TimexDurationParseException
+         */
+        public static function parseTimexTimeDurationType(string $input): string
+        {
+            if(strlen($input) < 2)
+                throw new InvalidTimexTimeDurationException("The given Timex3 Time duration format must be greater than 2 characters");
+
+            if(strtoupper(substr($input, 0, 2)) !== "PT")
+                throw new InvalidTimexTimeDurationException("The given input '$input' not a valid Timex Time duration");
+
+            if(strtoupper(substr($input, 0, 4)) == "PT0.") // Milliseconds ends in S, so this check is required.
+            {
+                return TimexTimeDuration::Milliseconds;
+            }
+            else
+            {
+                switch(strtoupper(substr($input, strlen($input) -1, 1)))
+                {
+                    case TimexTimeDuration::Hour:
+                        return TimexTimeDuration::Hour;
+
+                    case TimexTimeDuration::Minute:
+                        return TimexTimeDuration::Minute;
+
+                    case TimexTimeDuration::Second:
+                        return TimexTimeDuration::Second;
+                }
+            }
+
+            throw new TimexDurationParseException("The given input '$input' cannot be parsed as a Timex3 Time duration format");
+        }
+
+        /**
+         * Parses the Timex Date duration type
+         *
+         * @param string $input
+         * @return bool
+         * @throws InvalidTimexDateDurationException
+         * @throws TimexDurationParseException
+         */
+        public static function parseTimexDateDurationType(string $input): string
+        {
+            if(strlen($input) < 1)
+                throw new InvalidTimexDateDurationException("The given Timex3 Date duration format must be greater than 1 character");
+
+            if(strtoupper(substr($input, 0, 1)) !== "P")
+                throw new InvalidTimexDateDurationException("The given input '$input' not a valid Timex Date duration");
+
+            switch(strtoupper(substr($input, strlen($input) -1, 1)))
+            {
+                case TimexDateDuration::Year:
+                    return TimexDateDuration::Year;
+
+                case TimexDateDuration::Month:
+                    return TimexDateDuration::Month;
+
+                case TimexDateDuration::Day:
+                    return TimexDateDuration::Day;
+
+                case TimexDateDuration::Week:
+                    return TimexDateDuration::Week;
+            }
+
+            throw new TimexDurationParseException("The given input '$input' cannot be parsed as a Timex3 Time duration format");
+        }
+
+        /**
+         * Returns the Timex duration value
+         *
+         * @param string $input
+         * @return int
+         * @throws CannotDetermineDurationTypeException
+         * @throws InvalidTimexDurationTypeException
+         * @throws InvalidTimexTimeDurationException
+         * @throws TimexDurationParseException
+         */
+        public static function parseTimexDurationValue(string $input): int
+        {
+            if(
+                self::parseTimexDurationType($input) == TimexDurationType::Time  ||
+                self::parseTimexDurationType($input) == TimexDurationType::Date
+            )
+            {
+                // Haha very complic!!!1111!11
+                if((bool)preg_match("/([0-9]+)/", $input, $matches) == true)
+                    return (int)$matches[0];
+
+                throw new TimexDurationParseException("Cannot extract the value from '$input'");
+            }
+
+            throw new InvalidTimexDurationTypeException("The given Timex duration type '" . self::parseTimexTimeDurationType($input) . "' from the input '$input' is not valid for this method, must be Time or Date");
+        }
+
+        /**
+         * Makes the Timex Duration Time type more beautiful.
+         *
+         * @param string $input
+         * @return string
+         */
+        public static function TimexDurationTimeToString(string $input): string
+        {
+            switch($input)
+            {
+                case TimexTimeDuration::Hour:
+                    return DurationTimeTypes::Hour;
+
+                case TimexTimeDuration::Minute:
+                    return DurationTimeTypes::Minute;
+
+                case TimexTimeDuration::Milliseconds:
+                    return DurationTimeTypes::Milliseconds;
+
+                case TimexTimeDuration::Second:
+                    return DurationTimeTypes::Second;
+
+                default:
+                    return DurationTimeTypes::Unknown;
+            }
+        }
+
+        /**
+         * Makes the Timex Duration Date type more beautiful.
+         *
+         * @param string $input
+         * @return string
+         */
+        public static function TimexDurationDateToString(string $input): string
+        {
+            switch($input)
+            {
+                case TimexDateDuration::Year:
+                    return DurationDateTypes::Year;
+
+                case TimexDateDuration::Month:
+                    return DurationDateTypes::Month;
+
+                case TimexDateDuration::Day:
+                    return DurationDateTypes::Day;
+
+                case TimexDateDuration::Week:
+                    return DurationDateTypes::Week;
+
+                default:
+                    return DurationDateTypes::Unknown;
+            }
+        }
+
+        public static function TimexDurationTypeToString(string $input): string
+        {
+            switch($input)
+            {
+                case TimexDurationType::SeveralMilliseconds:
+                    return DurationType::SeveralMilliseconds;
+
+                case TimexDurationType::SeveralHours:
+                    return DurationType::SeveralHours;
+
+                case TimexDurationType::SeveralMinutes:
+                    return DurationType::SeveralMinutes;
+
+                case TimexDurationType::SeveralSeconds:
+                    return DurationType::SeveralSeconds;
+
+                case TimexDurationType::SeveralWeeks:
+                    return DurationType::SeveralWeeks;
+
+                case TimexDurationType::SeveralYears:
+                    return DurationType::SeveralYears;
+
+                case TimexDurationType::SeveralMonths:
+                    return DurationType::SeveralMonths;
+
+                case TimexDurationType::SeveralDays:
+                    return DurationType::SeveralDays;
+
+                case TimexDurationType::Time:
+                    return DurationType::Time;
+
+                case TimexDurationType::Date:
+                    return DurationType::Date;
+
+                default:
+                    return DurationDateTypes::Unknown;
             }
         }
     }

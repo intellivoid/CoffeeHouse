@@ -2,7 +2,7 @@
     "package": {
         "package_name": "net.intellivoid.coffeehouse",
         "name": "CoffeeHouse",
-        "version": "1.0.2.5",
+        "version": "1.0.3.0",
         "author": "Zi Xing Narrakas",
         "organization": "Intellivoid",
         "description": "Machine Learning / NLP Library",
@@ -49,11 +49,43 @@
     "components": [
         {
             "required": true,
+            "file": "Abstracts/CoreNLP/DurationDateTypes.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/DurationTimeTypes.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/DurationType.php"
+        },
+        {
+            "required": true,
             "file": "Abstracts/CoreNLP/NamedEntity.php"
         },
         {
             "required": true,
+            "file": "Abstracts/CoreNLP/NamedEntityAlternativeValueTypes.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/PartOfSpeechTag.php"
+        },
+        {
+            "required": true,
             "file": "Abstracts/CoreNLP/Sentiment.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/TimexDateDuration.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/TimexDurationType.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/TimexTimeDuration.php"
         },
         {
             "required": true,
@@ -137,6 +169,10 @@
         },
         {
             "required": true,
+            "file": "Exceptions/CannotDetermineDurationTypeException.php"
+        },
+        {
+            "required": true,
             "file": "Exceptions/DatabaseException.php"
         },
         {
@@ -185,7 +221,23 @@
         },
         {
             "required": true,
+            "file": "Exceptions/InvalidTimeException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimexDateDurationException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimexDurationTypeException.php"
+        },
+        {
+            "required": true,
             "file": "Exceptions/InvalidTimexFormatException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimexTimeDurationException.php"
         },
         {
             "required": true,
@@ -210,6 +262,10 @@
         {
             "required": true,
             "file": "Exceptions/SpamPredictionCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/TimexDurationParseException.php"
         },
         {
             "required": true,
@@ -309,6 +365,10 @@
         },
         {
             "required": true,
+            "file": "Objects/ProcessedNLP/PosTag.php"
+        },
+        {
+            "required": true,
             "file": "Objects/ProcessedNLP/Sentence.php"
         },
         {
@@ -318,6 +378,54 @@
         {
             "required": true,
             "file": "Objects/ProcessedNLP/Token.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ProcessedNLP/Types/DateTimeType.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ProcessedNLP/Types/DateType.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ProcessedNLP/Types/Duration.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ProcessedNLP/Types/TimeType.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/NamedEntitiesResults/NamedEntitySentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/NamedEntitiesResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/PartOfSpeechResults/PartOfSpeechSentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/PartOfSpeechResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/SentenceSplitResults/Sentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/SentenceSplitResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/SentimentResults/SentimentSentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/SentimentResults.php"
         },
         {
             "required": true,
@@ -353,15 +461,7 @@
         },
         {
             "required": true,
-            "file": "Objects/Timex/DateType.php"
-        },
-        {
-            "required": true,
             "file": "Objects/Timex/Range.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Timex/TimeType.php"
         },
         {
             "required": true,

@@ -9,15 +9,15 @@
      */
     abstract class Sentiment
     {
-        const VeryNegative = "very_negative";
+        const VeryNegative = "VERY_NEGATIVE";
 
-        const Negative = "negative";
+        const Negative = "NEGATIVE";
 
-        const Neutral = "neutral";
+        const Neutral = "NEUTRAL";
 
-        const Positive = "positive";
+        const Positive = "POSITIVE";
 
-        const VeryPositive = "very_positive";
+        const VeryPositive = "VERY_POSITIVE";
 
-        const Unknown = "unknown";
+        const Unknown = "UNKNOWN";
     }

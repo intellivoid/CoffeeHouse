@@ -2,34 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf24a7e6-5d8a-463f-84a8-235ed02969f3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/NamedEntity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/Sentiment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/CoreNLP.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/InvalidDateException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/InvalidTextInputException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/InvalidTimexFormatException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/TranslationException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/UnsupportedLanguageException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/NamedEntity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Sentence.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Sentiment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Token.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/ProcessedNLP.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Timex.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Timex/DateType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Timex/Range.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Timex/TimeType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/core_nlp_invoke.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Netkas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Netkas.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/DurationDateTypes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/DurationTimeTypes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/DurationType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/NamedEntityAlternativeValueTypes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/PartOfSpeechTag.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/TimexDateDuration.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/TimexDurationType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/TimexTimeDuration.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/CannotDetermineDurationTypeException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/InvalidTimeException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/InvalidTimexDateDurationException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/InvalidTimexDurationTypeException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/InvalidTimexTimeDurationException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Exceptions/TimexDurationParseException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/PosTag.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Types/DateTimeType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Types/Duration.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/CoreNLP/NamedEntitiesResults.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/CoreNLP/NamedEntitiesResults/NamedEntitySentence.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/CoreNLP/PartOfSpeechResults.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/CoreNLP/PartOfSpeechResults/PartOfSpeechSentence.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/CoreNLP/SentenceSplitResults.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/CoreNLP/SentenceSplitResults/Sentence.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/CoreNLP/SentimentResults.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Results/CoreNLP/SentimentResults/SentimentSentence.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core_nlp_direct_invoke.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core_nlp_ner.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core_nlp_pos_tagger.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core_nlp_sentiment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core_nlp_split_sentence.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/timex_duration_test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Netkas.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/ServerInterfaceModule.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/ServerInterfaceModule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/AutoConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/AutoConfig.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/ServerInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/ServerInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Translator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Translator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/NamedEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/NamedEntity.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/Sentiment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Abstracts/CoreNLP/Sentiment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/CoreNLP.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/CoreNLP.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Utilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Utilities.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Classes/Validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/CoffeeHouse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/configuration.ini" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/configuration.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/NamedEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/NamedEntity.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Sentence.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Sentence.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Sentiment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Sentiment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Timex/DateType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Types/DateType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/Objects/Timex/TimeType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/Objects/ProcessedNLP/Types/TimeType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CoffeeHouse/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeHouse/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,6 +81,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -172,7 +195,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm" value="WSL" />
     <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm" value="WSL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../php-stanford-corenlp-adapter" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -182,20 +205,24 @@
       <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Exceptions" />
-      <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Objects\Timex" />
+      <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Objects" />
+      <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Objects\ProcessedNLP\Types" />
       <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Objects\ProcessedNLP" />
-      <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Abstracts" />
+      <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Abstracts\CoreNLP" />
+      <recent name="C:\Users\Netkas\Documents\gits\CoffeeHouse\src\CoffeeHouse\Exceptions" />
     </key>
   </component>
-  <component name="RunManager" selected="PHP Script.core_nlp_invoke.php">
+  <component name="RunManager" selected="PHP Script.core_nlp_pos_tagger.php">
     <configuration name="chat.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/chat.php">
+      <method v="2" />
+    </configuration>
+    <configuration name="core_nlp_direct_invoke.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/core_nlp_direct_invoke.php">
       <method v="2" />
     </configuration>
     <configuration name="core_nlp_invoke.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/core_nlp_invoke.php">
       <method v="2" />
     </configuration>
-    <configuration name="linear_usage.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/linear_usage.php">
+    <configuration name="core_nlp_pos_tagger.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/core_nlp_pos_tagger.php">
       <method v="2" />
     </configuration>
     <configuration name="translate_test.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/tests/translate_test.php">
@@ -203,10 +230,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHP Script.core_nlp_pos_tagger.php" />
+        <item itemvalue="PHP Script.core_nlp_direct_invoke.php" />
         <item itemvalue="PHP Script.core_nlp_invoke.php" />
         <item itemvalue="PHP Script.translate_test.php" />
         <item itemvalue="PHP Script.chat.php" />
-        <item itemvalue="PHP Script.linear_usage.php" />
       </list>
     </recent_temporary>
   </component>
@@ -232,7 +260,10 @@
       <workItem from="1610149953538" duration="2034000" />
       <workItem from="1610172543492" duration="1556000" />
       <workItem from="1610228296451" duration="22375000" />
-      <workItem from="1610301426733" duration="30280000" />
+      <workItem from="1610301426733" duration="31764000" />
+      <workItem from="1610390436886" duration="25287000" />
+      <workItem from="1610426994192" duration="3716000" />
+      <workItem from="1610470737674" duration="17416000" />
     </task>
     <servers />
   </component>

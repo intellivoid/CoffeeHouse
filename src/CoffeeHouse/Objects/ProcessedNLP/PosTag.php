@@ -1,59 +1,57 @@
-<?php /** @noinspection PhpMissingFieldTypeInspection */
+<?php
 
 
     namespace CoffeeHouse\Objects\ProcessedNLP;
 
+    use CoffeeHouse\Abstracts\CoreNLP\PartOfSpeechTag;
+
     /**
-     * Class Token
+     * Class PosTag
      * @package CoffeeHouse\Objects\ProcessedNLP
      */
-    class Token
+    class PosTag
     {
         /**
          * The tokenized word
          *
          * @var string|null
          */
-        public $Word;
-
-        /**
-         * The original text of the code
-         *
-         * @var string|null
-         */
-        public $OriginalText;
+        public ?string $Word;
 
         /**
          * The character offset begin index
          *
          * @var int|null
          */
-        public $CharacterOffsetBegin;
+        public ?int $CharacterOffsetBegin;
 
         /**
          * The character offset end index
          *
          * @var int|null
          */
-        public $CharacterOffsetEnd;
+        public ?int $CharacterOffsetEnd;
+
+        /**
+         * The identified part of speech text.
+         *
+         * @var string|PartOfSpeechTag|null
+         */
+        public ?string $Value;
 
         /**
          * Constructs object from array
          *
          * @param array $data
-         * @return Token
+         * @return PosTag
+         * @noinspection DuplicatedCode
          */
-        public static function fromArray(array $data): Token
+        public static function fromArray(array $data): PosTag
         {
-            $TokenObject = new Token();
+            $TokenObject = new PosTag();
 
             if(isset($data["word"]))
                 $TokenObject->Word = $data["word"];
-
-            if(isset($data["originalText"]))
-                $TokenObject->OriginalText = $data["originalText"];
-            if(isset($data["original_text"]))
-                $TokenObject->OriginalText = $data["original_text"];
 
             if(isset($data["characterOffsetBegin"]))
                 $TokenObject->CharacterOffsetBegin = (int)$data["characterOffsetBegin"];
@@ -64,6 +62,12 @@
                 $TokenObject->CharacterOffsetEnd = (int)$data["characterOffsetEnd"];
             if(isset($data["offset_end"]))
                 $TokenObject->CharacterOffsetEnd = (int)$data["offset_end"];
+
+            if(isset($data["pos"]))
+                $TokenObject->Value = $data["pos"];
+
+            if(isset($data["value"]))
+                $TokenObject->Value = $data["value"];
 
             return $TokenObject;
         }
@@ -77,9 +81,9 @@
         {
             return [
                 "word" => $this->Word,
-                "original_text" => $this->OriginalText,
                 "offset_begin" => $this->CharacterOffsetBegin,
-                "offset_end" => $this->CharacterOffsetEnd
+                "offset_end" => $this->CharacterOffsetEnd,
+                "value" => $this->Value,
             ];
         }
     }

@@ -3,9 +3,17 @@
 
     namespace CoffeeHouse\Objects\ProcessedNLP;
 
+    use CoffeeHouse\Abstracts\CoreNLP\NamedEntityAlternativeValueTypes;
     use CoffeeHouse\Classes\Utilities;
     use CoffeeHouse\Exceptions\InvalidDateException;
+    use CoffeeHouse\Exceptions\InvalidTimeException;
     use CoffeeHouse\Exceptions\InvalidTimexFormatException;
+    use CoffeeHouse\Objects\ProcessedNLP\Types\DateTimeType;
+    use CoffeeHouse\Objects\ProcessedNLP\Types\DateType;
+    use CoffeeHouse\Objects\ProcessedNLP\Types\Duration;
+    use CoffeeHouse\Objects\ProcessedNLP\Types\TimeType;
+    use DateTime;
+    use Exception;
 
     /**
      * Class NamedEntity
@@ -54,6 +62,33 @@
          * @var string|int|float|null
          */
         public $Value;
+
+        /**
+         * The alternative value parsed from this named entity
+         *
+         * @var DateType|TimeType|DateTimeType|Duration[]|null
+         */
+        public $AltValue;
+
+        /**
+         * @var string|NamedEntityAlternativeValueTypes
+         */
+        public $AltValueType;
+
+        /**
+         * NamedEntity constructor.
+         */
+        public function __construct()
+        {
+            $this->Text = null;
+            $this->Type = null;
+            $this->Confidence = null;
+            $this->CharacterOffsetBegin = null;
+            $this->CharacterOffsetEnd = null;
+            $this->Value = null;
+            $this->AltValue = null;
+            $this->AltValueType = NamedEntityAlternativeValueTypes::None;
+        }
 
         /**
          * Parses a NamedEntity from an array
@@ -119,7 +154,17 @@
                         switch($data["timex"]["type"])
                         {
                             case "DATE":
-                                $NamedEntityObject->Value = Utilities::getTimexDate($data["timex"]["value"])->toUnixTimestamp();
+                                try
+                                {
+                                    $NamedEntityObject->AltValueType = NamedEntityAlternativeValueTypes::Date;
+                                    $NamedEntityObject->AltValue = Utilities::getTimexDate($data["timex"]["value"]);
+                                    $NamedEntityObject->Value = $NamedEntityObject->AltValue->toUnixTimestamp();
+                                }
+                                catch(InvalidTimexFormatException | InvalidTimeException $e)
+                                {
+                                    $NamedEntityObject->Value = $data["timex"]["value"];
+                                }
+
                                 $success = true;
                                 break;
 
@@ -144,12 +189,55 @@
 
                                 if($DateTypeObject == null)
                                 {
-                                    $NamedEntityObject->Value = $TimeTypeObject->toUnixTimestamp();
+                                    try
+                                    {
+                                        $NamedEntityObject->Value = $TimeTypeObject->toUnixTimestamp();
+                                    }
+                                    catch (InvalidTimeException $e)
+                                    {
+                                        unset($e);
+                                    }
+
+                                    $NamedEntityObject->AltValueType = NamedEntityAlternativeValueTypes::Time;
+                                    $NamedEntityObject->AltValue = $TimeTypeObject;
                                 }
                                 else
                                 {
                                     $NamedEntityObject->Value = Utilities::getUnixTimestamp($DateTypeObject, $TimeTypeObject);
+
+                                    $NamedEntityObject->AltValueType = NamedEntityAlternativeValueTypes::DateTime;
+                                    $NamedEntityObject->AltValue = new DateTime();
+                                    $NamedEntityObject->AltValue->DateType = $DateTypeObject;
+                                    $NamedEntityObject->AltValue->TimeType = $TimeTypeObject;
                                 }
+
+                                $success = true;
+                                break;
+
+                            case "DURATION":
+
+                                $NamedEntityObject->AltValue = [];
+                                $NamedEntityObject->AltValueType = NamedEntityAlternativeValueTypes::Duration;
+
+                                $ExplodedValues = explode("/", $data["timex"]["value"]);
+
+                                foreach($ExplodedValues as $value)
+                                {
+                                    try
+                                    {
+                                        $DurationObject = Duration::fromSyntax($value);
+                                        $NamedEntityObject->AltValue[] = $DurationObject;
+
+                                    }
+                                    catch(Exception $e)
+                                    {
+                                        unset($e);
+                                    }
+                                }
+
+                                if(isset($data["text"]))
+                                    $NamedEntityObject->Value = $data["text"];
+
 
                                 $success = true;
                                 break;
@@ -205,6 +293,44 @@
                 $NamedEntityObject->Value = $data["text"];
             }
 
+            if(isset($data["alt_type"]))
+            {
+                $NamedEntityObject->AltValue = $data["alt_type"];
+            }
+
+            if(isset($data["alt_value"]))
+            {
+                if(isset($data["alt_type"]))
+                {
+                    switch($data["alt_type"])
+                    {
+                        case NamedEntityAlternativeValueTypes::Time:
+                            $NamedEntityObject->AltValue = TimeType::fromArray($data["alt_value"]);
+                            break;
+
+                        case NamedEntityAlternativeValueTypes::Date:
+                            $NamedEntityObject->AltValue = DateType::fromArray($data["alt_value"]);
+                            break;
+
+                        case NamedEntityAlternativeValueTypes::DateTime:
+                            $NamedEntityObject->AltValue = DateTimeType::fromArray($data["alt_value"]);
+                            break;
+
+                        case NamedEntityAlternativeValueTypes::Duration:
+                            $NamedEntityObject->AltValue = Duration::fromArray($data["alt_value"]);
+                            break;
+
+                        default:
+                            $NamedEntityObject->AltValueType = NamedEntityAlternativeValueTypes::None;
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                $NamedEntityObject->AltValueType = NamedEntityAlternativeValueTypes::None;
+            }
+
             // Properly identify the entity type
             if(is_numeric($NamedEntityObject->Value))
             {
@@ -224,6 +350,44 @@
                 $NamedEntityObject->Value = (string)$NamedEntityObject->Value;
             }
 
+            // Sanity check
+            if($NamedEntityObject->AltValue !== null)
+            {
+                $NamedEntityObject->AltValueType = $NamedEntityObject->AltValue->ObjectType;
+            }
+
             return $NamedEntityObject;
+        }
+
+        /**
+         * @return array
+         */
+        public function toArray(): array
+        {
+            $alt_value = null;
+            $alt_value_type = null;
+
+            if($this->AltValue !== null)
+                try
+                {
+                    $alt_value = $this->AltValue->toArray();
+                }
+                catch (InvalidDateException | InvalidTimeException $e)
+                {
+                    // Failsafe!
+                    $alt_value = null;
+                    $alt_value_type = NamedEntityAlternativeValueTypes::None;
+                }
+
+            return [
+                "text" => $this->Text,
+                "type" => $this->Type,
+                "confidence" => $this->Confidence,
+                "offset_begin" => $this->CharacterOffsetBegin,
+                "offset_end" => $this->CharacterOffsetEnd,
+                "value" => $this->Value,
+                "alt_type" => $alt_value_type,
+                "alt_value" => $alt_value
+            ];
         }
     }

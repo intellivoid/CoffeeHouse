@@ -10,58 +10,58 @@
      */
     abstract class NamedEntity
     {
-        const Person = "person";
+        const Person = "PERSON";
 
-        const Location = "location";
+        const Location = "LOCATION";
 
-        const Organization = "organization";
+        const Organization = "ORGANIZATION";
 
-        const Miscellaneous = "misc";
-
-
-        const Money = "money";
-
-        const Number = "number";
-
-        const Ordinal = "ordinal";
-
-        const Percent = "percent";
+        const Miscellaneous = "MISC";
 
 
-        const Date = "date";
+        const Money = "MONEY";
 
-        const Time = "time";
+        const Number = "NUMBER";
 
-        const CurrentTime = "current_time";
+        const Ordinal = "ORDINAL";
 
-        const Duration = "duration";
-
-        const Set = "set";
+        const Percent = "PERCENT";
 
 
-        const Email = "email";
+        const Date = "DATE";
 
-        const Url = "url";
+        const Time = "TIME";
 
-        const City = "city";
+        const CurrentTime = "CURRENT_TIME";
 
-        const StateOrProvince = "state_or_province";
+        const Duration = "DURATION";
 
-        const Country = "country";
+        const Set = "SET";
 
-        const Nationality = "nationality";
 
-        const Religion = "religion";
+        const Email = "EMAIL";
 
-        const JobTitle = "job_title";
+        const Url = "URL";
 
-        const Ideology = "ideology";
+        const City = "CITY";
 
-        const CauseOfDeath = "cause_of_death";
+        const StateOrProvince = "STATE_OR_PROVINCE";
 
-        const CriminalCharge = "criminal_charge";
+        const Country = "COUNTRY";
 
-        const UsernameHandle = "username_handle";
+        const Nationality = "NATIONALITY";
 
-        const Unknown = "unknown";
+        const Religion = "RELIGION";
+
+        const JobTitle = "JOB_TITLE";
+
+        const Ideology = "IDEOLOGY";
+
+        const CauseOfDeath = "CAUSE_OF_DEATH";
+
+        const CriminalCharge = "CRIMINAL_CHARGE";
+
+        const UsernameHandle = "USERNAME_HANDLE";
+
+        const Unknown = "UNKNOWN";
     }
