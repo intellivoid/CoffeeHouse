@@ -70,7 +70,7 @@
         /**
          * @var mixed
          */
-        private $ServerConfiguration;
+        private $UtilsConfiguration;
 
         /**
          * @var ServerInterface
@@ -131,7 +131,7 @@
         {
             $this->acm = new acm(__DIR__, 'CoffeeHouse');
             $this->DatabaseConfiguration = $this->acm->getConfiguration('Database');
-            $this->ServerConfiguration = $this->acm->getConfiguration('CoffeeHouseServer');
+            $this->UtilsConfiguration = $this->acm->getConfiguration('CoffeeHouseUtils');
             $this->database = null;
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
@@ -209,9 +209,9 @@
         /**
          * @return mixed
          */
-        public function getServerConfiguration()
+        public function getUtilsConfiguration()
         {
-            return $this->ServerConfiguration;
+            return $this->UtilsConfiguration;
         }
 
         /**

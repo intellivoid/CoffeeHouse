@@ -134,37 +134,37 @@
         public function resolveInterfaceConnection(string $module): ServerInterfaceConnection
         {
             $ServerInterfaceConnection = new ServerInterfaceConnection();
-            $ServerInterfaceConnection->Host = $this->coffeehouse->getServerConfiguration()["Host"];
+            $ServerInterfaceConnection->Host = $this->coffeehouse->getUtilsConfiguration()["Host"];
             $ServerInterfaceConnection->Module = $module;
 
             switch($module)
             {
                 case ServerInterfaceModule::PingService:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["PingPort"];
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["PingPort"];
                     break;
 
                 case ServerInterfaceModule::SpamPrediction:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["SpamPredictionPort"];
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["SpamPredictionPort"];
                     break;
 
                 case ServerInterfaceModule::NsfwPrediction:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["NsfwPredictionPort"];
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["NsfwPredictionPort"];
                     break;
 
                 case ServerInterfaceModule::TranslateService:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["TranslatePort"];
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["TranslatePort"];
                     break;
 
                 case ServerInterfaceModule::CoreNLP:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["CoreNlpPort"];
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["CoreNlpPort"];
                     break;
 
                 case ServerInterfaceModule::EmotionPrediction:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["EmotionsPort"];
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["EmotionsPort"];
                     break;
 
                 case ServerInterfaceModule::LanguagePrediction:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["LanguageDetectionPort"];
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["LanguageDetectionPort"];
                     break;
 
                 default:

@@ -30,6 +30,6 @@
     $ServerSchema->setDefinition('CoreNlpPort', '5604');
     $ServerSchema->setDefinition('EmotionsPort', '5605');
     $ServerSchema->setDefinition('LanguageDetectionPort', '5606');
-    $acm->defineSchema('CoffeeHouseServer', $ServerSchema);
+    $acm->defineSchema('CoffeeHouseUtils', $ServerSchema);
 
     $acm->processCommandLine();
