@@ -6,6 +6,7 @@
 
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\InvalidInputException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
@@ -47,10 +48,11 @@
          * @param bool $cache
          * @return LanguagePredictionResults
          * @throws DatabaseException
-         * @throws InvalidServerInterfaceModuleException
-         * @throws ServerInterfaceException
          * @throws InvalidInputException
+         * @throws InvalidServerInterfaceModuleException
          * @throws MalformedDataException
+         * @throws ServerInterfaceException
+         * @throws CoffeeHouseUtilsNotReadyException
          */
         public function predict(string $input, $dltc=true, $cld=true, $ld=true, bool $cache=true): LanguagePredictionResults
         {
