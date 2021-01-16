@@ -14,7 +14,7 @@
     $acm = new acm(__DIR__, 'CoffeeHouse');
 
     $DatabaseSchema = new Schema();
-    $DatabaseSchema->setDefinition('Host', 'localhost');
+    $DatabaseSchema->setDefinition('Host', '127.0.0.1');
     $DatabaseSchema->setDefinition('Port', '3306');
     $DatabaseSchema->setDefinition('Username', 'admin');
     $DatabaseSchema->setDefinition('Password', 'admin');
@@ -22,10 +22,14 @@
     $acm->defineSchema('Database', $DatabaseSchema);
 
     $ServerSchema = new Schema();
-    $ServerSchema->setDefinition('Host', '192.168.0.107');
+    $ServerSchema->setDefinition('Host', '127.0.0.1');
+    $ServerSchema->setDefinition('PingPort', '5600');
     $ServerSchema->setDefinition('SpamPredictionPort', '5601');
-    $ServerSchema->setDefinition('LanguagePredictionPort', '5602');
+    $ServerSchema->setDefinition('NsfwPredictionPort', '5602');
+    $ServerSchema->setDefinition('TranslatePort', '5603');
     $ServerSchema->setDefinition('CoreNlpPort', '5604');
+    $ServerSchema->setDefinition('EmotionsPort', '5605');
+    $ServerSchema->setDefinition('LanguageDetectionPort', '5606');
     $acm->defineSchema('CoffeeHouseServer', $ServerSchema);
 
     $acm->processCommandLine();

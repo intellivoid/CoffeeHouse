@@ -49,75 +49,7 @@
     "components": [
         {
             "required": true,
-            "file": "Abstracts/CoreNLP/DurationDateTypes.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/DurationTimeTypes.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/DurationType.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/NamedEntity.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/NamedEntityAlternativeValueTypes.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/PartOfSpeechTag.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/Sentiment.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/TimexDateDuration.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/TimexDurationType.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/CoreNLP/TimexTimeDuration.php"
-        },
-        {
-            "required": true,
             "file": "Abstracts/ExceptionCodes.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/ForeignSessionSearchMethod.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/GeneralizedClassificationSearchMethod.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/LargeGeneralizedClassificationSearchMethod.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/ServerInterfaceModule.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/TranslateProcessingEngine.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/TranslationCacheSearchMethod.php"
-        },
-        {
-            "required": true,
-            "file": "Abstracts/UserSubscriptionSearchMethod.php"
         },
         {
             "required": true,
@@ -125,27 +57,79 @@
         },
         {
             "required": true,
-            "file": "AutoConfig.php"
+            "file": "Abstracts/UserSubscriptionSearchMethod.php"
         },
         {
             "required": true,
-            "file": "Bots/Cleverbot.php"
+            "file": "Abstracts/TranslationCacheSearchMethod.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/ForeignSessionSearchMethod.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/LargeGeneralizedClassificationSearchMethod.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/GeneralizedClassificationSearchMethod.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/ServerInterfaceModule.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/DurationDateTypes.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/NamedEntityAlternativeValueTypes.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/DurationTimeTypes.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/PartOfSpeechTag.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/TimexTimeDuration.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/Sentiment.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/TimexDurationType.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/NamedEntity.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/TimexDateDuration.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/CoreNLP/DurationType.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/TranslateProcessingEngine.php"
+        },
+        {
+            "required": true,
+            "file": "CoffeeHouse.php"
         },
         {
             "required": true,
             "file": "Classes/CoreNLP.php"
-        },
-        {
-            "required": true,
-            "file": "Classes/Hashing.php"
-        },
-        {
-            "required": true,
-            "file": "Classes/ServerInterface.php"
-        },
-        {
-            "required": true,
-            "file": "Classes/StringDistance.php"
         },
         {
             "required": true,
@@ -157,167 +141,19 @@
         },
         {
             "required": true,
+            "file": "Classes/ServerInterface.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/Hashing.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/StringDistance.php"
+        },
+        {
+            "required": true,
             "file": "Classes/Validation.php"
-        },
-        {
-            "required": true,
-            "file": "CoffeeHouse.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/BotSessionException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/CannotDetermineDurationTypeException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/DatabaseException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/EngineNotImplementedException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/ForeignSessionNotFoundException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/GeneralizedClassificationLimitException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/GeneralizedClassificationNotFoundException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidDateException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidInputException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidLanguageException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidMessageException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidSearchMethodException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidServerInterfaceModuleException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidTextInputException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidTimeException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidTimexDateDurationException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidTimexDurationTypeException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidTimexFormatException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/InvalidTimexTimeDurationException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/LanguagePredictionCacheNotFoundException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/MalformedDataException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/NoResultsFoundException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/ProbabilitySearchNoResultsFoundException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/ServerInterfaceException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/SpamPredictionCacheNotFoundException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/TimexDurationParseException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/TranslationCacheNotFoundException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/TranslationException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/UnsupportedLanguageException.php"
-        },
-        {
-            "required": true,
-            "file": "Exceptions/UserSubscriptionNotFoundException.php"
-        },
-        {
-            "required": true,
-            "file": "Managers/ChatDialogsManager.php"
-        },
-        {
-            "required": true,
-            "file": "Managers/ForeignSessionsManager.php"
-        },
-        {
-            "required": true,
-            "file": "Managers/GeneralizedClassificationManager.php"
-        },
-        {
-            "required": true,
-            "file": "Managers/LanguagePredictionCacheManager.php"
-        },
-        {
-            "required": true,
-            "file": "Managers/LargeGeneralizedClassificationManager.php"
-        },
-        {
-            "required": true,
-            "file": "Managers/SpamPredictionCacheManager.php"
-        },
-        {
-            "required": true,
-            "file": "Managers/TranslationCacheManager.php"
-        },
-        {
-            "required": true,
-            "file": "Managers/UserSubscriptionManager.php"
-        },
-        {
-            "required": true,
-            "file": "NaturalLanguageProcessing/LanguagePrediction.php"
         },
         {
             "required": true,
@@ -325,11 +161,147 @@
         },
         {
             "required": true,
-            "file": "Objects/BotThought.php"
+            "file": "NaturalLanguageProcessing/LanguagePrediction.php"
         },
         {
             "required": true,
-            "file": "Objects/Cache/LanguagePredictionCache.php"
+            "file": "Exceptions/ProbabilitySearchNoResultsFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/GeneralizedClassificationNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimexDurationTypeException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/DatabaseException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/NoResultsFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/MalformedDataException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/CannotDetermineDurationTypeException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/LanguagePredictionCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/UserSubscriptionNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/ForeignSessionNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/UnsupportedLanguageException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/GeneralizedClassificationLimitException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/TranslationCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/ServerInterfaceException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/TimexDurationParseException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/CoffeeHouseUtilsNotReadyException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimexDateDurationException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidInputException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimexFormatException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTextInputException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/TranslationException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidLanguageException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidDateException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimeException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidServerInterfaceModuleException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/EngineNotImplementedException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidSearchMethodException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidTimexTimeDurationException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidMessageException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/BotSessionException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/SpamPredictionCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Bots/Cleverbot.php"
+        },
+        {
+            "required": true,
+            "file": "AutoConfig.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/LargeGeneralization.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ServerInterfaceConnection.php"
         },
         {
             "required": true,
@@ -341,31 +313,23 @@
         },
         {
             "required": true,
-            "file": "Objects/Datums/LargeGeneralizationDatum.php"
+            "file": "Objects/Cache/LanguagePredictionCache.php"
         },
         {
             "required": true,
-            "file": "Objects/ForeignSession.php"
+            "file": "Objects/ProcessedNLP/Types/Duration.php"
         },
         {
             "required": true,
-            "file": "Objects/GeneralizedClassification.php"
+            "file": "Objects/ProcessedNLP/Types/DateTimeType.php"
         },
         {
             "required": true,
-            "file": "Objects/HttpResponse.php"
+            "file": "Objects/ProcessedNLP/Types/TimeType.php"
         },
         {
             "required": true,
-            "file": "Objects/LargeGeneralization.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/ProcessedNLP/NamedEntity.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/ProcessedNLP/PosTag.php"
+            "file": "Objects/ProcessedNLP/Types/DateType.php"
         },
         {
             "required": true,
@@ -377,91 +341,23 @@
         },
         {
             "required": true,
+            "file": "Objects/ProcessedNLP/NamedEntity.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ProcessedNLP/PosTag.php"
+        },
+        {
+            "required": true,
             "file": "Objects/ProcessedNLP/Token.php"
         },
         {
             "required": true,
-            "file": "Objects/ProcessedNLP/Types/DateTimeType.php"
+            "file": "Objects/Datums/LargeGeneralizationDatum.php"
         },
         {
             "required": true,
-            "file": "Objects/ProcessedNLP/Types/DateType.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/ProcessedNLP/Types/Duration.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/ProcessedNLP/Types/TimeType.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/CoreNLP/NamedEntitiesResults/NamedEntitySentence.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/CoreNLP/NamedEntitiesResults.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/CoreNLP/PartOfSpeechResults/PartOfSpeechSentence.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/CoreNLP/PartOfSpeechResults.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/CoreNLP/SentenceSplitResults/Sentence.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/CoreNLP/SentenceSplitResults.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/CoreNLP/SentimentResults/SentimentSentence.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/CoreNLP/SentimentResults.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/LanguagePrediction.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/LanguagePredictionResults.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/LanguagePredictions.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/LargeClassificationResults/Probabilities.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/ProcessedNLP.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/SpamPredictionResults.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Results/TranslationResults.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/ServerInterfaceConnection.php"
-        },
-        {
-            "required": true,
-            "file": "Objects/Timex/Range.php"
+            "file": "Objects/UserSubscription.php"
         },
         {
             "required": true,
@@ -469,12 +365,120 @@
         },
         {
             "required": true,
-            "file": "Objects/UserSubscription.php"
+            "file": "Objects/Timex/Range.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/BotThought.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/GeneralizedClassification.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LanguagePredictionResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/ProcessedNLP.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LanguagePredictions.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/TranslationResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/SentenceSplitResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/NamedEntitiesResults/NamedEntitySentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/PartOfSpeechResults/PartOfSpeechSentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/SentimentResults/SentimentSentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/NamedEntitiesResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/SentenceSplitResults/Sentence.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/SentimentResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/CoreNLP/PartOfSpeechResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LanguagePrediction.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/SpamPredictionResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LargeClassificationResults/Probabilities.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/HttpResponse.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/ForeignSession.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/LargeGeneralizedClassificationManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/SpamPredictionCacheManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/GeneralizedClassificationManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/TranslationCacheManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/UserSubscriptionManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/ForeignSessionsManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/ChatDialogsManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/LanguagePredictionCacheManager.php"
         }
     ],
     "files": [
         "coffee_house.json",
-        "configuration.ini",
-        "package.json"
+        "package.json",
+        "configuration.ini"
     ]
 }

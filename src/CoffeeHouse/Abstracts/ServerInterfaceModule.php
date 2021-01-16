@@ -5,7 +5,7 @@
 
 
     /**
-     * The supported modules that runs on CoffeeHouse-Server
+     * The supported modules that runs on CoffeeHouse-Utils
      *
      * Class ServerInterfaceModule
      * @package CoffeeHouse\Abstracts
@@ -13,17 +13,37 @@
     abstract class ServerInterfaceModule
     {
         /**
-         * Spam Detection Module of CoffeeHouse-Server
+         * Ping Service Module of CoffeeHouse-Utils
+         */
+        const PingService = "PING_SERVICE";
+
+        /**
+         * Spam Detection Module of CoffeeHouse-Utils
          */
         const SpamPrediction = "SPAM_PREDICTION";
 
         /**
-         * Language Prediction Module of the CoffeeHouse-Server
+         * NSFW Image Prediction Module of the CoffeeHouse-Utils
          */
-        const LanguagePrediction = "LANGUAGE_PREDICTION";
+        const NsfwPrediction = "NSFW_CLASSIFIER";
+
+        /**
+         * Translation Service Module of the CoffeeHouse-Utils
+         */
+        const TranslateService = "TRANSLATE_SERVICE";
 
         /**
          * CoreNLP
          */
         const CoreNLP = "CORE_NLP";
+
+        /**
+         * Emotion Prediction Module of the CoffeeHouse-Utils
+         */
+        const EmotionPrediction = "EMOTION_PREDICTION";
+
+        /**
+         * Language Prediction Module of the CoffeeHouse-Utils
+         */
+        const LanguagePrediction = "LANGUAGE_PREDICTION";
     }

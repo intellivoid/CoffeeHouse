@@ -6,6 +6,7 @@
 
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Objects\ServerInterfaceConnection;
@@ -34,13 +35,27 @@
          * @param string|ServerInterfaceModule $module
          * @param string $path
          * @param array $parameters
+         * @param bool $ping
          * @return string
+         * @throws CoffeeHouseUtilsNotReadyException
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
          * @noinspection DuplicatedCode
          */
-        public function sendRequest(string $module, string $path, array $parameters): string
+        public function sendRequest(string $module, string $path, array $parameters, bool $ping=true): string
         {
+            if($ping)
+            {
+                try
+                {
+                    $this->sendRequest(ServerInterfaceModule::PingService, "/", [], false);
+                }
+                catch(ServerInterfaceException $e)
+                {
+                    throw new CoffeeHouseUtilsNotReadyException("CoffeeHouse-Utils is not running or is not yet ready.");
+                }
+            }
+
             $InterfaceConnection = $this->resolveInterfaceConnection($module);
 
             $CurlClient = curl_init();
@@ -73,12 +88,15 @@
          * @param string $data
          * @param array $parameters
          * @return string
+         * @throws CoffeeHouseUtilsNotReadyException
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
          * @noinspection DuplicatedCode
          */
         public function sendDataRequest(string $module, string $path, string $data, array $parameters): string
         {
+            $this->sendRequest(ServerInterfaceModule::PingService, "/", [], false);
+
             $InterfaceConnection = $this->resolveInterfaceConnection($module);
 
             $CurlClient = curl_init();
@@ -121,16 +139,32 @@
 
             switch($module)
             {
+                case ServerInterfaceModule::PingService:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["PingPort"];
+                    break;
+
                 case ServerInterfaceModule::SpamPrediction:
                     $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["SpamPredictionPort"];
                     break;
 
-                case ServerInterfaceModule::LanguagePrediction:
-                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["LanguagePredictionPort"];
+                case ServerInterfaceModule::NsfwPrediction:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["NsfwPredictionPort"];
+                    break;
+
+                case ServerInterfaceModule::TranslateService:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["TranslatePort"];
                     break;
 
                 case ServerInterfaceModule::CoreNLP:
                     $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["CoreNlpPort"];
+                    break;
+
+                case ServerInterfaceModule::EmotionPrediction:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["EmotionsPort"];
+                    break;
+
+                case ServerInterfaceModule::LanguagePrediction:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getServerConfiguration()["LanguageDetectionPort"];
                     break;
 
                 default:
