@@ -12,9 +12,13 @@
     use CoffeeHouse\Exceptions\InvalidInputException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
+    use CoffeeHouse\Exceptions\MalformedDataException;
+    use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Exceptions\SpamPredictionCacheNotFoundException;
     use CoffeeHouse\Objects\GeneralizedClassification;
+    use CoffeeHouse\Objects\LargeGeneralization;
+    use CoffeeHouse\Objects\Results\LanguagePredictionResults;
     use CoffeeHouse\Objects\Results\SpamPredictionResults;
 
     /**
@@ -47,10 +51,11 @@
          * @return SpamPredictionResults
          * @throws DatabaseException
          * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidInputException
          * @throws InvalidSearchMethodException
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
-         * @throws InvalidInputException
+         * @throws \CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException
          * @noinspection DuplicatedCode
          */
         public function predict(string $input, bool $generalize=false, string $generalized_id="None", bool $cache=true): SpamPredictionResults
@@ -223,5 +228,28 @@
             );
 
             return true;
+        }
+
+        /**
+         * Generalized the Spam Prediction results using large generalization (more efficient)
+         *
+         * @param LargeGeneralization $largeGeneralization
+         * @param SpamPredictionResults $spamPredictionResults
+         * @return LargeGeneralization
+         * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws MalformedDataException
+         * @throws NoResultsFoundException
+         */
+        public function largeGeneralize(LargeGeneralization $largeGeneralization, SpamPredictionResults $spamPredictionResults): LargeGeneralization
+        {
+
+            $largeGeneralization->add("ham", $spamPredictionResults->HamPrediction, false);
+            $largeGeneralization->add("spam", $spamPredictionResults->SpamPrediction, false);
+            $largeGeneralization->sortProbabilities(true);
+
+            $this->coffeeHouse->getLargeGeneralizedClassificationManager()->update($largeGeneralization);
+
+            return $largeGeneralization;
         }
     }
