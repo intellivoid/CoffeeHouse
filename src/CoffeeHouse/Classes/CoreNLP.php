@@ -6,6 +6,7 @@
 
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\EngineNotImplementedException;
     use CoffeeHouse\Exceptions\InvalidInputException;
@@ -53,6 +54,7 @@
          * @return array
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
+         * @throws CoffeeHouseUtilsNotReadyException
          */
         public function invoke(string $input, array $annotators): array
         {
@@ -88,6 +90,7 @@
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
          * @throws UnsupportedLanguageException
+         * @throws CoffeeHouseUtilsNotReadyException
          */
         private function validateInput(string $input, string $source_language=null): string
         {
@@ -127,16 +130,17 @@
          * @return Sentence[]
          * @throws DatabaseException
          * @throws EngineNotImplementedException
+         * @throws InvalidInputException
          * @throws InvalidLanguageException
          * @throws InvalidSearchMethodException
          * @throws InvalidServerInterfaceModuleException
          * @throws InvalidTextInputException
+         * @throws MalformedDataException
          * @throws ServerInterfaceException
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
          * @throws UnsupportedLanguageException
-         * @throws InvalidInputException
-         * @throws MalformedDataException
+         * @throws CoffeeHouseUtilsNotReadyException
          */
         public function processText(string $input, string $source_language="en"): array
         {
@@ -181,6 +185,7 @@
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
          * @throws UnsupportedLanguageException
+         * @throws CoffeeHouseUtilsNotReadyException
          * @noinspection DuplicatedCode
          */
         public function sentenceSplit(string $input): SentenceSplitResults
@@ -214,6 +219,7 @@
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
          * @throws UnsupportedLanguageException
+         * @throws CoffeeHouseUtilsNotReadyException
          */
         public function posTag(string $input, string $source_language="en"): PartOfSpeechResults
         {
@@ -247,6 +253,7 @@
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
          * @throws UnsupportedLanguageException
+         * @throws CoffeeHouseUtilsNotReadyException
          */
         public function ner(string $input, string $source_language="en"): NamedEntitiesResults
         {
@@ -279,6 +286,7 @@
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
          * @throws UnsupportedLanguageException
+         * @throws CoffeeHouseUtilsNotReadyException
          */
         public function sentiment(string $input, string $source_language="en"): SentimentResults
         {

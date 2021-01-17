@@ -47,4 +47,28 @@
             $this->address = $address;
             $this->parameters = $parameters;
         }
+
+        /**
+         * @return string
+         */
+        public function getErrorDetails(): string
+        {
+            return $this->error_details;
+        }
+
+        /**
+         * @return string
+         */
+        public function getAddress(): string
+        {
+            return $this->address;
+        }
+
+        /**
+         * @return array
+         */
+        public function getParameters(): array
+        {
+            return $this->parameters;
+        }
     }

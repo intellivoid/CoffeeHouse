@@ -57,6 +57,10 @@
         },
         {
             "required": true,
+            "file": "Abstracts/ImageType.php"
+        },
+        {
+            "required": true,
             "file": "Abstracts/UserSubscriptionSearchMethod.php"
         },
         {
@@ -142,6 +146,10 @@
         {
             "required": true,
             "file": "Classes/ServerInterface.php"
+        },
+        {
+            "required": true,
+            "file": "Classes/NsfwClassification.php"
         },
         {
             "required": true,
@@ -277,7 +285,15 @@
         },
         {
             "required": true,
+            "file": "Exceptions/UnsupportedImageTypeException.php"
+        },
+        {
+            "required": true,
             "file": "Exceptions/InvalidMessageException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/NsfwClassificationException.php"
         },
         {
             "required": true,
@@ -286,6 +302,10 @@
         {
             "required": true,
             "file": "Exceptions/SpamPredictionCacheNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/PathNotFoundException.php"
         },
         {
             "required": true,
@@ -374,6 +394,10 @@
         {
             "required": true,
             "file": "Objects/GeneralizedClassification.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/NsfwClassificationResults.php"
         },
         {
             "required": true,

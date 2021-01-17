@@ -32,4 +32,9 @@
     $ServerSchema->setDefinition('LanguageDetectionPort', '5606');
     $acm->defineSchema('CoffeeHouseUtils', $ServerSchema);
 
+
+    $ServerSchema = new Schema();
+    $ServerSchema->setDefinition('TemporaryDirectory', '/tmp/coffeehouse');
+    $acm->defineSchema('CoffeeHouse', $ServerSchema);
+
     $acm->processCommandLine();

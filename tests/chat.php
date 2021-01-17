@@ -1,14 +1,16 @@
 <?php
 
     use CoffeeHouse\Bots\Cleverbot;
-    use CoffeeHouse\Exceptions\BotSessionException;
+use CoffeeHouse\CoffeeHouse;
+use CoffeeHouse\Exceptions\BotSessionException;
+use ppm\ppm;
 
-    //$SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+//$SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
     //include_once($SourceDirectory . 'CoffeeHouse' . DIRECTORY_SEPARATOR . 'CoffeeHouse.php');
 
     /** @noinspection PhpIncludeInspection */
     require("ppm");
-    \ppm\ppm::import("net.intellivoid.coffeehouse");
+    ppm::import("net.intellivoid.coffeehouse");
 
     function getInput(): string
     {
@@ -20,7 +22,7 @@
         return $line;
     }
 
-    $CoffeeHouse = new \CoffeeHouse\CoffeeHouse();
+    $CoffeeHouse = new CoffeeHouse();
     $Bot = new Cleverbot($CoffeeHouse);
     $Bot->newSession('en');
 

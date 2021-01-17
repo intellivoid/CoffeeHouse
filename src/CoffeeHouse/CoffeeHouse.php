@@ -7,6 +7,7 @@
 
     use acm\acm;
     use CoffeeHouse\Classes\CoreNLP;
+    use CoffeeHouse\Classes\NsfwClassification;
     use CoffeeHouse\Classes\ServerInterface;
     use CoffeeHouse\Classes\Translator;
     use CoffeeHouse\Managers\ChatDialogsManager;
@@ -22,6 +23,7 @@
     use DeepAnalytics\DeepAnalytics;
     use Exception;
     use mysqli;
+    use RuntimeException;
 
     require_once(__DIR__ . DIRECTORY_SEPARATOR . 'AutoConfig.php');
 
@@ -123,6 +125,16 @@
         private CoreNLP $CoreNLP;
 
         /**
+         * @var mixed
+         */
+        private $Configuration;
+
+        /**
+         * @var NsfwClassification
+         */
+        private NsfwClassification $NsfwClassification;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          * @noinspection PhpUndefinedClassInspection
@@ -132,7 +144,18 @@
             $this->acm = new acm(__DIR__, 'CoffeeHouse');
             $this->DatabaseConfiguration = $this->acm->getConfiguration('Database');
             $this->UtilsConfiguration = $this->acm->getConfiguration('CoffeeHouseUtils');
+            $this->Configuration = $this->acm->getConfiguration('CoffeeHouse');
             $this->database = null;
+
+            if(file_exists($this->Configuration["TemporaryDirectory"]) == false)
+            {
+                mkdir($this->Configuration["TemporaryDirectory"]);
+            }
+
+            if(file_exists($this->Configuration["TemporaryDirectory"]) == false)
+            {
+                throw new RuntimeException("Cannot created tmp directory '" . $this->Configuration["TemporaryDirectory"] . ', check permissions.');
+            }
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
@@ -147,6 +170,7 @@
             $this->LanguagePrediction = new LanguagePrediction($this);
             $this->CoreNLP = new CoreNLP($this);
             $this->Translator = new Translator($this);
+            $this->NsfwClassification = new NsfwClassification($this);
             $this->DeepAnalytics = new DeepAnalytics();
         }
 
@@ -322,6 +346,22 @@
         public function getCoreNLP(): CoreNLP
         {
             return $this->CoreNLP;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getConfiguration()
+        {
+            return $this->Configuration;
+        }
+
+        /**
+         * @return NsfwClassification
+         */
+        public function getNsfwClassification(): NsfwClassification
+        {
+            return $this->NsfwClassification;
         }
 
     }

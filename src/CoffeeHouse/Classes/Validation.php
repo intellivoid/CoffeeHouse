@@ -190,4 +190,26 @@
 
             return true;
         }
+
+        /**
+         * Determines if the image is a JPEG
+         *
+         * @param $data
+         * @return bool
+         */
+        public static function isJpeg(&$data): bool
+        {
+            return (bin2hex($data[0]) == 'ff' && bin2hex($data[1]) == 'd8');
+        }
+
+        /**
+         * Determines if the image is a PNG
+         *
+         * @param $data
+         * @return bool
+         */
+        public static function isPng(&$data): bool
+        {
+            return (bin2hex($data[0]) == '89' && $data[1] == 'P' && $data[2] == 'N' && $data[3] == 'G');
+        }
     }

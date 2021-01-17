@@ -4,15 +4,20 @@
     //include_once($SourceDirectory . 'CoffeeHouse' . DIRECTORY_SEPARATOR . 'CoffeeHouse.php');
 
     /** @noinspection PhpIncludeInspection */
-    require("ppm");
-    \ppm\ppm::import("net.intellivoid.coffeehouse");
 
-    $CoffeeHouse = new \CoffeeHouse\CoffeeHouse();
+use CoffeeHouse\Abstracts\ServerInterfaceModule;
+use CoffeeHouse\CoffeeHouse;
+use ppm\ppm;
+
+require("ppm");
+    ppm::import("net.intellivoid.coffeehouse");
+
+    $CoffeeHouse = new CoffeeHouse();
 
     try
     {
         $Results = $CoffeeHouse->getServerInterface()->sendRequest(
-            \CoffeeHouse\Abstracts\ServerInterfaceModule::SpamPrediction, "/",
+            ServerInterfaceModule::SpamPrediction, "/",
             array(
                 "input" => "Hello There!"
             )

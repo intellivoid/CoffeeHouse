@@ -1,8 +1,12 @@
 <?php
-    require("ppm");
+
+use CoffeeHouse\CoffeeHouse;
+use CoffeeHouse\Exceptions\ServerInterfaceException;
+
+require("ppm");
     ppm_import("net.intellivoid.coffeehouse");
 
-    $CoffeeHouse = new \CoffeeHouse\CoffeeHouse();
+    $CoffeeHouse = new CoffeeHouse();
 
     try
     {
@@ -11,7 +15,7 @@
             ["ssplit"]
         ));
     }
-    catch(\CoffeeHouse\Exceptions\ServerInterfaceException $e)
+    catch(ServerInterfaceException $e)
     {
         var_dump($e);
     }

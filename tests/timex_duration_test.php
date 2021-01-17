@@ -1,6 +1,8 @@
 <?php
 
-    require("ppm"); // Import the compiler!
+use CoffeeHouse\Objects\ProcessedNLP\Types\Duration;
+
+require("ppm"); // Import the compiler!
     ppm_import("net.intellivoid.coffeehouse"); // Import the library!
 
 
@@ -18,6 +20,6 @@
     foreach($data as $key => $value)
     {
         print("Testing $key ($value)" . PHP_EOL);
-        var_dump(\CoffeeHouse\Objects\ProcessedNLP\Types\Duration::fromSyntax($key));
+        var_dump(Duration::fromSyntax($key));
         print(PHP_EOL);
     }
