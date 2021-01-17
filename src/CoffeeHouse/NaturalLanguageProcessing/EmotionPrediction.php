@@ -4,16 +4,24 @@
     namespace CoffeeHouse\NaturalLanguageProcessing;
 
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
+    use CoffeeHouse\Classes\Utilities;
+    use CoffeeHouse\Classes\Validation;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException;
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\EmotionPredictionCacheNotFoundException;
+    use CoffeeHouse\Exceptions\EngineNotImplementedException;
     use CoffeeHouse\Exceptions\InvalidInputException;
+    use CoffeeHouse\Exceptions\InvalidLanguageException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
+    use CoffeeHouse\Exceptions\InvalidTextInputException;
     use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
+    use CoffeeHouse\Exceptions\TranslationCacheNotFoundException;
+    use CoffeeHouse\Exceptions\TranslationException;
+    use CoffeeHouse\Exceptions\UnsupportedLanguageException;
     use CoffeeHouse\Objects\LargeGeneralization;
     use CoffeeHouse\Objects\Results\EmotionPredictionResults;
 
@@ -41,23 +49,54 @@
          * Predicts the language of a given input
          *
          * @param string $input
+         * @param string $source_language
          * @param bool $cache
          * @return EmotionPredictionResults
          * @throws CoffeeHouseUtilsNotReadyException
          * @throws DatabaseException
          * @throws InvalidInputException
+         * @throws InvalidSearchMethodException
          * @throws InvalidServerInterfaceModuleException
+         * @throws MalformedDataException
          * @throws ServerInterfaceException
+         * @throws UnsupportedLanguageException
+         * @throws EngineNotImplementedException
+         * @throws InvalidLanguageException
+         * @throws InvalidTextInputException
+         * @throws TranslationCacheNotFoundException
+         * @throws TranslationException
+         * @noinspection DuplicatedCode
          */
-        public function predict(string $input, bool $cache=True): EmotionPredictionResults
+        public function predict(string $input, $source_language="en", bool $cache=True): EmotionPredictionResults
         {
             if(strlen($input) == 0)
             {
                 throw new InvalidInputException();
             }
+            
+            if($source_language !== null)
+            {
+                $source_language = strtolower($source_language);
+
+                if($source_language !== "en")
+                {
+                    if($source_language == "auto")
+                    {
+                        $source_language = $this->coffeeHouse->getLanguagePrediction()->predict($input)->combineResults()[0]->Language;
+                    }
+
+                    $source_language = Utilities::convertToISO6391($source_language);
+
+                    if(Validation::googleTranslateSupported($source_language) == false)
+                    {
+                        throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
+                    }
+
+                    $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                }
+            }
 
             $EmotionPredictionCache = null;
-
 
             if($cache)
             {
