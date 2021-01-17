@@ -28,7 +28,7 @@
         public Sentiment $Sentiment;
 
         /**
-         * The array of sentences with their sentimental analaysis
+         * The array of sentences with their sentimental analysis
          *
          * @var SentimentSentence[]|null
          */

@@ -477,6 +477,10 @@
         },
         {
             "required": true,
+            "file": "Objects/Results/EmotionPredictionSentencesResults/EmotionPredictionSentence.php"
+        },
+        {
+            "required": true,
             "file": "Objects/Results/SpamPredictionResults.php"
         },
         {
@@ -486,6 +490,10 @@
         {
             "required": true,
             "file": "Objects/Results/EmotionPredictionResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/EmotionPredictionSentencesResults.php"
         },
         {
             "required": true,

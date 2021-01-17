@@ -110,12 +110,15 @@
 
                     $source_language = Utilities::convertToISO6391($source_language);
 
-                    if(Validation::googleTranslateSupported($source_language) == false)
+                    if($source_language !== "en")
                     {
-                        throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
-                    }
+                        if(Validation::googleTranslateSupported($source_language) == false)
+                        {
+                            throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
+                        }
 
-                    $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                        $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                    }
                 }
             }
 

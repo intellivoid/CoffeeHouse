@@ -24,6 +24,7 @@
     use CoffeeHouse\Exceptions\UnsupportedLanguageException;
     use CoffeeHouse\Objects\LargeGeneralization;
     use CoffeeHouse\Objects\Results\EmotionPredictionResults;
+    use CoffeeHouse\Objects\Results\EmotionPredictionSentencesResults;
 
     /**
      * Class EmotionPrediction
@@ -73,7 +74,7 @@
             {
                 throw new InvalidInputException();
             }
-            
+
             if($source_language !== null)
             {
                 $source_language = strtolower($source_language);
@@ -87,12 +88,15 @@
 
                     $source_language = Utilities::convertToISO6391($source_language);
 
-                    if(Validation::googleTranslateSupported($source_language) == false)
+                    if($source_language !== "en")
                     {
-                        throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
-                    }
+                        if(Validation::googleTranslateSupported($source_language) == false)
+                        {
+                            throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
+                        }
 
-                    $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                        $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                    }
                 }
             }
 
@@ -146,6 +150,77 @@
             }
 
             return $PredictionResults;
+        }
+
+        /**
+         * Predicts emotional data from sentences
+         *
+         * @param string $input
+         * @param string $source_language
+         * @param bool $cache
+         * @return EmotionPredictionSentencesResults
+         * @throws CoffeeHouseUtilsNotReadyException
+         * @throws DatabaseException
+         * @throws EngineNotImplementedException
+         * @throws InvalidInputException
+         * @throws InvalidLanguageException
+         * @throws InvalidSearchMethodException
+         * @throws InvalidServerInterfaceModuleException
+         * @throws InvalidTextInputException
+         * @throws MalformedDataException
+         * @throws ServerInterfaceException
+         * @throws TranslationCacheNotFoundException
+         * @throws TranslationException
+         * @throws UnsupportedLanguageException
+         */
+        public function predictSentences(string $input, $source_language="en", bool $cache=True): EmotionPredictionSentencesResults
+        {
+            if(strlen($input) == 0)
+            {
+                throw new InvalidInputException();
+            }
+
+            if($source_language !== null)
+            {
+                $source_language = strtolower($source_language);
+
+                if($source_language !== "en")
+                {
+                    if($source_language == "auto")
+                    {
+                        $source_language = $this->coffeeHouse->getLanguagePrediction()->predict($input)->combineResults()[0]->Language;
+                    }
+
+                    $source_language = Utilities::convertToISO6391($source_language);
+
+                    if(Validation::googleTranslateSupported($source_language) == false)
+                    {
+                        throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
+                    }
+
+                    $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                }
+            }
+
+            $Sentences = $this->coffeeHouse->getCoreNLP()->sentenceSplit($input);
+            $EmotionPredictionSentencesResultsObject = new EmotionPredictionSentencesResults();
+            $EmotionPredictionSentencesResultsObject->Text = $input;
+            $EmotionPredictionSentencesResultsObject->EmotionPredictionSentences = [];
+
+            foreach($Sentences->Sentences as $sentence)
+            {
+                $EmotionSentenceObject = new EmotionPredictionSentencesResults\EmotionPredictionSentence();
+                $EmotionSentenceObject->Text = $sentence->Text;
+                $EmotionSentenceObject->OffsetBegin = $sentence->OffsetBegin;
+                $EmotionSentenceObject->OffsetEnd = $sentence->OffsetEnd;
+                $EmotionSentenceObject->EmotionPredictionResults = $this->predict($sentence->Text, $source_language, $cache);
+
+                $EmotionPredictionSentencesResultsObject->EmotionPredictionSentences[] = $EmotionSentenceObject;
+            }
+
+            $EmotionPredictionSentencesResultsObject->calculateCombinedSentiment();
+
+            return $EmotionPredictionSentencesResultsObject;
         }
 
         /**
