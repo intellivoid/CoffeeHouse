@@ -309,6 +309,10 @@
         },
         {
             "required": true,
+            "file": "Exceptions/NsfwClassificationCacheNotFoundException.php"
+        },
+        {
+            "required": true,
             "file": "Exceptions/BotSessionException.php"
         },
         {
@@ -338,6 +342,10 @@
         {
             "required": true,
             "file": "Objects/Cache/EmotionPredictionCache.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Cache/NsfwClassificationCache.php"
         },
         {
             "required": true,
@@ -510,6 +518,10 @@
         {
             "required": true,
             "file": "Managers/ForeignSessionsManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/NsfwClassificationCacheManager.php"
         },
         {
             "required": true,

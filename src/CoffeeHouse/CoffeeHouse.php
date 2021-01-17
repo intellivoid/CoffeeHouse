@@ -16,6 +16,7 @@
     use CoffeeHouse\Managers\GeneralizedClassificationManager;
     use CoffeeHouse\Managers\LanguagePredictionCacheManager;
     use CoffeeHouse\Managers\LargeGeneralizedClassificationManager;
+    use CoffeeHouse\Managers\NsfwClassificationCacheManager;
     use CoffeeHouse\Managers\SpamPredictionCacheManager;
     use CoffeeHouse\Managers\TranslationCacheManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
@@ -146,6 +147,10 @@
          */
         private EmotionPrediction $EmotionPrediction;
 
+        /**
+         * @var NsfwClassificationCacheManager
+         */
+        private NsfwClassificationCacheManager $NsfwClassificationCacheManager;
 
         /**
          * CoffeeHouse constructor.
@@ -177,6 +182,7 @@
             $this->LanguagePredictionCacheManager = new LanguagePredictionCacheManager($this);
             $this->TranslationCacheManager = new TranslationCacheManager($this);
             $this->EmotionPredictionCacheManager = new EmotionPredictionCacheManager($this);
+            $this->NsfwClassificationCacheManager = new NsfwClassificationCacheManager($this);
             $this->GeneralizedClassificationManager = new GeneralizedClassificationManager($this);
             $this->LargeGeneralizedClassificationManager = new LargeGeneralizedClassificationManager($this);
             $this->ServerInterface = new ServerInterface($this);
@@ -393,6 +399,14 @@
         public function getEmotionPrediction(): EmotionPrediction
         {
             return $this->EmotionPrediction;
+        }
+
+        /**
+         * @return NsfwClassificationCacheManager
+         */
+        public function getNsfwClassificationCacheManager(): NsfwClassificationCacheManager
+        {
+            return $this->NsfwClassificationCacheManager;
         }
 
 

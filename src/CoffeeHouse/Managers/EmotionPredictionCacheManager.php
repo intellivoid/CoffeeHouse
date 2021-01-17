@@ -41,7 +41,7 @@
          */
         public function registerCache(string $input, EmotionPredictionResults $predictionResults): bool
         {
-            $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input("EM" . $input));
+            $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input($input));
             $predictions = $this->coffeeHouse->getDatabase()->real_escape_string(ZiProto::encode($predictionResults->valuesToArray()));
             $top_prediction = (float)$predictionResults->TopValue;
             $top_emotion = $this->coffeeHouse->getDatabase()->real_escape_string($predictionResults->TopEmotion);
@@ -79,7 +79,7 @@
          */
         public function getCache(string $input): EmotionPredictionCache
         {
-            $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input("EM" . $input));
+            $hash = $this->coffeeHouse->getDatabase()->real_escape_string(Hashing::input($input));
 
             $Query = QueryBuilder::select("emotion_prediction_cache", [
                 "id",
@@ -128,7 +128,7 @@
             $top_emotion = $this->coffeeHouse->getDatabase()->real_escape_string($emotionPredictionResults->TopEmotion);
             $last_updated_timestamp = (int)time();
 
-            $Query = QueryBuilder::update('spam_prediction_cache', array(
+            $Query = QueryBuilder::update('emotion_prediction_cache', array(
                 "predictions" => $predictions,
                 "top_prediction" => $top_prediction,
                 "top_emotion" => $top_emotion,

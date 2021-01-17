@@ -7,7 +7,9 @@
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException;
+    use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
+    use CoffeeHouse\Exceptions\NsfwClassificationCacheNotFoundException;
     use CoffeeHouse\Exceptions\NsfwClassificationException;
     use CoffeeHouse\Exceptions\PathNotFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
@@ -38,13 +40,15 @@
          * Classifies an image data, only supported png & jpeg
          *
          * @param string $data
+         * @param bool $cache
          * @return NsfwClassificationResults
+         * @throws CoffeeHouseUtilsNotReadyException
+         * @throws DatabaseException
+         * @throws InvalidServerInterfaceModuleException
          * @throws NsfwClassificationException
          * @throws UnsupportedImageTypeException
-         * @throws CoffeeHouseUtilsNotReadyException
-         * @throws InvalidServerInterfaceModuleException
          */
-        public function classifyImage(string &$data): NsfwClassificationResults
+        public function classifyImage(string &$data, bool $cache=True): NsfwClassificationResults
         {
             $ReturnResults = new NsfwClassificationResults();
 
@@ -62,6 +66,24 @@
             }
 
             $ReturnResults->ContentHash = hash("sha256", $data);
+            $CacheResults = null;
+
+            if($cache)
+            {
+                try
+                {
+                    $CacheResults = $this->coffeeHouse->getNsfwClassificationCacheManager()->getCache($ReturnResults->ContentHash);
+
+                    if(time() - $CacheResults->LastUpdated < 172800)
+                    {
+                        return $CacheResults->toResults();
+                    }
+                }
+                catch (NsfwClassificationCacheNotFoundException $e)
+                {
+                    unset($e);
+                }
+            }
 
             try
             {
@@ -82,6 +104,18 @@
             $ReturnResults->UnsafePrediction = (float)$DecodedResults["results"]["unsafe"];
             $ReturnResults->IsNSFW = $ReturnResults->UnsafePrediction > $ReturnResults->SafePrediction;
 
+            if($cache)
+            {
+                if($CacheResults !== null)
+                {
+                    $this->coffeeHouse->getNsfwClassificationCacheManager()->updateCache($CacheResults, $ReturnResults);
+                }
+                else
+                {
+                    $this->coffeeHouse->getNsfwClassificationCacheManager()->registerCache($ReturnResults);
+                }
+            }
+
             return $ReturnResults;
         }
 
@@ -91,18 +125,20 @@
          * @param string $path
          * @return NsfwClassificationResults
          * @throws CoffeeHouseUtilsNotReadyException
+         * @throws DatabaseException
          * @throws InvalidServerInterfaceModuleException
          * @throws NsfwClassificationException
          * @throws PathNotFoundException
          * @throws UnsupportedImageTypeException
          */
-        public function classifyImageFile(string $path): NsfwClassificationResults
+        public function classifyImageFile(string $path, bool $cache=True): NsfwClassificationResults
         {
             if(file_exists($path) == false)
             {
                 throw new PathNotFoundException("The file '$path' was not found.");
             }
 
-            return $this->classifyImage(@file_get_contents($path));
+            $file_contents = file_get_contents($path);
+            return $this->classifyImage($file_contents, $cache);
         }
     }
