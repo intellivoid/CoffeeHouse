@@ -11,6 +11,7 @@
     use CoffeeHouse\Classes\ServerInterface;
     use CoffeeHouse\Classes\Translator;
     use CoffeeHouse\Managers\ChatDialogsManager;
+    use CoffeeHouse\Managers\EmotionPredictionCacheManager;
     use CoffeeHouse\Managers\ForeignSessionsManager;
     use CoffeeHouse\Managers\GeneralizedClassificationManager;
     use CoffeeHouse\Managers\LanguagePredictionCacheManager;
@@ -18,6 +19,7 @@
     use CoffeeHouse\Managers\SpamPredictionCacheManager;
     use CoffeeHouse\Managers\TranslationCacheManager;
     use CoffeeHouse\Managers\UserSubscriptionManager;
+    use CoffeeHouse\NaturalLanguageProcessing\EmotionPrediction;
     use CoffeeHouse\NaturalLanguageProcessing\LanguagePrediction;
     use CoffeeHouse\NaturalLanguageProcessing\SpamPrediction;
     use DeepAnalytics\DeepAnalytics;
@@ -135,6 +137,17 @@
         private NsfwClassification $NsfwClassification;
 
         /**
+         * @var EmotionPredictionCacheManager
+         */
+        private EmotionPredictionCacheManager $EmotionPredictionCacheManager;
+
+        /**
+         * @var EmotionPrediction
+         */
+        private EmotionPrediction $EmotionPrediction;
+
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          * @noinspection PhpUndefinedClassInspection
@@ -163,11 +176,13 @@
             $this->SpamPredictionCacheManager = new SpamPredictionCacheManager($this);
             $this->LanguagePredictionCacheManager = new LanguagePredictionCacheManager($this);
             $this->TranslationCacheManager = new TranslationCacheManager($this);
+            $this->EmotionPredictionCacheManager = new EmotionPredictionCacheManager($this);
             $this->GeneralizedClassificationManager = new GeneralizedClassificationManager($this);
             $this->LargeGeneralizedClassificationManager = new LargeGeneralizedClassificationManager($this);
             $this->ServerInterface = new ServerInterface($this);
             $this->SpamPrediction = new SpamPrediction($this);
             $this->LanguagePrediction = new LanguagePrediction($this);
+            $this->EmotionPrediction = new EmotionPrediction($this);
             $this->CoreNLP = new CoreNLP($this);
             $this->Translator = new Translator($this);
             $this->NsfwClassification = new NsfwClassification($this);
@@ -363,5 +378,22 @@
         {
             return $this->NsfwClassification;
         }
+
+        /**
+         * @return EmotionPredictionCacheManager
+         */
+        public function getEmotionPredictionCacheManager(): EmotionPredictionCacheManager
+        {
+            return $this->EmotionPredictionCacheManager;
+        }
+
+        /**
+         * @return EmotionPrediction
+         */
+        public function getEmotionPrediction(): EmotionPrediction
+        {
+            return $this->EmotionPrediction;
+        }
+
 
     }

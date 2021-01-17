@@ -65,6 +65,10 @@
         },
         {
             "required": true,
+            "file": "Abstracts/EmotionType.php"
+        },
+        {
+            "required": true,
             "file": "Abstracts/TranslationCacheSearchMethod.php"
         },
         {
@@ -173,6 +177,10 @@
         },
         {
             "required": true,
+            "file": "NaturalLanguageProcessing/EmotionPrediction.php"
+        },
+        {
+            "required": true,
             "file": "Exceptions/ProbabilitySearchNoResultsFoundException.php"
         },
         {
@@ -206,6 +214,10 @@
         {
             "required": true,
             "file": "Exceptions/UserSubscriptionNotFoundException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/EmotionPredictionCacheNotFoundException.php"
         },
         {
             "required": true,
@@ -322,6 +334,10 @@
         {
             "required": true,
             "file": "Objects/ServerInterfaceConnection.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Cache/EmotionPredictionCache.php"
         },
         {
             "required": true,
@@ -461,6 +477,10 @@
         },
         {
             "required": true,
+            "file": "Objects/Results/EmotionPredictionResults.php"
+        },
+        {
+            "required": true,
             "file": "Objects/HttpResponse.php"
         },
         {
@@ -490,6 +510,10 @@
         {
             "required": true,
             "file": "Managers/ForeignSessionsManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/EmotionPredictionCacheManager.php"
         },
         {
             "required": true,

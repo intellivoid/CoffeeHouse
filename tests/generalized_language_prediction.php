@@ -5,10 +5,10 @@
 
     /** @noinspection PhpIncludeInspection */
 
-use CoffeeHouse\CoffeeHouse;
-use ppm\ppm;
+    use CoffeeHouse\CoffeeHouse;
+    use ppm\ppm;
 
-require("ppm");
+    require("ppm");
     ppm::import("net.intellivoid.coffeehouse");
 
     $CoffeeHouse = new CoffeeHouse();

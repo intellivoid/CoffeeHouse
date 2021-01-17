@@ -79,7 +79,7 @@
          * @return bool
          * @throws MalformedDataException
          */
-        public function add(string $label, float $probability, bool $update=true)
+        public function add(string $label, float $probability, bool $update=true): bool
         {
             try
             {
