@@ -130,7 +130,7 @@
 
             if(isset($data["emotion_prediction"]))
             {
-                $EmotionPredictionSentencesResultsObject->EmotionPrediction = EmotionPredictionResults::fromArray($data["text"]);
+                $EmotionPredictionSentencesResultsObject->EmotionPrediction = EmotionPredictionResults::fromArray($data["emotion_prediction"]);
             }
             else
             {

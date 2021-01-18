@@ -6,20 +6,29 @@
 
     use CoffeeHouse\Abstracts\GeneralizedClassificationSearchMethod;
     use CoffeeHouse\Abstracts\ServerInterfaceModule;
+    use CoffeeHouse\Classes\Utilities;
+    use CoffeeHouse\Classes\Validation;
     use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\EngineNotImplementedException;
     use CoffeeHouse\Exceptions\GeneralizedClassificationNotFoundException;
     use CoffeeHouse\Exceptions\InvalidInputException;
+    use CoffeeHouse\Exceptions\InvalidLanguageException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
+    use CoffeeHouse\Exceptions\InvalidTextInputException;
     use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Exceptions\SpamPredictionCacheNotFoundException;
+    use CoffeeHouse\Exceptions\TranslationCacheNotFoundException;
+    use CoffeeHouse\Exceptions\TranslationException;
+    use CoffeeHouse\Exceptions\UnsupportedLanguageException;
     use CoffeeHouse\Objects\GeneralizedClassification;
     use CoffeeHouse\Objects\LargeGeneralization;
-    use CoffeeHouse\Objects\Results\LanguagePredictionResults;
     use CoffeeHouse\Objects\Results\SpamPredictionResults;
+    use CoffeeHouse\Objects\Results\SpamPredictionSentencesResults;
 
     /**
      * Class SpamPrediction
@@ -48,21 +57,54 @@
          * @param bool $generalize
          * @param string $generalized_id
          * @param bool $cache
+         * @param string $source_language
          * @return SpamPredictionResults
+         * @throws CoffeeHouseUtilsNotReadyException
          * @throws DatabaseException
+         * @throws EngineNotImplementedException
          * @throws GeneralizedClassificationNotFoundException
          * @throws InvalidInputException
+         * @throws InvalidLanguageException
          * @throws InvalidSearchMethodException
          * @throws InvalidServerInterfaceModuleException
+         * @throws InvalidTextInputException
+         * @throws MalformedDataException
          * @throws ServerInterfaceException
-         * @throws \CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException
+         * @throws TranslationCacheNotFoundException
+         * @throws TranslationException
+         * @throws UnsupportedLanguageException
          * @noinspection DuplicatedCode
          */
-        public function predict(string $input, bool $generalize=false, string $generalized_id="None", bool $cache=true): SpamPredictionResults
+        public function predict(string $input, bool $generalize=false, string $generalized_id="None", bool $cache=true, $source_language="en"): SpamPredictionResults
         {
             if(strlen($input) == 0)
             {
                 throw new InvalidInputException();
+            }
+
+            if($source_language !== null)
+            {
+                $source_language = strtolower($source_language);
+
+                if($source_language !== "en")
+                {
+                    if($source_language == "auto")
+                    {
+                        $source_language = $this->coffeeHouse->getLanguagePrediction()->predict($input)->combineResults()[0]->Language;
+                    }
+
+                    $source_language = Utilities::convertToISO6391($source_language);
+
+                    if($source_language !== "en")
+                    {
+                        if(Validation::googleTranslateSupported($source_language) == false)
+                        {
+                            throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
+                        }
+
+                        $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                    }
+                }
             }
 
             $SpamPredictionCache = null;
@@ -157,6 +199,78 @@
             }
 
             return $PredictionResults;
+        }
+
+        /**
+         * Predicts spam data from sentences
+         *
+         * @param string $input
+         * @param string $source_language
+         * @param bool $cache
+         * @return SpamPredictionSentencesResults
+         * @throws CoffeeHouseUtilsNotReadyException
+         * @throws DatabaseException
+         * @throws EngineNotImplementedException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidInputException
+         * @throws InvalidLanguageException
+         * @throws InvalidSearchMethodException
+         * @throws InvalidServerInterfaceModuleException
+         * @throws InvalidTextInputException
+         * @throws MalformedDataException
+         * @throws ServerInterfaceException
+         * @throws TranslationCacheNotFoundException
+         * @throws TranslationException
+         * @throws UnsupportedLanguageException
+         */
+        public function predictSentences(string $input, $source_language="en", bool $cache=True): SpamPredictionSentencesResults
+        {
+            if(strlen($input) == 0)
+            {
+                throw new InvalidInputException();
+            }
+
+            if($source_language !== null)
+            {
+                $source_language = strtolower($source_language);
+
+                if($source_language !== "en")
+                {
+                    if($source_language == "auto")
+                    {
+                        $source_language = $this->coffeeHouse->getLanguagePrediction()->predict($input)->combineResults()[0]->Language;
+                    }
+
+                    $source_language = Utilities::convertToISO6391($source_language);
+
+                    if(Validation::googleTranslateSupported($source_language) == false)
+                    {
+                        throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
+                    }
+
+                    $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                }
+            }
+
+            $Sentences = $this->coffeeHouse->getCoreNLP()->sentenceSplit($input);
+            $SpamPredictionSentencesResultsObject = new SpamPredictionSentencesResults();
+            $SpamPredictionSentencesResultsObject->Text = $input;
+            $SpamPredictionSentencesResultsObject->SpamPredictionSentences = [];
+
+            foreach($Sentences->Sentences as $sentence)
+            {
+                $SpamSentenceObject = new SpamPredictionSentencesResults\SpamPredictionSentence();
+                $SpamSentenceObject->Text = $sentence->Text;
+                $SpamSentenceObject->OffsetBegin = $sentence->OffsetBegin;
+                $SpamSentenceObject->OffsetEnd = $sentence->OffsetEnd;
+                $SpamSentenceObject->SpamPredictionResults = $this->predict($sentence->Text, $source_language, $cache);
+
+                $SpamPredictionSentencesResultsObject->SpamPredictionSentences[] = $SpamSentenceObject;
+            }
+
+            $SpamPredictionSentencesResultsObject->calculateCombinedPredictions();
+
+            return $SpamPredictionSentencesResultsObject;
         }
 
         /**

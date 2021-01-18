@@ -1,9 +1,9 @@
 <?php
 
-use CoffeeHouse\CoffeeHouse;
-use CoffeeHouse\Exceptions\ServerInterfaceException;
+    use CoffeeHouse\CoffeeHouse;
+    use CoffeeHouse\Exceptions\ServerInterfaceException;
 
-require("ppm");
+    require("ppm");
     ppm_import("net.intellivoid.coffeehouse");
 
     $CoffeeHouse = new CoffeeHouse();
@@ -11,7 +11,7 @@ require("ppm");
     try
     {
         $results = $CoffeeHouse->getCoreNLP()->sentiment(
-            "My name is Lydia and I'm powered by CoffeeHouse, i was created in 2017 by Zi Xing Narrakas. There are plenty of examples where Lydia can respond like a real human, but there are plenty of issues that Lydia can struggle with when dealing with the human language."
+            "They use text book communist tactics of distracting and demoralization to break trust within populations, build a new connection to an overarching government that is then enslaved to the banking system with perpetuals; \"forever debt\" that is never to be paid. They distract us with sexual degeneracy and activism, break trust between people by creating political divide in the home and in the work place, weaken our ability of critical thinking by ways of silencing, addicting garbage food and electromagnetic radiation, establish socialism to make sure people feel supported by a government instead of each other, and then ensure government compliance to forever debt by punishing any country going against this plan. Just look at how hard the EU has been trying to punish Great Britain, Hungary, Poland and Russia for in any way not complying with their policies."
         );
 
         var_dump($results);

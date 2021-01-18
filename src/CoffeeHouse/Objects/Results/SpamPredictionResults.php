@@ -82,6 +82,14 @@
          */
         public function toArray(): array
         {
+            if($this->GeneralizedID == null || $this->GeneralizedID = 0)
+            {
+                return array(
+                    'spam' => $this->SpamPrediction,
+                    'ham' => $this->HamPrediction
+                );
+            }
+
             return array(
                 'spam' => $this->SpamPrediction,
                 'spam_generalized' => $this->GeneralizedSpam,
