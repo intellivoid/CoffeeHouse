@@ -263,7 +263,7 @@
                 $SpamSentenceObject->Text = $sentence->Text;
                 $SpamSentenceObject->OffsetBegin = $sentence->OffsetBegin;
                 $SpamSentenceObject->OffsetEnd = $sentence->OffsetEnd;
-                $SpamSentenceObject->SpamPredictionResults = $this->predict($sentence->Text, $source_language, $cache);
+                $SpamSentenceObject->SpamPredictionResults = $this->predict($sentence->Text, false, "None", $cache, $source_language);
 
                 $SpamPredictionSentencesResultsObject->SpamPredictionSentences[] = $SpamSentenceObject;
             }

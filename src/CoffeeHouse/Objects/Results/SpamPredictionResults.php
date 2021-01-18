@@ -18,18 +18,18 @@
         public $SpamPrediction;
 
         /**
-         * The generalized prediction of spam if generalization is used
-         *
-         * @var float|null
-         */
-        public $GeneralizedSpam;
-
-        /**
          * The prediction percentage of the content not being spam
          *
          * @var float
          */
         public $HamPrediction;
+
+        /**
+         * The generalized prediction of spam if generalization is used
+         *
+         * @var float|null
+         */
+        public $GeneralizedSpam;
 
         /**
          * The generalized prediction of ham if generalization is used
