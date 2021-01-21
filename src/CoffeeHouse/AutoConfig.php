@@ -7,6 +7,7 @@
     {
         if(class_exists('acm\acm') == false)
         {
+            /** @noinspection PhpIncludeInspection */
             include_once(__DIR__ . DIRECTORY_SEPARATOR . 'acm' . DIRECTORY_SEPARATOR . 'acm.php');
         }
     }

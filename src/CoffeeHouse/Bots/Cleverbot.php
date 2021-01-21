@@ -65,10 +65,12 @@
 
         /**
          * @param string $language
+         * @throws BotSessionException
          * @throws DatabaseException
          * @throws ForeignSessionNotFoundException
          * @throws InvalidSearchMethodException
-         * @throws BotSessionException
+         * @throws LocalSessionNotFoundException
+         * @throws NoResultsFoundException
          */
         public function newSession($language="en")
         {
@@ -133,6 +135,7 @@
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
+         * @noinspection RegExpDuplicateCharacterInClass
          */
         public function think(string $input, bool $use_local_session=True): string
         {

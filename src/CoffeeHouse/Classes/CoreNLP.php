@@ -91,6 +91,7 @@
          * @throws TranslationException
          * @throws UnsupportedLanguageException
          * @throws CoffeeHouseUtilsNotReadyException
+         * @noinspection DuplicatedCode
          */
         private function validateInput(string $input, string $source_language=null): string
         {
@@ -144,6 +145,7 @@
          * @throws TranslationException
          * @throws UnsupportedLanguageException
          * @throws CoffeeHouseUtilsNotReadyException
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function processText(string $input, string $source_language="en"): array
         {
@@ -193,7 +195,7 @@
          */
         public function sentenceSplit(string $input): SentenceSplitResults
         {
-            $input = $this->validateInput($input, null);
+            $input = $this->validateInput($input);
 
             $results = $this->invoke($input, ["ssplit"]);
 

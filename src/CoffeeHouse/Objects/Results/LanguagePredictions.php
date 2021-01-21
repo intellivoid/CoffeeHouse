@@ -73,6 +73,7 @@
          * @param array $data
          * @param bool $bytes
          * @return LanguagePredictions
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data, bool $bytes=false): LanguagePredictions
         {

@@ -62,6 +62,7 @@
 
         /**
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function valuesToArray(): array
         {
@@ -109,6 +110,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

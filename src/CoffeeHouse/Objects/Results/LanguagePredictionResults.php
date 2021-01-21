@@ -3,7 +3,7 @@
 
     namespace CoffeeHouse\Objects\Results;
 
-    use function array_diff;
+    use CoffeeHouse\Exceptions\MalformedDataException;
 
     /**
      * Class LanguagePredictionResults
@@ -147,6 +147,7 @@
          *
          * @param bool $bytes
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(bool $bytes=false): array
         {
@@ -197,6 +198,7 @@
          * @param array $data
          * @param bool $bytes
          * @return LanguagePredictionResults
+         * @throws MalformedDataException
          */
         public static function fromArray(array $data, bool $bytes=false): LanguagePredictionResults
         {

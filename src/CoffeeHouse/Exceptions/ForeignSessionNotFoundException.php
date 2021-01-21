@@ -15,9 +15,10 @@
     {
         /**
          * ForeignSessionNotFoundException constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {
-            parent::__construct('The foreign session was not found in the database', ExceptionCodes::ForeignSessionNotFoundException, null);
+            parent::__construct('The foreign session was not found in the database', ExceptionCodes::ForeignSessionNotFoundException);
         }
     }

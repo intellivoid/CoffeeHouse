@@ -16,9 +16,10 @@
         /**
          * MalformedDataException constructor.
          * @param string $message
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct($message = "")
         {
-            parent::__construct($message, ExceptionCodes::MalformedDataException, null);
+            parent::__construct($message, ExceptionCodes::MalformedDataException);
         }
     }

@@ -110,6 +110,7 @@
          *
          * @param array $data
          * @return ForeignSession
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): ForeignSession
         {

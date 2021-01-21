@@ -14,9 +14,10 @@
     {
         /**
          * InvalidSearchMethodException constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {
-            parent::__construct("The given search method is invalid for this function", ExceptionCodes::InvalidSearchMethodException, null);
+            parent::__construct("The given search method is invalid for this function", ExceptionCodes::InvalidSearchMethodException);
         }
     }

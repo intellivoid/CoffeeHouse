@@ -15,9 +15,10 @@
     {
         /**
          * GeneralizedClassificationNotFoundException constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {
-            parent::__construct("The requested generalized classification record was not found in the database", ExceptionCodes::GeneralizedClassificationNotFoundException, null);
+            parent::__construct("The requested generalized classification record was not found in the database", ExceptionCodes::GeneralizedClassificationNotFoundException);
         }
     }

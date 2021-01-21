@@ -203,9 +203,9 @@
         }
 
         /**
-         * @return mysqli
+         * @return mysqli|null
          */
-        public function getDatabase()
+        public function getDatabase(): ?mysqli
         {
             if($this->database == null)
             {
@@ -236,7 +236,7 @@
          * @return mixed
          * @noinspection PhpUnused
          */
-        public function getDatabaseConfiguration()
+        public function getDatabaseConfiguration(): mixed
         {
             return $this->DatabaseConfiguration;
         }
@@ -261,7 +261,7 @@
         /**
          * @return mixed
          */
-        public function getUtilsConfiguration()
+        public function getUtilsConfiguration(): mixed
         {
             return $this->UtilsConfiguration;
         }
@@ -379,7 +379,7 @@
         /**
          * @return mixed
          */
-        public function getConfiguration()
+        public function getConfiguration(): mixed
         {
             return $this->Configuration;
         }

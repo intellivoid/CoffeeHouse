@@ -39,10 +39,11 @@
          * @param string $error_details
          * @param string $address
          * @param array $parameters
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct(string $error_details, string $address, array $parameters)
         {
-            parent::__construct("There was an unexpected error while contacting the server interface", ExceptionCodes::ServerInterfaceException, null);
+            parent::__construct("There was an unexpected error while contacting the server interface", ExceptionCodes::ServerInterfaceException);
             $this->error_details = $error_details;
             $this->address = $address;
             $this->parameters = $parameters;

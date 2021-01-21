@@ -8,7 +8,6 @@
     use CoffeeHouse\Exceptions\DatabaseException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\NoResultsFoundException;
-    use JetBrains\PhpStorm\Pure;
 
     /**
      * Class LocalSession
@@ -24,7 +23,7 @@
         public ?int $ID;
 
         /**
-         * The Foreigin Session ID related to this local session
+         * The Foreign Session ID related to this local session
          *
          * @var int|null
          */
@@ -153,6 +152,7 @@
          *
          * @param array $data
          * @return LocalSession
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): LocalSession
         {

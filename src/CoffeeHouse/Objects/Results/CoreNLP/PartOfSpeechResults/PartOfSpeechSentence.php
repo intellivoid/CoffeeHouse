@@ -40,6 +40,7 @@
 
         /**
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

@@ -33,6 +33,7 @@
 
         /**
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -48,6 +49,7 @@
          *
          * @param array $data
          * @return Sentence
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): Sentence
         {

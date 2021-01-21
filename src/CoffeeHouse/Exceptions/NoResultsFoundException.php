@@ -14,9 +14,10 @@
     {
         /**
          * NoResultsFoundException constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {
-            parent::__construct("No results were found in the database", ExceptionCodes::NoResultsFoundException, null);
+            parent::__construct("No results were found in the database", ExceptionCodes::NoResultsFoundException);
         }
     }

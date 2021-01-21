@@ -49,6 +49,7 @@
          * @param array $data
          * @param bool $as_object
          * @return LargeGeneralizationDatum
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data, bool $as_object=False): LargeGeneralizationDatum
         {

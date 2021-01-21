@@ -3,7 +3,6 @@
 
     namespace CoffeeHouse\Objects\Results;
 
-    use CoffeeHouse\Objects\Results\EmotionPredictionSentencesResults\EmotionPredictionSentence;
     use CoffeeHouse\Objects\Results\SpamPredictionSentencesResults\SpamPredictionSentence;
 
     /**
@@ -85,6 +84,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -116,10 +116,10 @@
 
             if(isset($data["sentences"]))
             {
-                $SpamPredictionSentencesResultsObject->EmotionPredictionSentences = [];
+                $SpamPredictionSentencesResultsObject->SpamPredictionSentences = [];
 
                 foreach($data["sentences"] as $datum)
-                    $SpamPredictionSentencesResultsObject->EmotionPredictionSentences[] = EmotionPredictionSentence::fromArray($datum);
+                    $SpamPredictionSentencesResultsObject->SpamPredictionSentences[] = SpamPredictionSentence::fromArray($datum);
             }
 
             if(isset($data["spam_prediction"]))

@@ -60,6 +60,7 @@
 
         /**
          * PartOfSpeechSentence constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {

@@ -141,7 +141,7 @@
          * @throws InvalidSearchMethodException
          * @throws NoResultsFoundException
          */
-        public function update(LargeGeneralization $largeGeneralization)
+        public function update(LargeGeneralization $largeGeneralization): bool
         {
             $this->get(LargeGeneralizedClassificationSearchMethod::byID, $largeGeneralization->ID);
             $array_results = $largeGeneralization->toArray();

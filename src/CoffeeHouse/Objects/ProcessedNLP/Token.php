@@ -42,6 +42,8 @@
          *
          * @param array $data
          * @return Token
+         * @noinspection PhpPureAttributeCanBeAddedInspection
+         * @noinspection DuplicatedCode
          */
         public static function fromArray(array $data): Token
         {
@@ -72,6 +74,7 @@
          * Returns an array representation of this value
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

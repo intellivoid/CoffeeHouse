@@ -48,6 +48,7 @@
 
         /**
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -67,6 +68,8 @@
          *
          * @param array $data
          * @return NsfwClassificationResults
+         * @noinspection PhpPureAttributeCanBeAddedInspection
+         * @noinspection DuplicatedCode
          */
         public static function fromArray(array $data): NsfwClassificationResults
         {

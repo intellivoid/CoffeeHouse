@@ -71,6 +71,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -90,6 +91,7 @@
          * Returns an Nsfw Classification Results object from this cache record.
          *
          * @return NsfwClassificationResults
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function toResults(): NsfwClassificationResults
         {
@@ -110,6 +112,7 @@
          * @param array $data
          * @return NsfwClassificationCache
          * @noinspection DuplicatedCode
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): NsfwClassificationCache
         {

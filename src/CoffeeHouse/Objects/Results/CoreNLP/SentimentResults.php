@@ -23,7 +23,7 @@
         /**
          * The overall predictions of all the sentiments combined
          *
-         * @var Sentiment|null
+         * @var Sentiment
          */
         public Sentiment $Sentiment;
 
@@ -101,6 +101,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

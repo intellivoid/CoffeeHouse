@@ -4,7 +4,6 @@
     namespace CoffeeHouse\Objects\Results;
 
     use CoffeeHouse\Abstracts\EmotionType;
-    use CoffeeHouse\NaturalLanguageProcessing\EmotionPrediction;
     use CoffeeHouse\Objects\Results\EmotionPredictionSentencesResults\EmotionPredictionSentence;
 
     /**
@@ -21,7 +20,7 @@
         public ?string $Text;
 
         /**
-         * An overall prediction of all the setnences combined
+         * An overall prediction of all the sentences combined
          *
          * @var EmotionPredictionResults|null
          */
@@ -92,6 +91,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

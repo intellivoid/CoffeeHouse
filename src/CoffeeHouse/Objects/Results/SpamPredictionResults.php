@@ -104,6 +104,7 @@
          *
          * @param array $data
          * @return SpamPredictionResults
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): SpamPredictionResults
         {

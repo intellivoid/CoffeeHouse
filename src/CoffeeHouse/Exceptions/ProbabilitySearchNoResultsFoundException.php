@@ -16,9 +16,10 @@
         /**
          * ProbabilitySearchNoResultsFoundException constructor.
          * @param string $message
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct($message = "")
         {
-            parent::__construct($message, ExceptionCodes::ProbabilitySearchNoResultsFoundException, null);
+            parent::__construct($message, ExceptionCodes::ProbabilitySearchNoResultsFoundException);
         }
     }

@@ -60,6 +60,7 @@
          *
          * @return array
          * @throws InvalidDateException
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -76,6 +77,7 @@
          *
          * @param array $data
          * @return DateType
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): DateType
         {

@@ -43,32 +43,14 @@
             $SentimentObject = new Sentiment();
 
             if(isset($data["sentiment"]))
-                switch(strtolower($data["sentiment"]))
-                {
-                    case "verynegative":
-                        $SentimentObject->TopSentiment = \CoffeeHouse\Abstracts\CoreNLP\Sentiment::VeryNegative;
-                        break;
-
-                    case "negative":
-                        $SentimentObject->TopSentiment = \CoffeeHouse\Abstracts\CoreNLP\Sentiment::Negative;
-                        break;
-
-                    case "neutral":
-                        $SentimentObject->TopSentiment = \CoffeeHouse\Abstracts\CoreNLP\Sentiment::Neutral;
-                        break;
-
-                    case "positive":
-                        $SentimentObject->TopSentiment = \CoffeeHouse\Abstracts\CoreNLP\Sentiment::Positive;
-                        break;
-
-                    case "verypositive":
-                        $SentimentObject->TopSentiment = \CoffeeHouse\Abstracts\CoreNLP\Sentiment::VeryPositive;
-                        break;
-
-                    default:
-                        $SentimentObject->TopSentiment = \CoffeeHouse\Abstracts\CoreNLP\Sentiment::Unknown;
-                        break;
-                }
+                $SentimentObject->TopSentiment = match (strtolower($data["sentiment"])) {
+                    "verynegative" => \CoffeeHouse\Abstracts\CoreNLP\Sentiment::VeryNegative,
+                    "negative" => \CoffeeHouse\Abstracts\CoreNLP\Sentiment::Negative,
+                    "neutral" => \CoffeeHouse\Abstracts\CoreNLP\Sentiment::Neutral,
+                    "positive" => \CoffeeHouse\Abstracts\CoreNLP\Sentiment::Positive,
+                    "verypositive" => \CoffeeHouse\Abstracts\CoreNLP\Sentiment::VeryPositive,
+                    default => \CoffeeHouse\Abstracts\CoreNLP\Sentiment::Unknown,
+                };
 
             if(isset($data["top_sentiment"]))
                 $SentimentObject->TopSentiment = $data["top_sentiment"];
@@ -105,6 +87,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

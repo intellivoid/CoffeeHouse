@@ -281,6 +281,7 @@
          * @throws DatabaseException
          * @throws GeneralizedClassificationNotFoundException
          * @throws InvalidSearchMethodException
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function getGeneralized(string $generalized_id): array
         {
@@ -309,6 +310,7 @@
          * @throws DatabaseException
          * @throws GeneralizedClassificationNotFoundException
          * @throws InvalidSearchMethodException
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function createGeneralized(): array
         {

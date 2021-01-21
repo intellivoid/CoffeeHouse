@@ -66,6 +66,7 @@
          *
          * @param array $data
          * @return EmotionPredictionCache
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): EmotionPredictionCache
         {
@@ -99,6 +100,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

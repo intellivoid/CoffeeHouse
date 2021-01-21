@@ -4,8 +4,6 @@
     namespace CoffeeHouse\Classes;
 
 
-    use CoffeeHouse\Objects\LargeGeneralization;
-
     /**
      * Class Hashing
      * @package CoffeeHouse\Classes
@@ -39,6 +37,7 @@
          *
          * @param string $vars
          * @return string
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function icognocheckCode(string $vars): string
         {
@@ -64,6 +63,7 @@
          *
          * @param string $input
          * @return string
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function input(string $input): string
         {
@@ -111,6 +111,7 @@
          * @param string $target
          * @param string $input
          * @return string
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function translateCachePublicId(string $source, string $target, string $input): string
         {

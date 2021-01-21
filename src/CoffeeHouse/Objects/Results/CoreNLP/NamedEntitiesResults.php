@@ -3,7 +3,6 @@
 
     namespace CoffeeHouse\Objects\Results\CoreNLP;
 
-    use CoffeeHouse\Objects\ProcessedNLP\NamedEntity;
     use CoffeeHouse\Objects\ProcessedNLP\Sentence;
     use CoffeeHouse\Objects\Results\CoreNLP\NamedEntitiesResults\NamedEntitySentence;
 
@@ -27,6 +26,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

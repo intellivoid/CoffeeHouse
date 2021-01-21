@@ -3,8 +3,6 @@
 
     namespace CoffeeHouse\Objects\ProcessedNLP;
 
-    use CoffeeHouse\Abstracts\CoreNLP\PartOfSpeechTag;
-
     /**
      * Class PosTag
      * @package CoffeeHouse\Objects\ProcessedNLP
@@ -35,7 +33,7 @@
         /**
          * The identified part of speech text.
          *
-         * @var string|PartOfSpeechTag|null
+         * @var string|null
          */
         public ?string $Value;
 
@@ -45,6 +43,7 @@
          * @param array $data
          * @return PosTag
          * @noinspection DuplicatedCode
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): PosTag
         {
@@ -76,6 +75,7 @@
          * Returns an array representation of this value
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

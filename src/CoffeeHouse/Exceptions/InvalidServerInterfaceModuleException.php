@@ -15,9 +15,10 @@
     {
         /**
          * InvalidServerInterfaceModuleException constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {
-            parent::__construct("The given server interface module is not supported by this version of CoffeeHouse", ExceptionCodes::InvalidServerInterfaceModuleException, null);
+            parent::__construct("The given server interface module is not supported by this version of CoffeeHouse", ExceptionCodes::InvalidServerInterfaceModuleException);
         }
     }

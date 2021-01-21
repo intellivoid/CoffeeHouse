@@ -3,7 +3,6 @@
 
     namespace CoffeeHouse\Objects\Results;
 
-    use CoffeeHouse\Abstracts\TranslateProcessingEngine;
     use CoffeeHouse\Objects\Cache\TranslateCache;
 
     /**
@@ -27,7 +26,7 @@
         public ?string $Target;
 
         /**
-         * @var string|TranslateProcessingEngine|null
+         * @var string|null
          */
         public ?string $ProcessingEngine;
 
@@ -49,6 +48,7 @@
          * Returns an array
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -67,6 +67,7 @@
          * @param array $data
          * @return TranslationResults
          * @noinspection DuplicatedCode
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): TranslationResults
         {
@@ -105,6 +106,7 @@
          *
          * @param TranslateCache $translateCache
          * @return TranslationResults
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromCache(TranslateCache $translateCache): TranslationResults
         {

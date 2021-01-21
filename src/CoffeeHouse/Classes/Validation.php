@@ -15,6 +15,7 @@
          *
          * @param string $input
          * @return bool
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function message(string $input): bool
         {
@@ -27,10 +28,11 @@
         }
 
         /**
-         * Determines if the langauge code is supported for Google Translate
+         * Determines if the language code is supported for Google Translate
          *
          * @param string $input
          * @return bool
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function googleTranslateSupported(string $input): bool
         {
@@ -160,6 +162,7 @@
          *
          * @param string $input
          * @return bool
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function translationInput(string $input): bool
         {
@@ -176,6 +179,7 @@
          *
          * @param string $input
          * @return bool
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function coreNlpInput(string $input): bool
         {
@@ -196,8 +200,9 @@
          *
          * @param $data
          * @return bool
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
-        public static function isJpeg(&$data): bool
+        public static function isJpeg($data): bool
         {
             return (bin2hex($data[0]) == 'ff' && bin2hex($data[1]) == 'd8');
         }
@@ -207,8 +212,9 @@
          *
          * @param $data
          * @return bool
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
-        public static function isPng(&$data): bool
+        public static function isPng($data): bool
         {
             return (bin2hex($data[0]) == '89' && $data[1] == 'P' && $data[2] == 'N' && $data[3] == 'G');
         }

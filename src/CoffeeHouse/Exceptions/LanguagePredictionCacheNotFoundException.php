@@ -16,9 +16,10 @@
     {
         /**
          * LanguagePredictionCacheNotFoundException constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {
-            parent::__construct("The requested language prediction cache is not registered", ExceptionCodes::LanguagePredictionCacheNotFoundException, null);
+            parent::__construct("The requested language prediction cache is not registered", ExceptionCodes::LanguagePredictionCacheNotFoundException);
         }
     }

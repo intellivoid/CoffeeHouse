@@ -5,6 +5,7 @@
 
     use CoffeeHouse\Abstracts\CoreNLP\NamedEntityAlternativeValueTypes;
     use CoffeeHouse\Exceptions\InvalidDateException;
+    use CoffeeHouse\Exceptions\InvalidTimeException;
 
     /**
      * Class DateTimeType
@@ -51,6 +52,8 @@
          *
          * @return array
          * @throws InvalidDateException
+         * @throws InvalidTimeException
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

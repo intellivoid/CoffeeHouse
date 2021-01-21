@@ -55,6 +55,7 @@
          * Returns an array which represents this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -73,6 +74,7 @@
          *
          * @param array $data
          * @return UserSubscription
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): UserSubscription
         {

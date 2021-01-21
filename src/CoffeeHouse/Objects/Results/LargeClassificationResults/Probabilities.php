@@ -70,7 +70,7 @@
 
             $this->Probabilities[(int)$this->CurrentPointer] = $probability;
             $this->CurrentPointer += 1;
-            return $this->calculateGeneralProbability(true);
+            return $this->calculateGeneralProbability();
         }
 
         /**
@@ -119,6 +119,7 @@
          *
          * @param array $data
          * @return Probabilities
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): Probabilities
         {

@@ -51,6 +51,7 @@
 
         /**
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -64,6 +65,7 @@
         /**
          * @param array $data
          * @return ServerInterfaceConnection
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): ServerInterfaceConnection
         {

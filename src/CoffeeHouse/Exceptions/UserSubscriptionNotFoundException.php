@@ -15,10 +15,11 @@
     {
         /**
          * UserSubscriptionNotFoundException constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {
-            parent::__construct("The user subscription was not found in the database", ExceptionCodes::UserSubscriptionNotFoundException, null);
+            parent::__construct("The user subscription was not found in the database", ExceptionCodes::UserSubscriptionNotFoundException);
         }
 
 

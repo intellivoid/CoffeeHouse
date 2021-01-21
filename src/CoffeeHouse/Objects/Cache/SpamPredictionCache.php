@@ -11,7 +11,7 @@
     class SpamPredictionCache
     {
         /**
-         * Unique internal databsae ID for this cache record
+         * Unique internal database ID for this cache record
          *
          * @var int
          */
@@ -56,6 +56,7 @@
          * Returns an array representing this object's structure and data
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -74,6 +75,7 @@
          *
          * @param array $data
          * @return SpamPredictionCache
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): SpamPredictionCache
         {

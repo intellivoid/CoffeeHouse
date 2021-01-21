@@ -172,6 +172,7 @@
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
          * @throws UnsupportedLanguageException
+         * @noinspection DuplicatedCode
          */
         public function predictSentences(string $input, $source_language="en", bool $cache=True): EmotionPredictionSentencesResults
         {

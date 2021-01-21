@@ -31,7 +31,7 @@
         /**
          * The last refresh timestamp
          *
-         * @var int|null
+         * @var int
          */
         private int $LastRefresh;
 
@@ -127,16 +127,10 @@
             if($engine == "auto")
                 $engine = TranslateProcessingEngine::GoogleTranslate;
 
-            switch($engine)
-            {
-                case TranslateProcessingEngine::GoogleTranslate:
-                    $translation_results = $this->GoogleTranslate($input, $output, $source);
-                    break;
-
-                case TranslateProcessingEngine::CoffeeHouseTranslate:
-                default:
-                    throw new EngineNotImplementedException("The engine '$engine' is not implemented");
-            }
+            $translation_results = match ($engine) {
+                TranslateProcessingEngine::GoogleTranslate => $this->GoogleTranslate($input, $output, $source),
+                default => throw new EngineNotImplementedException("The engine '$engine' is not implemented"),
+            };
 
             if($use_cache)
             {

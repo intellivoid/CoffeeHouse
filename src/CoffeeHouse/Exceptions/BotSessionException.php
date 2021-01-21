@@ -21,17 +21,18 @@
         /**
          * BotSessionException constructor.
          * @param $error_details
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct($error_details)
         {
             $this->error_details = $error_details;
-            parent::__construct("There was an error with the bot session", ExceptionCodes::BotSessionException, null);
+            parent::__construct("There was an error with the bot session", ExceptionCodes::BotSessionException);
         }
 
         /**
          * @return mixed
          */
-        public function getErrorDetails()
+        public function getErrorDetails(): mixed
         {
             return $this->error_details;
         }

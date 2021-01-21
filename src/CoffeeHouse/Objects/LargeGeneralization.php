@@ -94,7 +94,7 @@
 
                 if($update)
                 {
-                    $this->sortProbabilities(true);
+                    $this->sortProbabilities();
                 }
 
                 return true;
@@ -112,7 +112,7 @@
 
             if($update)
             {
-                $this->sortProbabilities(true);
+                $this->sortProbabilities();
             }
 
             return true;
@@ -125,6 +125,7 @@
          * @return array (index(int) ? result(Probabilities))
          * @throws MalformedDataException
          * @throws ProbabilitySearchNoResultsFoundException
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function findProbabilityByLabel(string $label): array
         {
@@ -151,7 +152,7 @@
          * Sorts the probabilities from highest value to lowest value
          *
          * @param bool $update_top_k
-         * @return array|Probabilities[]
+         * @return array
          * @throws MalformedDataException
          */
         public function sortProbabilities(bool $update_top_k=true): array
@@ -243,6 +244,7 @@
          * Returns an array which represents this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {

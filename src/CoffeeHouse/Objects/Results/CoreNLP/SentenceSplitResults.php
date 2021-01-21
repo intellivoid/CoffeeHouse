@@ -29,6 +29,7 @@
          * Returns an array representation of this object
          *
          * @return array
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -43,6 +44,7 @@
          *
          * @param array $data
          * @return SentenceSplitResults
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): SentenceSplitResults
         {

@@ -15,9 +15,10 @@
     {
         /**
          * SpamPredictionCacheNotFoundException constructor.
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct()
         {
-            parent::__construct("The spam prediction cache record was not found", ExceptionCodes::SpamPredictionCacheNotFoundException, null);
+            parent::__construct("The spam prediction cache record was not found", ExceptionCodes::SpamPredictionCacheNotFoundException);
         }
     }

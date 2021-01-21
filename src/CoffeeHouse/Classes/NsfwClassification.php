@@ -48,7 +48,7 @@
          * @throws NsfwClassificationException
          * @throws UnsupportedImageTypeException
          */
-        public function classifyImage(string &$data, bool $cache=True): NsfwClassificationResults
+        public function classifyImage(string $data, bool $cache=True): NsfwClassificationResults
         {
             $ReturnResults = new NsfwClassificationResults();
 
@@ -123,6 +123,7 @@
          * Classifies if an image is NSFW from file.
          *
          * @param string $path
+         * @param bool $cache
          * @return NsfwClassificationResults
          * @throws CoffeeHouseUtilsNotReadyException
          * @throws DatabaseException

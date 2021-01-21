@@ -4,7 +4,6 @@
     namespace CoffeeHouse\Objects\ProcessedNLP\Types;
 
     use CoffeeHouse\Abstracts\CoreNLP\NamedEntityAlternativeValueTypes;
-    use CoffeeHouse\Exceptions\InvalidDateException;
     use CoffeeHouse\Exceptions\InvalidTimeException;
 
     /**
@@ -59,6 +58,7 @@
          *
          * @return array
          * @throws InvalidTimeException
+         * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
          */
         public function toArray(): array
         {
@@ -75,6 +75,7 @@
          *
          * @param array $data
          * @return TimeType
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function fromArray(array $data): TimeType
         {

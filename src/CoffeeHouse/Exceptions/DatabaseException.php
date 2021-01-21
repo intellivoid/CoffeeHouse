@@ -22,6 +22,7 @@
         /**
          * DatabaseException constructor.
          * @param string $DatabaseError
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function __construct(string $DatabaseError)
         {

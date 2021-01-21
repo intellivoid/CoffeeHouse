@@ -6,9 +6,9 @@
 
     use CoffeeHouse\Classes\Utilities;
     use CoffeeHouse\Exceptions\InvalidTimexFormatException;
-    use CoffeeHouse\Objects\Timex\DateType;
+    use CoffeeHouse\Objects\ProcessedNLP\Types\DateType;
+    use CoffeeHouse\Objects\ProcessedNLP\Types\TimeType;
     use CoffeeHouse\Objects\Timex\Range;
-    use CoffeeHouse\Objects\Timex\TimeType;
 
     /**
      * Stores one TIMEX3 expression.  This class is used for both TimeAnnotator and
@@ -159,6 +159,7 @@
          * @param string $type
          * @param string $val
          * @return Timex
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function withString(string $type, string $val): Timex
         {
@@ -191,6 +192,7 @@
          * @param int $beginPoint
          * @param int $endPoint
          * @return Timex
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public static function withTimex(string $type, string $val, string $altVal, string $tid, string $text, int $beginPoint, int $endPoint): Timex
         {
@@ -304,6 +306,7 @@
          * Returns an XML representation of this Timex Value
          *
          * @return string
+         * @noinspection PhpPureAttributeCanBeAddedInspection
          */
         public function toXml(): string
         {
@@ -346,7 +349,7 @@
          * @return DateType
          * @throws InvalidTimexFormatException
          */
-        public function getDate(): DateType
+        public function getDate()
         {
             return Utilities::getTimexDate($this->val);
         }
@@ -357,7 +360,7 @@
          * @return TimeType
          * @throws InvalidTimexFormatException
          */
-        public function getTime(): TimeType
+        public function getTime()
         {
             return Utilities::getTimexTime($this->val);
         }
