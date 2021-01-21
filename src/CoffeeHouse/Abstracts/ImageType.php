@@ -7,7 +7,7 @@
      * Class ImageType
      * @package CoffeeHouse\Abstracts
      */
-    class ImageType
+    abstract class ImageType
     {
         const JPEG = "jpg";
 
