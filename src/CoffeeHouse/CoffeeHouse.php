@@ -16,6 +16,7 @@
     use CoffeeHouse\Managers\GeneralizedClassificationManager;
     use CoffeeHouse\Managers\LanguagePredictionCacheManager;
     use CoffeeHouse\Managers\LargeGeneralizedClassificationManager;
+    use CoffeeHouse\Managers\LocalSessionManager;
     use CoffeeHouse\Managers\NsfwClassificationCacheManager;
     use CoffeeHouse\Managers\SpamPredictionCacheManager;
     use CoffeeHouse\Managers\TranslationCacheManager;
@@ -153,6 +154,11 @@
         private NsfwClassificationCacheManager $NsfwClassificationCacheManager;
 
         /**
+         * @var LocalSessionManager
+         */
+        private LocalSessionManager $LocalSessionManager;
+
+        /**
          * CoffeeHouse constructor.
          * @throws Exception
          * @noinspection PhpUndefinedClassInspection
@@ -176,6 +182,7 @@
             }
 
             $this->ForeignSessionsManager = new ForeignSessionsManager($this);
+            $this->LocalSessionManager = new LocalSessionManager($this);
             $this->ChatDialogsManager = new ChatDialogsManager($this);
             $this->UserSubscriptionManager = new UserSubscriptionManager($this);
             $this->SpamPredictionCacheManager = new SpamPredictionCacheManager($this);
@@ -407,6 +414,14 @@
         public function getNsfwClassificationCacheManager(): NsfwClassificationCacheManager
         {
             return $this->NsfwClassificationCacheManager;
+        }
+
+        /**
+         * @return LocalSessionManager
+         */
+        public function getLocalSessionManager(): LocalSessionManager
+        {
+            return $this->LocalSessionManager;
         }
 
 

@@ -230,16 +230,16 @@
          * Generalized the language predictions and returns the results
          *
          * @param LargeGeneralization $largeGeneralization
-         * @param EmotionPredictionResults $languagePredictionResults
+         * @param EmotionPredictionResults $emotionPredictionResults
          * @return LargeGeneralization
          * @throws DatabaseException
          * @throws InvalidSearchMethodException
          * @throws MalformedDataException
          * @throws NoResultsFoundException
          */
-        public function generalize(LargeGeneralization $largeGeneralization, EmotionPredictionResults $languagePredictionResults): LargeGeneralization
+        public function generalize(LargeGeneralization $largeGeneralization, EmotionPredictionResults $emotionPredictionResults): LargeGeneralization
         {
-            foreach($languagePredictionResults->valuesToArray() as $emotion => $prediction_value)
+            foreach($emotionPredictionResults->valuesToArray() as $emotion => $prediction_value)
             {
                 $largeGeneralization->add($emotion, $prediction_value, false);
             }

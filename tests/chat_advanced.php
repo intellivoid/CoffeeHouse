@@ -29,6 +29,8 @@ use ppm\ppm;
     while(true)
     {
         // Don't use local sessions for this example.
-        $Output = $Bot->think(getInput(), false);
+        $Output = $Bot->think(getInput(), true);
         print("Bot: $Output\n");
+        print("Emotion: " . $Bot->getLocalSession()->AiCurrentEmotion . "\n");
+        print("Language: " . $Bot->getLocalSession()->PredictedLanguage . "\n");
     }

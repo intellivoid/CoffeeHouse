@@ -12,12 +12,15 @@
     use CoffeeHouse\Exceptions\ForeignSessionNotFoundException;
     use CoffeeHouse\Exceptions\InvalidMessageException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
+    use CoffeeHouse\Exceptions\LocalSessionNotFoundException;
+    use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Objects\BotThought;
     use CoffeeHouse\Objects\ForeignSession;
+    use CoffeeHouse\Objects\LocalSession;
     use Exception;
 
     /**
-     * Class _Cleverbot
+     * Class Cleverbot
      * @package CoffeeHouse\Bots
      */
     class Cleverbot
@@ -39,9 +42,14 @@
         private $coffeeHouse;
 
         /**
-         * @var ForeignSession
+         * @var ForeignSession|null
          */
         private $Session;
+
+        /**
+         * @var LocalSession|null
+         */
+        private $LocalSession;
 
         /**
          * Cleverbot constructor.
@@ -62,7 +70,7 @@
          * @throws InvalidSearchMethodException
          * @throws BotSessionException
          */
-        public function newSession($language = 'en')
+        public function newSession($language="en")
         {
             $this->Session = $this->coffeeHouse->getForeignSessionsManager()->createSession($language);
 
@@ -92,6 +100,8 @@
             $this->Session->Language = $language;
 
             $this->coffeeHouse->getForeignSessionsManager()->updateSession($this->Session);
+            $this->LocalSession = $this->coffeeHouse->getLocalSessionManager()->createLocalSession($this->Session);
+
             $this->coffeeHouse->getDeepAnalytics()->tally('coffeehouse', 'lydia_sessions', 0);
         }
 
@@ -102,6 +112,8 @@
          * @throws DatabaseException
          * @throws ForeignSessionNotFoundException
          * @throws InvalidSearchMethodException
+         * @throws LocalSessionNotFoundException
+         * @throws NoResultsFoundException
          * @noinspection PhpUnused
          */
         public function loadSession(string $session_id)
@@ -109,15 +121,20 @@
             $this->Session = $this->coffeeHouse->getForeignSessionsManager()->getSession(
                 ForeignSessionSearchMethod::bySessionId, $session_id
             );
+
+            $this->LocalSession = $this->coffeeHouse->getLocalSessionManager()->createLocalSession($this->Session);
         }
 
         /**
          * @param string $input
+         * @param bool $use_local_session
          * @return BotThought
          * @throws BotSessionException
          * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws NoResultsFoundException
          */
-        public function think(string $input): string
+        public function think(string $input, bool $use_local_session=True): string
         {
             $this->Session->Variables['stimulus'] = $input;
 
@@ -166,6 +183,63 @@
                 $Text = 'COFFEE_HOUSE ERROR';
             }
 
+            // Local session manager
+            if($use_local_session)
+            {
+                $this->LocalSession->initialize($this->coffeeHouse);
+
+                // Process the language
+                $language = $this->Session->Language;
+
+                try
+                {
+                    $this->LocalSession->LanguageLargeGeneralization = $this->coffeeHouse->getLanguagePrediction()->generalize(
+                        $this->LocalSession->LanguageLargeGeneralization, $this->coffeeHouse->getLanguagePrediction()->predict($Text)
+                    );
+
+                    $this->LocalSession->PredictedLanguage = $this->LocalSession->LanguageLargeGeneralization->TopLabel;
+                }
+                catch(Exception $e)
+                {
+                    unset($e);
+                }
+
+                try
+                {
+                    $this->LocalSession->LanguageLargeGeneralization = $this->coffeeHouse->getLanguagePrediction()->generalize(
+                        $this->LocalSession->LanguageLargeGeneralization, $this->coffeeHouse->getLanguagePrediction()->predict($input)
+                    );
+
+                    $this->LocalSession->PredictedLanguage = $this->LocalSession->LanguageLargeGeneralization->TopLabel;
+                }
+                catch(Exception $e)
+                {
+                    unset($e);
+                }
+
+
+                if($this->LocalSession->PredictedLanguage !== null)
+                {
+                    $language = $this->Session->Language;
+                    $this->Session->Language = $this->LocalSession->PredictedLanguage;
+                }
+
+                try
+                {
+                    $this->LocalSession->EmotionLargeGeneralization = $this->coffeeHouse->getEmotionPrediction()->generalize(
+                        $this->LocalSession->EmotionLargeGeneralization, $this->coffeeHouse->getEmotionPrediction()->predict($Text, $language)
+                    );
+
+                    $this->LocalSession->AiCurrentEmotion = $this->LocalSession->EmotionLargeGeneralization->TopLabel;
+                }
+                catch(Exception $e)
+                {
+                    unset($e);
+                }
+
+                $this->coffeeHouse->getLocalSessionManager()->updateLocalSession($this->LocalSession);
+            }
+
             $this->Session->Messages += 1;
             $this->coffeeHouse->getForeignSessionsManager()->updateSession($this->Session);
 
@@ -175,9 +249,9 @@
                     $this->Session->SessionID, $this->Session->Messages, $input, $Text
                 );
             }
-            catch(InvalidMessageException $invalidMessageException)
+            catch(InvalidMessageException $e)
             {
-                // Ignore this exception
+                unset($e);
             }
 
             $this->coffeeHouse->getDeepAnalytics()->tally('coffeehouse', 'lydia_messages', 0);
@@ -186,10 +260,18 @@
         }
 
         /**
-         * @return ForeignSession
+         * @return ForeignSession|null
          */
-        public function getSession(): ForeignSession
+        public function getSession(): ?ForeignSession
         {
             return $this->Session;
+        }
+
+        /**
+         * @return LocalSession|null
+         */
+        public function getLocalSession(): ?LocalSession
+        {
+            return $this->LocalSession;
         }
     }

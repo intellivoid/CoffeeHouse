@@ -57,6 +57,10 @@
         },
         {
             "required": true,
+            "file": "Abstracts/LocalSessionSearchMethod.php"
+        },
+        {
+            "required": true,
             "file": "Abstracts/ImageType.php"
         },
         {
@@ -202,6 +206,10 @@
         {
             "required": true,
             "file": "Exceptions/MalformedDataException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/LocalSessionNotFoundException.php"
         },
         {
             "required": true,
@@ -401,6 +409,10 @@
         },
         {
             "required": true,
+            "file": "Objects/LocalSession.php"
+        },
+        {
+            "required": true,
             "file": "Objects/UserSubscription.php"
         },
         {
@@ -526,6 +538,10 @@
         {
             "required": true,
             "file": "Managers/TranslationCacheManager.php"
+        },
+        {
+            "required": true,
+            "file": "Managers/LocalSessionManager.php"
         },
         {
             "required": true,
