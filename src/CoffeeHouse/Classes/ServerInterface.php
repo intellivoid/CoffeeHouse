@@ -50,7 +50,7 @@
                 {
                     $this->sendRequest(ServerInterfaceModule::PingService, "/", [], false);
                 }
-                catch(ServerInterfaceException $e)
+                catch(ServerInterfaceException)
                 {
                     throw new CoffeeHouseUtilsNotReadyException("CoffeeHouse-Utils is not running or is not yet ready.");
                 }
@@ -137,16 +137,39 @@
             $ServerInterfaceConnection->Host = $this->coffeehouse->getUtilsConfiguration()["Host"];
             $ServerInterfaceConnection->Module = $module;
 
-            $ServerInterfaceConnection->Port = match ($module) {
-                ServerInterfaceModule::PingService => $this->coffeehouse->getUtilsConfiguration()["PingPort"],
-                ServerInterfaceModule::SpamPrediction => $this->coffeehouse->getUtilsConfiguration()["SpamPredictionPort"],
-                ServerInterfaceModule::NsfwPrediction => $this->coffeehouse->getUtilsConfiguration()["NsfwPredictionPort"],
-                ServerInterfaceModule::TranslateService => $this->coffeehouse->getUtilsConfiguration()["TranslatePort"],
-                ServerInterfaceModule::CoreNLP => $this->coffeehouse->getUtilsConfiguration()["CoreNlpPort"],
-                ServerInterfaceModule::EmotionPrediction => $this->coffeehouse->getUtilsConfiguration()["EmotionsPort"],
-                ServerInterfaceModule::LanguagePrediction => $this->coffeehouse->getUtilsConfiguration()["LanguageDetectionPort"],
-                default => throw new InvalidServerInterfaceModuleException(),
-            };
+            switch($module)
+            {
+                case ServerInterfaceModule::PingService:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["PingPort"];
+                    break;
+
+                case ServerInterfaceModule::SpamPrediction:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["SpamPredictionPort"];
+                    break;
+
+                case ServerInterfaceModule::NsfwPrediction:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["NsfwPredictionPort"];
+                    break;
+
+                case ServerInterfaceModule::TranslateService:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["TranslatePort"];
+                    break;
+
+                case ServerInterfaceModule::CoreNLP:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["CoreNlpPort"];
+                    break;
+
+                case ServerInterfaceModule::EmotionPrediction:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["EmotionsPort"];
+                    break;
+
+                case ServerInterfaceModule::LanguagePrediction:
+                    $ServerInterfaceConnection->Port = $this->coffeehouse->getUtilsConfiguration()["LanguageDetectionPort"];
+                    break;
+
+                default:
+                    throw new InvalidServerInterfaceModuleException();
+            }
 
             return $ServerInterfaceConnection;
         }

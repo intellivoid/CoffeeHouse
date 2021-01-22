@@ -127,10 +127,9 @@
             if($engine == "auto")
                 $engine = TranslateProcessingEngine::GoogleTranslate;
 
-            $translation_results = match ($engine) {
-                TranslateProcessingEngine::GoogleTranslate => $this->GoogleTranslate($input, $output, $source),
-                default => throw new EngineNotImplementedException("The engine '$engine' is not implemented"),
-            };
+            $translation_results = $engine === TranslateProcessingEngine::GoogleTranslate ?
+                $this->GoogleTranslate($input, $output, $source) :
+                throw new EngineNotImplementedException("The engine '$engine' is not implemented");
 
             if($use_cache)
             {
