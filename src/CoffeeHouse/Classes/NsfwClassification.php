@@ -160,8 +160,8 @@
          */
         public function generalize(LargeGeneralization $largeGeneralization, NsfwClassificationResults $nsfwClassificationResults): LargeGeneralization
         {
-            $largeGeneralization->add("sfw", $nsfwClassificationResults->SafePrediction, false);
-            $largeGeneralization->add("nsfw", $nsfwClassificationResults->UnsafePrediction, false);
+            $largeGeneralization->add("safe", $nsfwClassificationResults->SafePrediction, false);
+            $largeGeneralization->add("unsafe", $nsfwClassificationResults->UnsafePrediction, false);
 
             $largeGeneralization->sortProbabilities(true);
             $this->coffeeHouse->getLargeGeneralizedClassificationManager()->update($largeGeneralization);
