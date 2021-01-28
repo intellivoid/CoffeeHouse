@@ -8,12 +8,16 @@
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
+    use CoffeeHouse\Exceptions\MalformedDataException;
+    use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\NsfwClassificationCacheNotFoundException;
     use CoffeeHouse\Exceptions\NsfwClassificationException;
     use CoffeeHouse\Exceptions\PathNotFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Exceptions\UnsupportedImageTypeException;
+    use CoffeeHouse\Objects\LargeGeneralization;
     use CoffeeHouse\Objects\Results\NsfwClassificationResults;
 
     /**
@@ -141,5 +145,26 @@
 
             $file_contents = file_get_contents($path);
             return $this->classifyImage($file_contents, $cache);
+        }
+
+        /**
+         * Generalized the nsfw predictions and returns the results
+         *
+         * @param LargeGeneralization $largeGeneralization
+         * @param NsfwClassificationResults $nsfwClassificationResults
+         * @return LargeGeneralization
+         * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws MalformedDataException
+         * @throws NoResultsFoundException
+         */
+        public function generalize(LargeGeneralization $largeGeneralization, NsfwClassificationResults $nsfwClassificationResults): LargeGeneralization
+        {
+            $largeGeneralization->add("sfw", $nsfwClassificationResults->SafePrediction, false);
+            $largeGeneralization->add("nsfw", $nsfwClassificationResults->UnsafePrediction, false);
+
+            $largeGeneralization->sortProbabilities(true);
+            $this->coffeeHouse->getLargeGeneralizedClassificationManager()->update($largeGeneralization);
+            return $largeGeneralization;
         }
     }
