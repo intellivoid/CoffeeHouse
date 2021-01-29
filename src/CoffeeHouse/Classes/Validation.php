@@ -187,7 +187,7 @@
             {
                 return false;
             }
-            elseif(strlen($input) > 1000)
+            elseif(strlen($input) > 14096)
             {
                 return false;
             }
