@@ -15,10 +15,12 @@
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\InvalidTextInputException;
     use CoffeeHouse\Exceptions\MalformedDataException;
+    use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Exceptions\TranslationCacheNotFoundException;
     use CoffeeHouse\Exceptions\TranslationException;
     use CoffeeHouse\Exceptions\UnsupportedLanguageException;
+    use CoffeeHouse\Objects\LargeGeneralization;
     use CoffeeHouse\Objects\ProcessedNLP\Sentence;
     use CoffeeHouse\Objects\Results\CoreNLP\NamedEntitiesResults;
     use CoffeeHouse\Objects\Results\CoreNLP\PartOfSpeechResults;
@@ -304,5 +306,28 @@
                 $sentences[] = Sentence::fromArray($input, $sentence);
 
             return SentimentResults::fromSentences($input, $sentences);
+        }
+
+        /**
+         * Updates the generalized sentiment results
+         *
+         * @param LargeGeneralization $largeGeneralization
+         * @param SentimentResults $sentimentResults
+         * @return LargeGeneralization
+         * @throws DatabaseException
+         * @throws InvalidSearchMethodException
+         * @throws MalformedDataException
+         * @throws NoResultsFoundException
+         */
+        public function generalizeSentiment(LargeGeneralization $largeGeneralization, SentimentResults $sentimentResults): LargeGeneralization
+        {
+            foreach($sentimentResults->Sentiment->Predictions as $prediction => $value)
+            {
+                $largeGeneralization->add($prediction, $value, false);
+            }
+
+            $largeGeneralization->sortProbabilities(true);
+            $this->coffeeHouse->getLargeGeneralizedClassificationManager()->update($largeGeneralization);
+            return $largeGeneralization;
         }
     }
