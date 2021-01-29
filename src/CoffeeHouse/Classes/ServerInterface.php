@@ -10,6 +10,7 @@
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
     use CoffeeHouse\Objects\ServerInterfaceConnection;
+    use Exception;
 
     /**
      * Class ServerInterface
@@ -87,15 +88,26 @@
          * @param string $path
          * @param string $data
          * @param array $parameters
+         * @param bool $ping
          * @return string
          * @throws CoffeeHouseUtilsNotReadyException
          * @throws InvalidServerInterfaceModuleException
          * @throws ServerInterfaceException
          * @noinspection DuplicatedCode
          */
-        public function sendDataRequest(string $module, string $path, string $data, array $parameters): string
+        public function sendDataRequest(string $module, string $path, string $data, array $parameters, bool $ping=true): string
         {
-            $this->sendRequest(ServerInterfaceModule::PingService, "/", [], false);
+            if($ping)
+            {
+                try
+                {
+                    $this->sendRequest(ServerInterfaceModule::PingService, "/", [], false);
+                }
+                catch(ServerInterfaceException)
+                {
+                    throw new CoffeeHouseUtilsNotReadyException("CoffeeHouse-Utils is not running or is not yet ready.");
+                }
+            }
 
             $InterfaceConnection = $this->resolveInterfaceConnection($module);
 
