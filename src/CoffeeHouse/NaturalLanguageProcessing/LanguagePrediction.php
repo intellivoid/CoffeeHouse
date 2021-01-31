@@ -8,15 +8,22 @@
     use CoffeeHouse\CoffeeHouse;
     use CoffeeHouse\Exceptions\CoffeeHouseUtilsNotReadyException;
     use CoffeeHouse\Exceptions\DatabaseException;
+    use CoffeeHouse\Exceptions\EngineNotImplementedException;
     use CoffeeHouse\Exceptions\InvalidInputException;
+    use CoffeeHouse\Exceptions\InvalidLanguageException;
     use CoffeeHouse\Exceptions\InvalidSearchMethodException;
     use CoffeeHouse\Exceptions\InvalidServerInterfaceModuleException;
+    use CoffeeHouse\Exceptions\InvalidTextInputException;
     use CoffeeHouse\Exceptions\LanguagePredictionCacheNotFoundException;
     use CoffeeHouse\Exceptions\MalformedDataException;
     use CoffeeHouse\Exceptions\NoResultsFoundException;
     use CoffeeHouse\Exceptions\ServerInterfaceException;
+    use CoffeeHouse\Exceptions\TranslationCacheNotFoundException;
+    use CoffeeHouse\Exceptions\TranslationException;
+    use CoffeeHouse\Exceptions\UnsupportedLanguageException;
     use CoffeeHouse\Objects\LargeGeneralization;
     use CoffeeHouse\Objects\Results\LanguagePredictionResults;
+    use CoffeeHouse\Objects\Results\LanguagePredictionSentencesResults;
 
     /**
      * Class LanguagePrediction
@@ -151,72 +158,49 @@
          * Predicts spam data from sentences
          *
          * @param string $input
-         * @param string $source_language
          * @param bool $cache
-         * @return SpamPredictionSentencesResults
+         * @return LanguagePredictionSentencesResults
          * @throws CoffeeHouseUtilsNotReadyException
          * @throws DatabaseException
-         * @throws EngineNotImplementedException
-         * @throws GeneralizedClassificationNotFoundException
          * @throws InvalidInputException
-         * @throws InvalidLanguageException
          * @throws InvalidSearchMethodException
          * @throws InvalidServerInterfaceModuleException
-         * @throws InvalidTextInputException
          * @throws MalformedDataException
          * @throws ServerInterfaceException
+         * @throws EngineNotImplementedException
+         * @throws InvalidLanguageException
+         * @throws InvalidTextInputException
          * @throws TranslationCacheNotFoundException
          * @throws TranslationException
          * @throws UnsupportedLanguageException
          */
-        public function predictSentences(string $input, $source_language="en", bool $cache=True): SpamPredictionSentencesResults
+        public function predictSentences(string $input, bool $cache=True): LanguagePredictionSentencesResults
         {
             if(strlen($input) == 0)
             {
                 throw new InvalidInputException();
             }
 
-            if($source_language !== null)
-            {
-                $source_language = strtolower($source_language);
-
-                if($source_language !== "en")
-                {
-                    if($source_language == "auto")
-                    {
-                        $source_language = $this->coffeeHouse->getLanguagePrediction()->predict($input)->combineResults()[0]->Language;
-                    }
-
-                    $source_language = Utilities::convertToISO6391($source_language);
-
-                    if(Validation::googleTranslateSupported($source_language) == false)
-                    {
-                        throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
-                    }
-
-                    $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
-                }
-            }
 
             $Sentences = $this->coffeeHouse->getCoreNLP()->sentenceSplit($input);
-            $SpamPredictionSentencesResultsObject = new SpamPredictionSentencesResults();
-            $SpamPredictionSentencesResultsObject->Text = $input;
-            $SpamPredictionSentencesResultsObject->SpamPredictionSentences = [];
+            $LanguagePredictionSentencesResultsObject = new LanguagePredictionSentencesResults();
+            $LanguagePredictionSentencesResultsObject->Text = $input;
+            $LanguagePredictionSentencesResultsObject->LanguagePredictionSentences = [];
 
             foreach($Sentences->Sentences as $sentence)
             {
-                $SpamSentenceObject = new SpamPredictionSentencesResults\SpamPredictionSentence();
-                $SpamSentenceObject->Text = $sentence->Text;
-                $SpamSentenceObject->OffsetBegin = $sentence->OffsetBegin;
-                $SpamSentenceObject->OffsetEnd = $sentence->OffsetEnd;
-                $SpamSentenceObject->SpamPredictionResults = $this->predict($sentence->Text, false, "None", $cache, $source_language);
+                $LanguageSentenceObject = new LanguagePredictionSentencesResults\LanguagePredictionSentence();
+                $LanguageSentenceObject->Text = $sentence->Text;
+                $LanguageSentenceObject->OffsetBegin = $sentence->OffsetBegin;
+                $LanguageSentenceObject->OffsetEnd = $sentence->OffsetEnd;
+                $LanguageSentenceObject->LanguagePredictionResults = $this->predict($sentence->Text);
 
-                $SpamPredictionSentencesResultsObject->SpamPredictionSentences[] = $SpamSentenceObject;
+                $LanguagePredictionSentencesResultsObject->LanguagePredictionSentences[] = $LanguageSentenceObject;
             }
 
-            $SpamPredictionSentencesResultsObject->calculateCombinedPredictions();
+            $LanguagePredictionSentencesResultsObject->calculateCombinedPredictions();
 
-            return $SpamPredictionSentencesResultsObject;
+            return $LanguagePredictionSentencesResultsObject;
         }
 
         /**
