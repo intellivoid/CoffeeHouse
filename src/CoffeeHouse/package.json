@@ -441,11 +441,19 @@
         },
         {
             "required": true,
+            "file": "Objects/Results/LanguagePredictionSentencesResults/LanguagePredictionSentence.php"
+        },
+        {
+            "required": true,
             "file": "Objects/Results/SpamPredictionSentencesResults/SpamPredictionSentence.php"
         },
         {
             "required": true,
             "file": "Objects/Results/LanguagePredictionResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Results/LanguagePredictionSentencesResults.php"
         },
         {
             "required": true,

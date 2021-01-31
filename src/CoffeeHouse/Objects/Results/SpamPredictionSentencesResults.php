@@ -90,8 +90,8 @@
         {
             $sentences = [];
 
-            foreach($this->SpamPredictionSentences as $emotionPredictionSentence)
-                $sentences = $emotionPredictionSentence->toArray();
+            foreach($this->SpamPredictionSentences as $spamPredictionSentence)
+                $sentences = $spamPredictionSentence->toArray();
 
             return [
                 "text" => $this->Text,

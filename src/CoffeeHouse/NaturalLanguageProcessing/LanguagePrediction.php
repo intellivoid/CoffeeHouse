@@ -148,6 +148,78 @@
         }
 
         /**
+         * Predicts spam data from sentences
+         *
+         * @param string $input
+         * @param string $source_language
+         * @param bool $cache
+         * @return SpamPredictionSentencesResults
+         * @throws CoffeeHouseUtilsNotReadyException
+         * @throws DatabaseException
+         * @throws EngineNotImplementedException
+         * @throws GeneralizedClassificationNotFoundException
+         * @throws InvalidInputException
+         * @throws InvalidLanguageException
+         * @throws InvalidSearchMethodException
+         * @throws InvalidServerInterfaceModuleException
+         * @throws InvalidTextInputException
+         * @throws MalformedDataException
+         * @throws ServerInterfaceException
+         * @throws TranslationCacheNotFoundException
+         * @throws TranslationException
+         * @throws UnsupportedLanguageException
+         */
+        public function predictSentences(string $input, $source_language="en", bool $cache=True): SpamPredictionSentencesResults
+        {
+            if(strlen($input) == 0)
+            {
+                throw new InvalidInputException();
+            }
+
+            if($source_language !== null)
+            {
+                $source_language = strtolower($source_language);
+
+                if($source_language !== "en")
+                {
+                    if($source_language == "auto")
+                    {
+                        $source_language = $this->coffeeHouse->getLanguagePrediction()->predict($input)->combineResults()[0]->Language;
+                    }
+
+                    $source_language = Utilities::convertToISO6391($source_language);
+
+                    if(Validation::googleTranslateSupported($source_language) == false)
+                    {
+                        throw new UnsupportedLanguageException("The language '$source_language' is unsupported");
+                    }
+
+                    $input = $this->coffeeHouse->getTranslator()->translate($input, "en", $source_language)->Output;
+                }
+            }
+
+            $Sentences = $this->coffeeHouse->getCoreNLP()->sentenceSplit($input);
+            $SpamPredictionSentencesResultsObject = new SpamPredictionSentencesResults();
+            $SpamPredictionSentencesResultsObject->Text = $input;
+            $SpamPredictionSentencesResultsObject->SpamPredictionSentences = [];
+
+            foreach($Sentences->Sentences as $sentence)
+            {
+                $SpamSentenceObject = new SpamPredictionSentencesResults\SpamPredictionSentence();
+                $SpamSentenceObject->Text = $sentence->Text;
+                $SpamSentenceObject->OffsetBegin = $sentence->OffsetBegin;
+                $SpamSentenceObject->OffsetEnd = $sentence->OffsetEnd;
+                $SpamSentenceObject->SpamPredictionResults = $this->predict($sentence->Text, false, "None", $cache, $source_language);
+
+                $SpamPredictionSentencesResultsObject->SpamPredictionSentences[] = $SpamSentenceObject;
+            }
+
+            $SpamPredictionSentencesResultsObject->calculateCombinedPredictions();
+
+            return $SpamPredictionSentencesResultsObject;
+        }
+
+        /**
          * Generalized the language predictions and returns the results
          *
          * @param LargeGeneralization $largeGeneralization
