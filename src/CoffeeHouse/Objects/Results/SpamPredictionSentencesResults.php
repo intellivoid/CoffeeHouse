@@ -72,8 +72,8 @@
                     ($CombinedPredictions[$prediction_name] / $CombinedPredictionsCount);
             }
 
-            $spamPredictionResults->GeneralizedHam = (float)$CombinedPredictions["ham"];
-            $spamPredictionResults->GeneralizedSpam = (float)$CombinedPredictions["spam"];
+            $spamPredictionResults->HamPrediction = (float)$CombinedPredictions["ham"];
+            $spamPredictionResults->SpamPrediction = (float)$CombinedPredictions["spam"];
 
             $this->SpamPrediction = $spamPredictionResults;
 
