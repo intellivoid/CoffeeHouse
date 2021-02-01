@@ -27,5 +27,12 @@ require("ppm");
     {
         $Results = $CoffeeHouse->getLanguagePrediction()->predict(getInput(), false, true, true);
         print("Language: " . $Results->combineResults()[0]->Language . "(" . $Results->combineResults()[0]->Probability . ")");
+
+        $res = [];
+        foreach($Results->combineResults() as $predictions)
+        {
+            $res[] = $predictions->Language;
+        }
+        print(json_encode($res) . PHP_EOL);
         print(PHP_EOL);
     }

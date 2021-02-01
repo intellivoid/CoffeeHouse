@@ -369,9 +369,20 @@
             $alt_value_type = null;
 
             if($this->AltValue !== null)
+            {
                 try
                 {
-                    $alt_value = $this->AltValue->toArray();
+                    if(is_array($this->AltValue))
+                    {
+                        $alt_value = [];
+                        foreach($this->AltValue as $item)
+                            $alt_value[] = $item->toArray();
+                    }
+                    else
+                    {
+                        $alt_value = $this->AltValue->toArray();
+
+                    }
                 }
                 catch (InvalidDateException | InvalidTimeException $e)
                 {
@@ -379,6 +390,8 @@
                     $alt_value = null;
                     $alt_value_type = NamedEntityAlternativeValueTypes::None;
                 }
+            }
+
 
             return [
                 "text" => $this->Text,
