@@ -92,7 +92,7 @@
         /**
          * Possessive ending
          */
-        const POS = "PosTag";
+        const POS = "POS";
 
         /**
          * Personal pronoun
