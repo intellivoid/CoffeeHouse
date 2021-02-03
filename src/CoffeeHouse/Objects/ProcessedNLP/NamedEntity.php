@@ -12,7 +12,6 @@
     use CoffeeHouse\Objects\ProcessedNLP\Types\DateType;
     use CoffeeHouse\Objects\ProcessedNLP\Types\Duration;
     use CoffeeHouse\Objects\ProcessedNLP\Types\TimeType;
-    use DateTime;
     use Exception;
 
     /**
@@ -206,7 +205,7 @@
                                     $NamedEntityObject->Value = Utilities::getUnixTimestamp($DateTypeObject, $TimeTypeObject);
 
                                     $NamedEntityObject->AltValueType = NamedEntityAlternativeValueTypes::DateTime;
-                                    $NamedEntityObject->AltValue = new DateTime();
+                                    $NamedEntityObject->AltValue = new DateTimeType();
                                     $NamedEntityObject->AltValue->DateType = $DateTypeObject;
                                     $NamedEntityObject->AltValue->TimeType = $TimeTypeObject;
                                 }
