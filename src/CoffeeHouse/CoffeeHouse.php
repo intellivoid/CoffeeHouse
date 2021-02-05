@@ -236,7 +236,7 @@
          * @return mixed
          * @noinspection PhpUnused
          */
-        public function getDatabaseConfiguration(): mixed
+        public function getDatabaseConfiguration()
         {
             return $this->DatabaseConfiguration;
         }
@@ -261,7 +261,7 @@
         /**
          * @return mixed
          */
-        public function getUtilsConfiguration(): mixed
+        public function getUtilsConfiguration()
         {
             return $this->UtilsConfiguration;
         }
@@ -379,7 +379,7 @@
         /**
          * @return mixed
          */
-        public function getConfiguration(): mixed
+        public function getConfiguration()
         {
             return $this->Configuration;
         }

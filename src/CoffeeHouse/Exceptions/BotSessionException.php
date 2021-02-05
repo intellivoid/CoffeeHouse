@@ -32,7 +32,7 @@
         /**
          * @return mixed
          */
-        public function getErrorDetails(): mixed
+        public function getErrorDetails()
         {
             return $this->error_details;
         }

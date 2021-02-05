@@ -131,7 +131,7 @@
          * @return mixed
          * @noinspection PhpPureAttributeCanBeAddedInspection
          */
-        public static function stringAtIndex($strings, $index): mixed
+        public static function stringAtIndex($strings, $index)
         {
             if(count($strings) > $index)
             {
