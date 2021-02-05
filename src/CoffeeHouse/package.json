@@ -33,9 +33,9 @@
                 "required": true
             },
             {
-                "package": "com.stichoza.google_translate_php",
+                "package": "net.intellivoid.google_translate",
                 "version": "latest",
-                "source": "stichoza@composer/google-translate-php",
+                "source": "default@github/intellivoid/google-translate",
                 "required": true
             }
         ],
