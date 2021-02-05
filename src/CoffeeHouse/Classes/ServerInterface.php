@@ -51,7 +51,7 @@
                 {
                     $this->sendRequest(ServerInterfaceModule::PingService, "/", [], false);
                 }
-                catch(ServerInterfaceException)
+                catch(ServerInterfaceException $e)
                 {
                     throw new CoffeeHouseUtilsNotReadyException("CoffeeHouse-Utils is not running or is not yet ready.");
                 }
@@ -103,7 +103,7 @@
                 {
                     $this->sendRequest(ServerInterfaceModule::PingService, "/", [], false);
                 }
-                catch(ServerInterfaceException)
+                catch(ServerInterfaceException $e)
                 {
                     throw new CoffeeHouseUtilsNotReadyException("CoffeeHouse-Utils is not running or is not yet ready.");
                 }
