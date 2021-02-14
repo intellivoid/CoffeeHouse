@@ -252,7 +252,8 @@
 
             foreach($this->Probabilities as $probabilities)
             {
-                $probabilities_data[] = $probabilities->toArray();
+                if($probabilities !== null)
+                    $probabilities_data[] = $probabilities->toArray();
             }
 
             return array(
