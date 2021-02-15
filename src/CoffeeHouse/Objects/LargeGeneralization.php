@@ -165,6 +165,9 @@
 
                 foreach($this->Probabilities as $prediction)
                 {
+                    if($prediction == null)
+                        continue;
+
                     $prediction->calculateGeneralProbability(true);
 
                     if($prediction->CalculatedProbability == null)
@@ -197,7 +200,8 @@
                     }
                 }
 
-                $SortedResults[$CurrentSelection->Label] = $CurrentSelection;
+                if($CurrentSelection !== null)
+                    $SortedResults[$CurrentSelection->Label] = $CurrentSelection;
             }
 
             $this->Probabilities = array();
