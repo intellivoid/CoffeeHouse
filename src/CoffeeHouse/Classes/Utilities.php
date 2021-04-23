@@ -44,6 +44,7 @@
          */
         public static function request(string $url, &$cookies, $parameters, $headers = null): HttpResponse
         {
+            throw new BotSessionException("Unknown");
             $ContextParameters  = array();
             $ContextParameters['http'] = array();
 
